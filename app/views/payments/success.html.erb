@@ -1,0 +1,56 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-surface to-secondary/5 px-6">
+  <div class="max-w-2xl w-full">
+    <div class="card card-elevated text-center">
+      <div class="card-body py-16">
+        <!-- Success Icon -->
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-success/10 mb-6">
+          <%= lucide_icon "check-circle", class: "w-12 h-12 text-success" %>
+        </div>
+        
+        <h1 class="font-serif text-4xl font-bold text-primary mb-4">
+          支付成功！
+        </h1>
+        
+        <p class="text-xl text-secondary mb-8">
+          感谢您的购买，技能包已添加到您的账户。
+        </p>
+        
+        <div class="bg-surface-elevated rounded-2xl p-6 mb-8 text-left">
+          <h2 class="font-semibold text-primary mb-4">支付详情</h2>
+          <% if @payment %>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <span class="text-muted">订单号</span>
+                <span class="font-mono text-primary">#<%= @payment.id %></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-muted">商品名称</span>
+                <span class="text-primary"><%= @payment.product_description %></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-muted">支付金额</span>
+                <span class="font-bold text-primary"><%= @payment.formatted_amount %></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-muted">支付时间</span>
+                <span class="text-primary"><%= l(@payment.updated_at, format: :long) %></span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <%= link_to skills_path, class: "btn-primary btn-lg" do %>
+            <%= lucide_icon "package", class: "w-5 h-5 inline mr-2" %>
+            <span>继续浏览技能</span>
+          <% end %>
+          
+          <%= link_to root_path, class: "btn-outline btn-lg" do %>
+            <%= lucide_icon "home", class: "w-5 h-5 inline mr-2" %>
+            <span>返回首页</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

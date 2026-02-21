@@ -1,0 +1,645 @@
+<!-- Hero Section - Split Layout with AI-themed Visual -->
+<section class="relative min-h-screen flex items-center overflow-hidden">
+  <!-- Background Gradient -->
+  <div class="absolute inset-0 hero-gradient"></div>
+  <div class="hero-overlay"></div>
+  
+  <!-- Hero Content -->
+  <div class="relative z-10 container-xl mx-auto px-6 py-20">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Left: Text Content -->
+      <div class="text-surface space-y-8">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-surface/20 backdrop-blur-sm rounded-full border border-surface/30">
+          <%= lucide_icon "sparkles", class: "w-5 h-5" %>
+          <span class="text-sm font-medium">中国律师行业AI创新平台</span>
+        </div>
+        
+        <h1 class="font-serif text-5xl md:text-7xl font-bold leading-tight">
+          让每位律师拥有<br>
+          <span class="text-secondary">专属7×24小时</span><br>
+          AI助理
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-surface/90 leading-relaxed max-w-xl">
+          智能辅助案件分析、文档生成，提升您的法律实践效率。借助AI技术与专业资源，助力律师在竞争中脱颖而出。
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4">
+          <%= link_to skills_path, class: "btn-primary btn-lg inline-flex items-center gap-2 justify-center" do %>
+            <%= lucide_icon "rocket", class: "w-5 h-5" %>
+            <span>立即体验技能市场</span>
+          <% end %>
+          <%= link_to video_resources_path, class: "btn-outline btn-lg inline-flex items-center gap-2 justify-center border-surface/30 text-surface hover:bg-surface/10" do %>
+            <%= lucide_icon "play-circle", class: "w-5 h-5" %>
+            <span>观看教学视频</span>
+          <% end %>
+        </div>
+        
+        <!-- Stats -->
+        <div class="flex flex-wrap gap-8 pt-8">
+          <div class="text-surface">
+            <div class="font-serif text-4xl font-bold">5000+</div>
+            <div class="text-surface/80 text-sm">专业律师用户</div>
+          </div>
+          <div class="text-surface">
+            <div class="font-serif text-4xl font-bold">200+</div>
+            <div class="text-surface/80 text-sm">实战技能包</div>
+          </div>
+          <div class="text-surface">
+            <div class="font-serif text-4xl font-bold">24/7</div>
+            <div class="text-surface/80 text-sm">AI智能支持</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right: Image -->
+      <div class="relative">
+        <div class="aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-surface/20">
+          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=800&fit=crop" 
+               alt="AI Legal Assistant" 
+               class="w-full h-full object-cover">
+        </div>
+        <!-- Floating Card -->
+        <div class="absolute -bottom-6 -left-6 bg-surface rounded-2xl p-6 shadow-xl border border-border max-w-xs hidden lg:block">
+          <div class="flex items-start gap-4">
+            <%= lucide_icon "brain", class: "w-8 h-8 text-primary flex-shrink-0" %>
+            <div>
+              <div class="font-semibold text-primary mb-1">AI智能分析</div>
+              <div class="text-sm text-secondary">实时案例检索与法条匹配</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <%= lucide_icon "chevron-down", class: "w-8 h-8 text-surface" %>
+  </div>
+</section>
+
+<!-- Video Resources Section -->
+<section id="video-resources" class="py-24 bg-surface">
+  <div class="container-xl mx-auto px-6">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
+        <%= lucide_icon "video", class: "w-4 h-4" %>
+        <span>专业视频教学</span>
+      </div>
+      <h2 class="section-title text-center">精选视频资源</h2>
+      <p class="section-subtitle mx-auto">
+        由资深律师录制的高质量法律实务课程，助您掌握核心技能与前沿知识。
+      </p>
+    </div>
+    
+    <!-- Category Filter (Static) -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <button class="category-pill active">全部课程</button>
+      <button class="category-pill">合同法</button>
+      <button class="category-pill">刑事辩护</button>
+      <button class="category-pill">知识产权</button>
+      <button class="category-pill">公司法务</button>
+      <button class="category-pill">民事诉讼</button>
+    </div>
+    
+    <!-- Video Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Video Card 1 -->
+      <div class="video-card">
+        <div class="video-thumbnail">
+          <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=600&h=400&fit=crop" 
+               alt="合同法实务" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center bg-surface/20 hover:bg-surface/40 transition-colors">
+            <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
+              <%= lucide_icon "play", class: "w-8 h-8 text-surface ml-1" %>
+            </div>
+          </div>
+          <div class="absolute top-4 right-4 px-3 py-1 bg-surface/90 backdrop-blur-sm rounded-full text-xs font-medium text-primary">
+            45:20
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="font-serif text-xl font-semibold text-primary mb-2">合同法实务精讲</h3>
+          <p class="text-secondary text-sm mb-4">深入解析合同起草与审查的核心要点，规避常见法律风险。</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-muted text-sm">
+              <%= lucide_icon "user", class: "w-4 h-4" %>
+              <span>张律师</span>
+            </div>
+            <div class="flex items-center gap-2 text-muted text-sm">
+              <%= lucide_icon "eye", class: "w-4 h-4" %>
+              <span>8,234 次观看</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Video Card 2 -->
+      <div class="video-card">
+        <div class="video-thumbnail">
+          <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=600&h=400&fit=crop" 
+               alt="刑事辩护策略" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center bg-surface/20 hover:bg-surface/40 transition-colors">
+            <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
+              <%= lucide_icon "play", class: "w-8 h-8 text-surface ml-1" %>
+            </div>
+          </div>
+          <div class="absolute top-4 right-4 px-3 py-1 bg-surface/90 backdrop-blur-sm rounded-full text-xs font-medium text-primary">
+            52:15
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="font-serif text-xl font-semibold text-primary mb-2">刑事辩护策略与技巧</h3>
+          <p class="text-secondary text-sm mb-4">资深刑辩律师分享实战经验，提升辩护质量与成功率。</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-muted text-sm">
+              <%= lucide_icon "user", class: "w-4 h-4" %>
+              <span>李律师</span>
+            </div>
+            <div class="flex items-center gap-2 text-muted text-sm">
+              <%= lucide_icon "eye", class: "w-4 h-4" %>
+              <span>12,567 次观看</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Video Card 3 -->
+      <div class="video-card">
+        <div class="video-thumbnail">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop" 
+               alt="知识产权保护" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center bg-surface/20 hover:bg-surface/40 transition-colors">
+            <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
+              <%= lucide_icon "play", class: "w-8 h-8 text-surface ml-1" %>
+            </div>
+          </div>
+          <div class="absolute top-4 right-4 px-3 py-1 bg-surface/90 backdrop-blur-sm rounded-full text-xs font-medium text-primary">
+            38:42
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="font-serif text-xl font-semibold text-primary mb-2">知识产权保护实务</h3>
+          <p class="text-secondary text-sm mb-4">专利、商标、著作权全覆盖，掌握知产维权核心流程。</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-muted text-sm">
+              <%= lucide_icon "user", class: "w-4 h-4" %>
+              <span>王律师</span>
+            </div>
+            <div class="flex items-center gap-2 text-muted text-sm">
+              <%= lucide_icon "eye", class: "w-4 h-4" %>
+              <span>6,891 次观看</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- View More -->
+    <div class="text-center mt-12">
+      <%= link_to video_resources_path, class: "btn-outline btn-lg inline-flex items-center gap-2" do %>
+        <span>浏览更多视频</span>
+        <%= lucide_icon "arrow-right", class: "w-5 h-5" %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- Community Section -->
+<section id="community" class="py-24 bg-gradient-to-br from-primary/5 via-surface to-secondary/5">
+  <div class="container-xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Left: Community Info -->
+      <div>
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
+          <%= lucide_icon "users", class: "w-4 h-4" %>
+          <span>专业社群</span>
+        </div>
+        
+        <h2 class="section-title">加入青狮龙虾社群</h2>
+        <p class="text-xl text-secondary leading-relaxed mb-8">
+          中国法律行业最大的专业社群，汇聚顶尖律师，分享实战经验、讨论热点案件、拓展职业人脉。
+        </p>
+        
+        <!-- Stats -->
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <div class="bg-surface rounded-2xl p-6 border border-border">
+            <div class="font-serif text-4xl font-bold text-primary mb-2">5000+</div>
+            <div class="text-secondary text-sm">活跃律师会员</div>
+          </div>
+          <div class="bg-surface rounded-2xl p-6 border border-border">
+            <div class="font-serif text-4xl font-bold text-primary mb-2">200+</div>
+            <div class="text-secondary text-sm">每日话题讨论</div>
+          </div>
+        </div>
+        
+        <!-- Benefits -->
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <%= lucide_icon "check", class: "w-5 h-5 text-primary" %>
+            </div>
+            <div>
+              <div class="font-semibold text-primary mb-1">实战案例分享</div>
+              <div class="text-secondary text-sm">每日热点案例解析，学习顶尖律师的办案思路</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <%= lucide_icon "check", class: "w-5 h-5 text-primary" %>
+            </div>
+            <div>
+              <div class="font-semibold text-primary mb-1">职业人脉拓展</div>
+              <div class="text-secondary text-sm">结识同行专家，建立高质量的法律人脉网络</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <%= lucide_icon "check", class: "w-5 h-5 text-primary" %>
+            </div>
+            <div>
+              <div class="font-semibold text-primary mb-1">专属资源获取</div>
+              <div class="text-secondary text-sm">优先获取最新法律资讯与独家技能资源</div>
+            </div>
+          </div>
+        </div>
+        
+        <%= link_to "#community", class: "btn-primary btn-lg inline-flex items-center gap-2" do %>
+          <%= lucide_icon "arrow-right", class: "w-5 h-5" %>
+          <span>立即加入社群</span>
+        <% end %>
+      </div>
+      
+      <!-- Right: QR Code & Preview -->
+      <div class="relative">
+        <div class="bg-surface rounded-3xl p-8 shadow-2xl border border-border">
+          <!-- QR Code Placeholder -->
+          <div class="aspect-square bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center mb-6">
+            <div class="text-center">
+              <%= lucide_icon "qr-code", class: "w-32 h-32 text-primary mx-auto mb-4" %>
+              <p class="text-secondary font-medium">扫描二维码加入社群</p>
+            </div>
+          </div>
+          
+          <!-- Community Topics Preview -->
+          <div class="space-y-3">
+            <div class="text-sm font-semibold text-primary mb-3">热门话题</div>
+            <div class="flex items-center gap-3 p-3 bg-surface-elevated rounded-lg">
+              <%= lucide_icon "message-circle", class: "w-5 h-5 text-primary" %>
+              <div class="flex-1 text-sm text-secondary">新公司法实施后的合规要点</div>
+              <span class="text-xs text-muted">235条</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-surface-elevated rounded-lg">
+              <%= lucide_icon "message-circle", class: "w-5 h-5 text-primary" %>
+              <div class="flex-1 text-sm text-secondary">离婚案件财产分割实战经验</div>
+              <span class="text-xs text-muted">189条</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-surface-elevated rounded-lg">
+              <%= lucide_icon "message-circle", class: "w-5 h-5 text-primary" %>
+              <div class="flex-1 text-sm text-secondary">刑事案件证据收集技巧</div>
+              <span class="text-xs text-muted">156条</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Floating Badge -->
+        <div class="absolute -top-4 -right-4 bg-secondary rounded-2xl px-6 py-3 shadow-lg rotate-3">
+          <div class="font-serif text-2xl font-bold text-surface">免费加入</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Market Section -->
+<section id="skills-market" class="py-24 bg-surface">
+  <div class="container-xl mx-auto px-6">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
+        <%= lucide_icon "package", class: "w-4 h-4" %>
+        <span>技能市场</span>
+      </div>
+      <h2 class="section-title text-center">实战技能市场</h2>
+      <p class="section-subtitle mx-auto">
+        专业律师上传的实用技能包，包含文档模板、AI提示词、办案指南，每个技能仅需 <span class="font-bold text-primary">¥99</span>。
+      </p>
+    </div>
+    
+    <!-- Category Filter (Static) -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <button class="category-pill active">全部技能</button>
+      <button class="category-pill">民事案件</button>
+      <button class="category-pill">刑事案件</button>
+      <button class="category-pill">行政案件</button>
+      <button class="category-pill">公司法务</button>
+    </div>
+    
+    <!-- Skills Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Skill Card 1 -->
+      <div class="skill-card">
+        <div class="card-body">
+          <div class="flex items-start justify-between mb-4">
+            <div class="skill-card-badge">民事案件</div>
+            <div class="flex items-center gap-1 text-secondary text-sm">
+              <%= lucide_icon "star", class: "w-4 h-4 fill-current" %>
+              <span class="font-semibold">4.8</span>
+            </div>
+          </div>
+          
+          <h3 class="font-serif text-2xl font-semibold text-primary mb-3">离婚案件技能包</h3>
+          <p class="text-secondary text-sm mb-6">
+            包含完整离婚诉讼文书模板、财产分割计算工具、抚养权争议应对策略、AI辅助案例检索提示词。
+          </p>
+          
+          <div class="flex items-center gap-4 mb-6 text-sm text-muted">
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "file-text", class: "w-4 h-4" %>
+              <span>18个模板</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "download", class: "w-4 h-4" %>
+              <span>1,234次</span>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between pt-4 border-t border-border">
+            <div class="flex items-center gap-2 text-sm text-muted">
+              <%= lucide_icon "user", class: "w-4 h-4" %>
+              <span>陈律师</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-bold font-serif text-primary">¥99</span>
+              <button class="btn-primary btn-sm">购买</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Skill Card 2 -->
+      <div class="skill-card">
+        <div class="card-body">
+          <div class="flex items-start justify-between mb-4">
+            <div class="skill-card-badge">刑事案件</div>
+            <div class="flex items-center gap-1 text-secondary text-sm">
+              <%= lucide_icon "star", class: "w-4 h-4 fill-current" %>
+              <span class="font-semibold">4.9</span>
+            </div>
+          </div>
+          
+          <h3 class="font-serif text-2xl font-semibold text-primary mb-3">刑事辩护全流程</h3>
+          <p class="text-secondary text-sm mb-6">
+            涵盖从会见、取保候审到庭审辩护的全套文书模板，附带AI辅助证据分析提示词与量刑建议生成工具。
+          </p>
+          
+          <div class="flex items-center gap-4 mb-6 text-sm text-muted">
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "file-text", class: "w-4 h-4" %>
+              <span>25个模板</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "download", class: "w-4 h-4" %>
+              <span>2,567次</span>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between pt-4 border-t border-border">
+            <div class="flex items-center gap-2 text-sm text-muted">
+              <%= lucide_icon "user", class: "w-4 h-4" %>
+              <span>李律师</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-bold font-serif text-primary">¥99</span>
+              <button class="btn-primary btn-sm">购买</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Skill Card 3 -->
+      <div class="skill-card">
+        <div class="card-body">
+          <div class="flex items-start justify-between mb-4">
+            <div class="skill-card-badge">公司法务</div>
+            <div class="flex items-center gap-1 text-secondary text-sm">
+              <%= lucide_icon "star", class: "w-4 h-4 fill-current" %>
+              <span class="font-semibold">4.7</span>
+            </div>
+          </div>
+          
+          <h3 class="font-serif text-2xl font-semibold text-primary mb-3">股权激励方案设计</h3>
+          <p class="text-secondary text-sm mb-6">
+            创业公司股权激励完整方案模板，包含期权池设计、员工激励协议、AI辅助估值计算与风险提示生成。
+          </p>
+          
+          <div class="flex items-center gap-4 mb-6 text-sm text-muted">
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "file-text", class: "w-4 h-4" %>
+              <span>12个模板</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "download", class: "w-4 h-4" %>
+              <span>876次</span>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between pt-4 border-t border-border">
+            <div class="flex items-center gap-2 text-sm text-muted">
+              <%= lucide_icon "user", class: "w-4 h-4" %>
+              <span>王律师</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-bold font-serif text-primary">¥99</span>
+              <button class="btn-primary btn-sm">购买</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Skill Card 4 -->
+      <div class="skill-card">
+        <div class="card-body">
+          <div class="flex items-start justify-between mb-4">
+            <div class="skill-card-badge">行政案件</div>
+            <div class="flex items-center gap-1 text-secondary text-sm">
+              <%= lucide_icon "star", class: "w-4 h-4 fill-current" %>
+              <span class="font-semibold">4.6</span>
+            </div>
+          </div>
+          
+          <h3 class="font-serif text-2xl font-semibold text-primary mb-3">行政诉讼实战</h3>
+          <p class="text-secondary text-sm mb-6">
+            行政复议与诉讼全流程指南，包含起诉状、证据清单模板，AI辅助行政法规检索与适用建议。
+          </p>
+          
+          <div class="flex items-center gap-4 mb-6 text-sm text-muted">
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "file-text", class: "w-4 h-4" %>
+              <span>15个模板</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "download", class: "w-4 h-4" %>
+              <span>654次</span>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between pt-4 border-t border-border">
+            <div class="flex items-center gap-2 text-sm text-muted">
+              <%= lucide_icon "user", class: "w-4 h-4" %>
+              <span>赵律师</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-bold font-serif text-primary">¥99</span>
+              <button class="btn-primary btn-sm">购买</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Skill Card 5 -->
+      <div class="skill-card">
+        <div class="card-body">
+          <div class="flex items-start justify-between mb-4">
+            <div class="skill-card-badge">民事案件</div>
+            <div class="flex items-center gap-1 text-secondary text-sm">
+              <%= lucide_icon "star", class: "w-4 h-4 fill-current" %>
+              <span class="font-semibold">4.9</span>
+            </div>
+          </div>
+          
+          <h3 class="font-serif text-2xl font-semibold text-primary mb-3">合同纠纷处理方案</h3>
+          <p class="text-secondary text-sm mb-6">
+            买卖、服务、租赁等常见合同纠纷处理模板，包含违约责任认定、损失计算、AI辅助案例检索。
+          </p>
+          
+          <div class="flex items-center gap-4 mb-6 text-sm text-muted">
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "file-text", class: "w-4 h-4" %>
+              <span>20个模板</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "download", class: "w-4 h-4" %>
+              <span>1,890次</span>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between pt-4 border-t border-border">
+            <div class="flex items-center gap-2 text-sm text-muted">
+              <%= lucide_icon "user", class: "w-4 h-4" %>
+              <span>周律师</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-bold font-serif text-primary">¥99</span>
+              <button class="btn-primary btn-sm">购买</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Skill Card 6 -->
+      <div class="skill-card">
+        <div class="card-body">
+          <div class="flex items-start justify-between mb-4">
+            <div class="skill-card-badge">公司法务</div>
+            <div class="flex items-center gap-1 text-secondary text-sm">
+              <%= lucide_icon "star", class: "w-4 h-4 fill-current" %>
+              <span class="font-semibold">4.8</span>
+            </div>
+          </div>
+          
+          <h3 class="font-serif text-2xl font-semibold text-primary mb-3">投融资法律文件包</h3>
+          <p class="text-secondary text-sm mb-6">
+            天使轮到C轮的投资协议模板、尽职调查清单、股东协议、AI辅助估值分析与风险预警系统。
+          </p>
+          
+          <div class="flex items-center gap-4 mb-6 text-sm text-muted">
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "file-text", class: "w-4 h-4" %>
+              <span>22个模板</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "download", class: "w-4 h-4" %>
+              <span>743次</span>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between pt-4 border-t border-border">
+            <div class="flex items-center gap-2 text-sm text-muted">
+              <%= lucide_icon "user", class: "w-4 h-4" %>
+              <span>吴律师</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-bold font-serif text-primary">¥99</span>
+              <button class="btn-primary btn-sm">购买</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- View More -->
+    <div class="text-center mt-12">
+      <%= link_to skills_path, class: "btn-outline btn-lg inline-flex items-center gap-2" do %>
+        <span>浏览全部技能</span>
+        <%= lucide_icon "arrow-right", class: "w-5 h-5" %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-primary via-primary-dark to-secondary"></div>
+  <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE0YzAtNi42MjctNS4zNzMtMTItMTItMTJzLTEyIDUuMzczLTEyIDEyIDUuMzczIDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
+  
+  <div class="relative z-10 container-xl mx-auto px-6 text-center">
+    <h2 class="font-serif text-4xl md:text-5xl font-bold text-surface mb-6">
+      立即开启您的法律AI之旅
+    </h2>
+    <p class="text-xl text-surface/90 mb-10 max-w-2xl mx-auto">
+      加入5000+专业律师，体验AI驱动的法律实务平台，获取优质资源，提升执业效率。
+    </p>
+    
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <%= link_to sign_up_path, class: "btn-secondary btn-lg inline-flex items-center gap-2 bg-surface text-primary hover:bg-surface/90" do %>
+        <%= lucide_icon "user-plus", class: "w-5 h-5" %>
+        <span>免费注册账号</span>
+      <% end %>
+      <%= link_to "#skills-market", class: "btn-outline btn-lg inline-flex items-center gap-2 border-surface/30 text-surface hover:bg-surface/10" do %>
+        <%= lucide_icon "package", class: "w-5 h-5" %>
+        <span>探索技能市场</span>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-12 bg-surface-elevated border-t border-border">
+  <div class="container-xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <%= lucide_icon "scale", class: "w-8 h-8 text-primary" %>
+        <span class="font-serif text-2xl font-bold text-primary">LegalSkill Hub</span>
+      </div>
+      
+      <div class="text-sm text-muted text-center md:text-left">
+        © 2024 LegalSkill Hub. All rights reserved. | 专注中国律师行业技能提升
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <%= link_to "mailto:contact@legalskillhub.com", class: "w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors" do %>
+          <%= lucide_icon "mail", class: "w-5 h-5 text-primary" %>
+        <% end %>
+        <%= link_to "#community", class: "w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors" do %>
+          <%= lucide_icon "message-circle", class: "w-5 h-5 text-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</footer>
