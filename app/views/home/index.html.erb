@@ -154,94 +154,51 @@
     </div>
 
     <!-- Category Filter -->
+    <% categories = Category.all %>
+    <% if categories.any? %>
     <div class="flex flex-wrap gap-2 mb-10">
       <button class="category-pill active">全部</button>
-      <button class="category-pill">合同法</button>
-      <button class="category-pill">刑事辩护</button>
-      <button class="category-pill">知识产权</button>
-      <button class="category-pill">公司法务</button>
-      <button class="category-pill">民事诉讼</button>
+      <% categories.each do |category| %>
+      <button class="category-pill"><%= category.name %></button>
+      <% end %>
     </div>
+    <% end %>
 
     <!-- Video Grid -->
+    <% videos = VideoResource.includes(:category).order(created_at: :desc).limit(3) %>
+    <% if videos.any? %>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-      <!-- Video Card 1 -->
+      <% videos.each do |video| %>
       <div class="video-card bg-surface-elevated">
         <div class="video-thumbnail">
           <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=600&h=340&fit=crop&q=80"
-               alt="合同法实务" class="w-full h-full object-cover opacity-60">
-          <div class="absolute inset-0 flex items-center justify-center">
+               alt="<%= video.title %>"
+               class="w-full h-full object-cover opacity-60">
+          <%= link_to video_resource_path(video),
+                class: "absolute inset-0 flex items-center justify-center hover:bg-primary/5 transition-colors" do %>
             <div class="w-12 h-12 border border-primary flex items-center justify-center bg-surface/80 hover:bg-primary/20 transition-colors cursor-pointer">
               <%= lucide_icon "play", class: "w-5 h-5 text-primary ml-0.5" %>
             </div>
-          </div>
+          <% end %>
+          <% if video.duration.present? %>
           <div class="absolute top-3 right-3 px-2 py-0.5 bg-surface/90 border border-border text-xs font-mono text-muted">
-            45:20
+            <%= video.duration %>
           </div>
+          <% end %>
           <div class="absolute bottom-0 left-0 right-0 h-px bg-primary/40"></div>
         </div>
         <div class="p-5">
-          <div class="sys-label mb-2">合同法</div>
-          <h3 class="font-sans text-base font-semibold text-primary mb-2">合同法实务精讲</h3>
-          <p class="text-secondary text-sm mb-4 leading-relaxed">深入解析合同起草与审查的核心要点，规避常见法律风险</p>
+          <div class="sys-label mb-2"><%= video.category.name.upcase %></div>
+          <%= link_to video_resource_path(video), class: "block group" do %>
+            <h3 class="font-sans text-base font-semibold text-primary mb-2 group-hover:text-primary-light transition-colors"><%= video.title %></h3>
+          <% end %>
           <div class="flex items-center justify-between text-xs font-mono text-muted border-t border-border pt-3">
-            <span>BY 张律师</span>
-            <span>8,234 观看</span>
+            <span><%= lucide_icon "folder", class: "w-3 h-3 inline" %> <%= video.category.name %></span>
+            <span><%= lucide_icon "eye", class: "w-3 h-3 inline" %> <%= number_with_delimiter(video.views_count) %></span>
           </div>
         </div>
       </div>
-
-      <!-- Video Card 2 -->
-      <div class="video-card bg-surface-elevated">
-        <div class="video-thumbnail">
-          <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=600&h=340&fit=crop&q=80"
-               alt="刑事辩护策略" class="w-full h-full object-cover opacity-60">
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="w-12 h-12 border border-primary flex items-center justify-center bg-surface/80 hover:bg-primary/20 transition-colors cursor-pointer">
-              <%= lucide_icon "play", class: "w-5 h-5 text-primary ml-0.5" %>
-            </div>
-          </div>
-          <div class="absolute top-3 right-3 px-2 py-0.5 bg-surface/90 border border-border text-xs font-mono text-muted">
-            52:15
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 h-px bg-primary/40"></div>
-        </div>
-        <div class="p-5">
-          <div class="sys-label mb-2">刑事辩护</div>
-          <h3 class="font-sans text-base font-semibold text-primary mb-2">刑事辩护策略与技巧</h3>
-          <p class="text-secondary text-sm mb-4 leading-relaxed">资深刑辩律师分享实战经验，提升辩护质量与成功率</p>
-          <div class="flex items-center justify-between text-xs font-mono text-muted border-t border-border pt-3">
-            <span>BY 李律师</span>
-            <span>12,567 观看</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Video Card 3 -->
-      <div class="video-card bg-surface-elevated">
-        <div class="video-thumbnail">
-          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=340&fit=crop&q=80"
-               alt="知识产权保护" class="w-full h-full object-cover opacity-60">
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="w-12 h-12 border border-primary flex items-center justify-center bg-surface/80 hover:bg-primary/20 transition-colors cursor-pointer">
-              <%= lucide_icon "play", class: "w-5 h-5 text-primary ml-0.5" %>
-            </div>
-          </div>
-          <div class="absolute top-3 right-3 px-2 py-0.5 bg-surface/90 border border-border text-xs font-mono text-muted">
-            38:42
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 h-px bg-primary/40"></div>
-        </div>
-        <div class="p-5">
-          <div class="sys-label mb-2">知识产权</div>
-          <h3 class="font-sans text-base font-semibold text-primary mb-2">知识产权保护实务</h3>
-          <p class="text-secondary text-sm mb-4 leading-relaxed">专利、商标、著作权全覆盖，掌握知产维权核心流程</p>
-          <div class="flex items-center justify-between text-xs font-mono text-muted border-t border-border pt-3">
-            <span>BY 王律师</span>
-            <span>6,891 观看</span>
-          </div>
-        </div>
-      </div>
+      <% end %>
     </div>
 
     <div class="mt-8 text-center">
@@ -250,6 +207,7 @@
         <%= lucide_icon "arrow-right", class: "w-3 h-3" %>
       <% end %>
     </div>
+    <% end %>
   </div>
 </section>
 
