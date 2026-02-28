@@ -1,89 +1,84 @@
-<!-- Page Header -->
-<section class="py-16 bg-gradient-to-br from-primary/5 to-secondary/5 border-b border-border">
-  <div class="container-xl mx-auto px-6">
-    <div class="max-w-3xl">
-      <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
-        <%= lucide_icon "video", class: "w-4 h-4" %>
-        <span>专业视频教学</span>
-      </div>
-      <h1 class="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">
-        视频资源库
-      </h1>
-      <p class="text-xl text-secondary leading-relaxed">
-        由资深律师录制的高质量法律实务课程，助您掌握核心技能与前沿知识。
-      </p>
+<%# VIDEO LIBRARY — Tech Agent dark UI %>
+<div class="bg-surface min-h-screen">
+  <!-- Header -->
+  <div class="border-b border-border bg-surface-elevated">
+    <div class="container-xl mx-auto px-6 py-10">
+      <div class="sys-label mb-3">// TRAINING_LIBRARY :: VIDEO_INDEX</div>
+      <h1 class="section-title">视频资源库</h1>
+      <p class="section-subtitle mt-2">由资深律师录制的高质量法律实务课程，助您掌握核心技能</p>
     </div>
   </div>
-</section>
 
-<!-- Category Filter -->
-<section class="py-8 bg-surface sticky top-0 z-10 border-b border-border">
-  <div class="container-xl mx-auto px-6">
-    <div class="flex flex-wrap gap-3">
-      <%= link_to video_resources_path, class: "category-pill #{params[:category].blank? ? 'active' : ''}" do %>
-        全部课程
-      <% end %>
-      <% @categories.each do |category| %>
-        <%= link_to video_resources_path(category: category.slug), class: "category-pill #{params[:category] == category.slug ? 'active' : ''}" do %>
-          <%= category.name %>
+  <!-- Category Filter — sticky bar -->
+  <div class="border-b border-border bg-surface sticky top-14 z-10">
+    <div class="container-xl mx-auto px-6 py-4">
+      <div class="flex flex-wrap gap-2">
+        <%= link_to "ALL", video_resources_path,
+              class: "category-pill #{params[:category].blank? ? 'active' : ''}" %>
+        <% @categories.each do |category| %>
+          <%= link_to category.name.upcase, video_resources_path(category: category.slug),
+                class: "category-pill #{params[:category] == category.slug ? 'active' : ''}" %>
         <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- Video Grid -->
-<section class="py-12 bg-surface">
-  <div class="container-xl mx-auto px-6">
+  <!-- Video Grid -->
+  <div class="container-xl mx-auto px-6 py-10">
     <% if @videos.any? %>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border mb-10">
         <% @videos.each do |video| %>
-          <div class="video-card">
+          <div class="video-card bg-surface-elevated">
             <div class="video-thumbnail">
-              <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=600&h=400&fit=crop" 
-                   alt="<%= video.title %>" 
-                   class="w-full h-full object-cover">
-              <%= link_to video_resource_path(video), class: "absolute inset-0 flex items-center justify-center bg-surface/20 hover:bg-surface/40 transition-colors" do %>
-                <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
-                  <%= lucide_icon "play", class: "w-8 h-8 text-surface ml-1" %>
+              <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=600&h=340&fit=crop&q=80"
+                   alt="<%= video.title %>"
+                   class="w-full h-full object-cover opacity-60">
+              <%= link_to video_resource_path(video),
+                    class: "absolute inset-0 flex items-center justify-center hover:bg-primary/5 transition-colors" do %>
+                <div class="w-12 h-12 border border-primary flex items-center justify-center bg-surface/80 hover:bg-primary/20 transition-colors">
+                  <%= lucide_icon "play", class: "w-5 h-5 text-primary ml-0.5" %>
                 </div>
               <% end %>
               <% if video.duration.present? %>
-                <div class="absolute top-4 right-4 px-3 py-1 bg-surface/90 backdrop-blur-sm rounded-full text-xs font-medium text-primary">
+                <div class="absolute top-3 right-3 px-2 py-0.5 bg-surface/90 border border-border text-xs font-mono text-muted">
                   <%= video.duration %>
                 </div>
               <% end %>
+              <div class="absolute bottom-0 left-0 right-0 h-px bg-primary/30"></div>
             </div>
-            <div class="card-body">
-              <%= link_to video_resource_path(video) do %>
-                <h3 class="font-serif text-xl font-semibold text-primary mb-2 hover:text-primary-dark transition-colors">
+            <div class="p-5">
+              <div class="sys-label mb-2"><%= video.category.name.upcase %></div>
+              <%= link_to video_resource_path(video), class: "block group" do %>
+                <h3 class="font-sans text-sm font-semibold text-primary mb-3 group-hover:text-primary-light transition-colors line-clamp-2">
                   <%= video.title %>
                 </h3>
               <% end %>
-              <div class="flex items-center justify-between mt-4">
-                <div class="flex items-center gap-2 text-muted text-sm">
-                  <%= lucide_icon "folder", class: "w-4 h-4" %>
+              <div class="flex items-center justify-between text-xs font-mono text-muted border-t border-border pt-3">
+                <span class="flex items-center gap-1">
+                  <%= lucide_icon "folder", class: "w-3 h-3" %>
                   <span><%= video.category.name %></span>
-                </div>
-                <div class="flex items-center gap-2 text-muted text-sm">
-                  <%= lucide_icon "eye", class: "w-4 h-4" %>
-                  <span><%= number_with_delimiter(video.views_count) %> 次观看</span>
-                </div>
+                </span>
+                <span class="flex items-center gap-1">
+                  <%= lucide_icon "eye", class: "w-3 h-3" %>
+                  <span><%= number_with_delimiter(video.views_count) %></span>
+                </span>
               </div>
             </div>
           </div>
         <% end %>
       </div>
 
-      <!-- Pagination -->
-      <div class="mt-12">
+      <div class="flex justify-center">
         <%= paginate @videos %>
       </div>
     <% else %>
-      <div class="text-center py-20">
-        <%= lucide_icon "video-off", class: "w-16 h-16 text-muted mx-auto mb-4" %>
-        <p class="text-lg text-secondary">暂无视频资源</p>
+      <div class="text-center py-24 border border-border bg-surface-elevated">
+        <div class="inline-flex items-center justify-center w-12 h-12 border border-border mb-6">
+          <%= lucide_icon "video-off", class: "w-5 h-5 text-muted" %>
+        </div>
+        <div class="sys-label mb-3 justify-center flex">// NO_CONTENT</div>
+        <p class="text-secondary text-sm">暂无视频资源</p>
       </div>
     <% end %>
   </div>
-</section>
+</div>

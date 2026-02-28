@@ -1,199 +1,168 @@
-<div class="container-lg mx-auto px-6 py-12">
-  <!-- Breadcrumb -->
-  <nav class="mb-8">
-    <ol class="flex items-center gap-2 text-sm text-muted">
-      <li><%= link_to "首页", root_path, class: "hover:text-primary" %></li>
-      <li><%= lucide_icon "chevron-right", class: "w-4 h-4" %></li>
-      <li><%= link_to "技能市场", skills_path, class: "hover:text-primary" %></li>
-      <li><%= lucide_icon "chevron-right", class: "w-4 h-4" %></li>
-      <li><%= link_to @skill.category.name, skills_path(category: @skill.category.slug), class: "hover:text-primary" %></li>
-      <li><%= lucide_icon "chevron-right", class: "w-4 h-4" %></li>
-      <li class="text-primary"><%= @skill.title %></li>
-    </ol>
-  </nav>
-
-  <div class="grid lg:grid-cols-3 gap-12">
-    <!-- Main Content -->
-    <div class="lg:col-span-2 space-y-8">
-      <!-- Skill Header -->
-      <div>
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-4">
-          <%= lucide_icon "package", class: "w-4 h-4" %>
-          <span><%= @skill.category.name %></span>
-        </div>
-        
-        <h1 class="font-serif text-4xl md:text-5xl font-bold text-primary mb-4">
-          <%= @skill.title %>
-        </h1>
-        
-        <div class="flex flex-wrap items-center gap-6 text-sm text-secondary">
-          <div class="flex items-center gap-2">
-            <%= lucide_icon "user", class: "w-5 h-5" %>
-            <span class="font-medium"><%= @skill.author_name %></span>
-          </div>
-          
-          <div class="flex items-center gap-2">
-            <%= lucide_icon "star", class: "w-5 h-5 fill-current text-secondary" %>
-            <span class="font-semibold"><%= number_with_precision(@skill.rating, precision: 1) %></span>
-            <span class="text-muted">(<%= @skill.download_count %> 次下载)</span>
-          </div>
-          
-          <div class="flex items-center gap-2">
-            <%= lucide_icon "file-text", class: "w-5 h-5" %>
-            <span><%= @skill.template_count %> 个模板文件</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Description -->
-      <div class="card card-elevated">
-        <div class="card-body">
-          <h2 class="font-serif text-2xl font-bold text-primary mb-4">技能详情</h2>
-          <div class="prose max-w-none text-secondary">
-            <%= simple_format(@skill.description) %>
-          </div>
-        </div>
-      </div>
-
-      <!-- What's Included -->
-      <div class="card card-elevated">
-        <div class="card-body">
-          <h2 class="font-serif text-2xl font-bold text-primary mb-6">包含内容</h2>
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <%= lucide_icon "file-text", class: "w-6 h-6 text-primary" %>
-              </div>
-              <div>
-                <div class="font-semibold text-primary mb-1">专业文档模板</div>
-                <div class="text-sm text-secondary">精心整理的法律文书模板，开箱即用</div>
-              </div>
-            </div>
-            
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <%= lucide_icon "brain", class: "w-6 h-6 text-primary" %>
-              </div>
-              <div>
-                <div class="font-semibold text-primary mb-1">AI提示词库</div>
-                <div class="text-sm text-secondary">优化的AI对话提示，提升工作效率</div>
-              </div>
-            </div>
-            
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <%= lucide_icon "book-open", class: "w-6 h-6 text-primary" %>
-              </div>
-              <div>
-                <div class="font-semibold text-primary mb-1">办案指南</div>
-                <div class="text-sm text-secondary">实战流程与注意事项详解</div>
-              </div>
-            </div>
-            
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <%= lucide_icon "shield-check", class: "w-6 h-6 text-primary" %>
-              </div>
-              <div>
-                <div class="font-semibold text-primary mb-1">风险提示</div>
-                <div class="text-sm text-secondary">常见法律风险点与规避策略</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sidebar -->
-    <div class="lg:col-span-1">
-      <div class="sticky top-8 space-y-6">
-        <!-- Purchase Card -->
-        <div class="card card-elevated border-2 border-primary/20">
-          <div class="card-body text-center">
-            <div class="mb-6">
-              <div class="text-sm text-muted mb-2">技能包价格</div>
-              <div class="font-serif text-5xl font-bold text-primary mb-2">
-                ¥<%= number_with_precision(@skill.price, precision: 0) %>
-              </div>
-              <div class="text-sm text-muted">一次购买，永久使用</div>
-            </div>
-            
-            <% if user_signed_in? %>
-              <%= button_to purchase_skill_path(@skill), method: :post, class: "btn-primary btn-lg w-full mb-4" do %>
-                <%= lucide_icon "shopping-cart", class: "w-5 h-5 inline mr-2" %>
-                <span>立即购买</span>
-              <% end %>
-            <% else %>
-              <%= link_to "登录后购买", sign_in_path, class: "btn-primary btn-lg w-full mb-4" %>
-            <% end %>
-            
-            <div class="space-y-3 text-sm text-left">
-              <div class="flex items-center gap-2 text-secondary">
-                <%= lucide_icon "check-circle", class: "w-5 h-5 text-success flex-shrink-0" %>
-                <span>支持支付宝、微信支付</span>
-              </div>
-              <div class="flex items-center gap-2 text-secondary">
-                <%= lucide_icon "check-circle", class: "w-5 h-5 text-success flex-shrink-0" %>
-                <span>购买后立即下载</span>
-              </div>
-              <div class="flex items-center gap-2 text-secondary">
-                <%= lucide_icon "check-circle", class: "w-5 h-5 text-success flex-shrink-0" %>
-                <span>7天无理由退款</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Author Info -->
-        <div class="card">
-          <div class="card-body">
-            <h3 class="font-semibold text-primary mb-4">关于作者</h3>
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <%= lucide_icon "user", class: "w-6 h-6 text-primary" %>
-              </div>
-              <div>
-                <div class="font-medium text-primary"><%= @skill.author_name %></div>
-                <div class="text-sm text-muted">专业律师</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<%# SKILL DETAIL — Tech Agent dark UI %>
+<div class="bg-surface min-h-screen">
+  <!-- Page Header Bar -->
+  <div class="border-b border-border bg-surface-elevated">
+    <div class="container-lg mx-auto px-6 py-4">
+      <nav>
+        <ol class="flex items-center gap-2 text-xs font-mono text-muted">
+          <li><%= link_to "HOME", root_path, class: "hover:text-primary transition-colors" %></li>
+          <li class="text-border">/</li>
+          <li><%= link_to "SKILLS", skills_path, class: "hover:text-primary transition-colors" %></li>
+          <li class="text-border">/</li>
+          <li><%= link_to @skill.category.name.upcase, skills_path(category: @skill.category.slug), class: "hover:text-primary transition-colors" %></li>
+          <li class="text-border">/</li>
+          <li class="text-primary truncate max-w-xs"><%= @skill.title.upcase %></li>
+        </ol>
+      </nav>
     </div>
   </div>
 
-  <!-- Related Skills -->
-  <% if @related_skills.any? %>
-    <div class="mt-16">
-      <h2 class="font-serif text-3xl font-bold text-primary mb-8">相关技能推荐</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <% @related_skills.each do |skill| %>
-          <div class="skill-card">
-            <div class="card-body">
-              <div class="flex items-start justify-between mb-4">
-                <span class="skill-card-badge"><%= skill.category.name %></span>
-                <div class="flex items-center gap-1 text-secondary text-sm">
-                  <%= lucide_icon "star", class: "w-4 h-4 fill-current" %>
-                  <span class="font-semibold"><%= number_with_precision(skill.rating, precision: 1) %></span>
+  <div class="container-lg mx-auto px-6 py-10">
+    <div class="grid lg:grid-cols-3 gap-10">
+      <!-- Main Content -->
+      <div class="lg:col-span-2 space-y-6">
+        <!-- Skill Header -->
+        <div>
+          <div class="flex items-center gap-3 mb-5">
+            <span class="skill-card-badge"><%= @skill.category.name.upcase %></span>
+            <span class="text-xs font-mono text-primary">★ <%= number_with_precision(@skill.rating, precision: 1) %></span>
+          </div>
+
+          <div class="sys-label mb-3">// SKILL_PACKAGE</div>
+          <h1 class="font-sans text-2xl md:text-3xl font-bold text-primary mb-5 leading-tight">
+            <%= @skill.title %>
+          </h1>
+
+          <div class="flex flex-wrap items-center gap-6 text-xs font-mono text-muted border-t border-border pt-5">
+            <span class="flex items-center gap-2">
+              <%= lucide_icon "user", class: "w-3 h-3" %>
+              <span>BY <%= @skill.author_name %></span>
+            </span>
+            <span class="flex items-center gap-2">
+              <%= lucide_icon "download", class: "w-3 h-3" %>
+              <span><%= @skill.download_count %> DOWNLOADS</span>
+            </span>
+            <span class="flex items-center gap-2">
+              <%= lucide_icon "file-text", class: "w-3 h-3" %>
+              <span><%= @skill.template_count %> TEMPLATES</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Description Panel -->
+        <div class="bg-surface-elevated border border-border p-6">
+          <div class="sys-label mb-4">// DESCRIPTION</div>
+          <div class="text-secondary text-sm leading-relaxed">
+            <%= simple_format(@skill.description) %>
+          </div>
+        </div>
+
+        <!-- What's Included -->
+        <div class="bg-surface-elevated border border-border p-6">
+          <div class="sys-label mb-6">// PACKAGE_CONTENTS</div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <% [
+              ["file-text", "专业文档模板", "精心整理的法律文书模板，开箱即用"],
+              ["brain", "AI提示词库", "优化的AI对话提示，提升工作效率"],
+              ["book-open", "办案指南", "实战流程与注意事项详解"],
+              ["shield-check", "风险提示", "常见法律风险点与规避策略"],
+            ].each do |icon, title, desc| %>
+              <div class="flex items-start gap-4 p-4 bg-surface border border-border hover:border-primary/40 transition-colors">
+                <div class="w-8 h-8 border border-primary/30 flex items-center justify-center flex-shrink-0">
+                  <%= lucide_icon icon, class: "w-4 h-4 text-primary" %>
+                </div>
+                <div>
+                  <div class="text-primary text-sm font-medium mb-1"><%= title %></div>
+                  <div class="text-muted text-xs"><%= desc %></div>
                 </div>
               </div>
-              
-              <%= link_to skill_path(skill), class: "block" do %>
-                <h3 class="font-serif text-xl font-semibold text-primary mb-3 hover:underline"><%= skill.title %></h3>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="sticky top-20 space-y-4">
+          <!-- Purchase Panel -->
+          <div class="bg-surface-elevated border border-primary/30 p-6">
+            <div class="sys-label mb-4">// ACQUIRE</div>
+
+            <div class="mb-6 border-b border-border pb-6">
+              <div class="text-xs font-mono text-muted mb-1 tracking-wider">UNIT_PRICE</div>
+              <div class="font-mono text-4xl font-bold text-primary">
+                ¥<%= number_with_precision(@skill.price, precision: 0) %>
+              </div>
+              <div class="text-xs font-mono text-muted mt-1">ONE_TIME · PERPETUAL_LICENSE</div>
+            </div>
+
+            <% if user_signed_in? %>
+              <%= button_to purchase_skill_path(@skill), method: :post,
+                    class: "btn-primary btn-lg w-full mb-4 font-mono text-xs tracking-widest" do %>
+                <%= lucide_icon "terminal", class: "w-4 h-4 inline mr-2" %>
+                <span>PURCHASE NOW</span>
               <% end %>
-              
-              <div class="flex items-center justify-between pt-4 border-t border-border">
-                <div class="flex items-center gap-2 text-sm text-muted">
-                  <%= lucide_icon "user", class: "w-4 h-4" %>
-                  <span><%= skill.author_name %></span>
+            <% else %>
+              <%= link_to "LOGIN TO PURCHASE", sign_in_path,
+                    class: "btn-primary btn-lg w-full mb-4 font-mono text-xs tracking-widest text-center block" %>
+            <% end %>
+
+            <div class="space-y-2">
+              <% [
+                ["check-circle", "支付宝 · 微信支付"],
+                ["check-circle", "购买后立即下载"],
+                ["check-circle", "7天无理由退款"],
+              ].each do |icon, text| %>
+                <div class="flex items-center gap-3 text-xs font-mono text-secondary">
+                  <%= lucide_icon icon, class: "w-3 h-3 text-success flex-shrink-0" %>
+                  <span><%= text %></span>
                 </div>
-                <span class="text-xl font-bold font-serif text-primary">¥<%= number_with_precision(skill.price, precision: 0) %></span>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Author Panel -->
+          <div class="bg-surface-elevated border border-border p-5">
+            <div class="sys-label mb-4">// AUTHOR</div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 border border-border flex items-center justify-center">
+                <%= lucide_icon "user", class: "w-4 h-4 text-muted" %>
+              </div>
+              <div>
+                <div class="text-primary text-sm font-medium"><%= @skill.author_name %></div>
+                <div class="text-xs font-mono text-muted">VERIFIED_ATTORNEY</div>
               </div>
             </div>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
-  <% end %>
+
+    <!-- Related Skills -->
+    <% if @related_skills.any? %>
+      <div class="mt-16 pt-10 border-t border-border">
+        <div class="sys-label mb-4">// RELATED_PACKAGES</div>
+        <h2 class="font-sans text-xl font-bold text-primary mb-8">相关技能推荐</h2>
+        <div class="grid md:grid-cols-3 gap-px bg-border">
+          <% @related_skills.each do |skill| %>
+            <div class="skill-card p-5 bg-surface-elevated">
+              <div class="flex items-start justify-between mb-3">
+                <span class="skill-card-badge"><%= skill.category.name.upcase %></span>
+                <span class="text-xs font-mono text-primary">★ <%= number_with_precision(skill.rating, precision: 1) %></span>
+              </div>
+              <%= link_to skill_path(skill), class: "block group" do %>
+                <h3 class="font-sans text-sm font-semibold text-primary mb-2 group-hover:text-primary-light transition-colors">
+                  <%= skill.title %>
+                </h3>
+              <% end %>
+              <div class="flex items-center justify-between pt-3 border-t border-border mt-3">
+                <span class="text-xs font-mono text-muted">BY <%= skill.author_name %></span>
+                <span class="font-mono text-sm font-bold text-primary">¥<%= number_with_precision(skill.price, precision: 0) %></span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

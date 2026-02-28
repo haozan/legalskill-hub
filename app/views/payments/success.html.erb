@@ -1,55 +1,62 @@
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-surface to-secondary/5 px-6">
-  <div class="max-w-2xl w-full">
-    <div class="card card-elevated text-center">
-      <div class="card-body py-16">
-        <!-- Success Icon -->
-        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-success/10 mb-6">
-          <%= lucide_icon "check-circle", class: "w-12 h-12 text-success" %>
-        </div>
-        
-        <h1 class="font-serif text-4xl font-bold text-primary mb-4">
-          支付成功！
-        </h1>
-        
-        <p class="text-xl text-secondary mb-8">
-          感谢您的购买，技能包已添加到您的账户。
-        </p>
-        
-        <div class="bg-surface-elevated rounded-2xl p-6 mb-8 text-left">
-          <h2 class="font-semibold text-primary mb-4">支付详情</h2>
-          <% if @payment %>
-            <div class="space-y-3 text-sm">
-              <div class="flex justify-between">
-                <span class="text-muted">订单号</span>
-                <span class="font-mono text-primary">#<%= @payment.id %></span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-muted">商品名称</span>
-                <span class="text-primary"><%= @payment.product_description %></span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-muted">支付金额</span>
-                <span class="font-bold text-primary"><%= @payment.formatted_amount %></span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-muted">支付时间</span>
-                <span class="text-primary"><%= l(@payment.updated_at, format: :long) %></span>
-              </div>
+<%# PAYMENT SUCCESS — Tech Agent dark confirmation %>
+<div class="min-h-screen bg-surface tech-grid-bg flex items-center justify-center px-6 py-16">
+  <!-- Glow -->
+  <div class="fixed inset-0 pointer-events-none"
+       style="background: radial-gradient(ellipse 50% 40% at 50% 40%, hsl(145 80% 48% / 0.06) 0%, transparent 70%);"></div>
+
+  <div class="relative w-full max-w-lg">
+    <!-- Panel header -->
+    <div class="bg-surface-elevated border border-success/30 border-b-0 px-6 py-4 flex items-center gap-3">
+      <div class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></div>
+      <span class="font-mono text-xs text-success tracking-widest">TRANSACTION :: CONFIRMED</span>
+    </div>
+
+    <!-- Panel body -->
+    <div class="bg-surface-elevated border border-success/30 p-8 text-center">
+      <!-- Success Icon -->
+      <div class="inline-flex items-center justify-center w-16 h-16 border border-success/40 bg-success/5 mb-6">
+        <%= lucide_icon "check", class: "w-8 h-8 text-success" %>
+      </div>
+
+      <div class="sys-label mb-3 justify-center flex">// PAYMENT_SUCCESS</div>
+      <h1 class="font-mono text-2xl font-bold text-primary mb-3">支付成功</h1>
+      <p class="text-secondary text-sm mb-8">技能包已添加到您的账户，可立即使用</p>
+
+      <!-- Order Details -->
+      <% if @payment %>
+        <div class="bg-surface border border-border p-5 mb-8 text-left">
+          <div class="sys-label mb-4">// TRANSACTION_RECORD</div>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center text-xs font-mono">
+              <span class="text-muted tracking-wider">ORDER_ID</span>
+              <span class="text-primary">#<%= @payment.id %></span>
             </div>
-          <% end %>
+            <div class="flex justify-between items-center text-xs font-mono border-t border-border pt-3">
+              <span class="text-muted tracking-wider">PRODUCT</span>
+              <span class="text-secondary"><%= @payment.product_description %></span>
+            </div>
+            <div class="flex justify-between items-center text-xs font-mono border-t border-border pt-3">
+              <span class="text-muted tracking-wider">AMOUNT</span>
+              <span class="text-primary font-bold text-sm"><%= @payment.formatted_amount %></span>
+            </div>
+            <div class="flex justify-between items-center text-xs font-mono border-t border-border pt-3">
+              <span class="text-muted tracking-wider">TIMESTAMP</span>
+              <span class="text-secondary"><%= @payment.updated_at.strftime("%Y.%m.%d %H:%M") %></span>
+            </div>
+          </div>
         </div>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <%= link_to skills_path, class: "btn-primary btn-lg" do %>
-            <%= lucide_icon "package", class: "w-5 h-5 inline mr-2" %>
-            <span>继续浏览技能</span>
-          <% end %>
-          
-          <%= link_to root_path, class: "btn-outline btn-lg" do %>
-            <%= lucide_icon "home", class: "w-5 h-5 inline mr-2" %>
-            <span>返回首页</span>
-          <% end %>
-        </div>
+      <% end %>
+
+      <!-- Actions -->
+      <div class="flex flex-col sm:flex-row gap-3">
+        <%= link_to skills_path, class: "btn-primary btn-md flex-1 font-mono text-xs tracking-widest inline-flex items-center justify-center gap-2" do %>
+          <%= lucide_icon "package", class: "w-3 h-3" %>
+          <span>BROWSE SKILLS</span>
+        <% end %>
+        <%= link_to root_path, class: "btn-outline btn-md flex-1 font-mono text-xs tracking-widest inline-flex items-center justify-center gap-2" do %>
+          <%= lucide_icon "home", class: "w-3 h-3" %>
+          <span>HOME</span>
+        <% end %>
       </div>
     </div>
   </div>

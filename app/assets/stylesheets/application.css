@@ -15,8 +15,8 @@
  * All components defined in components.css - READ ONLY, DO NOT MODIFY
  * Custom components go in "CUSTOM COMPONENTS" section at bottom of this file
  */
-/* Import Google Fonts - Legal Professional Typography */
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap');
+/* Import Google Fonts - Tech Minimal Typography */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap');
 
 /* Import design system components - DO NOT MODIFY components.css */
 @import "components";
@@ -43,163 +43,199 @@
    * Use semantic variables only for maintainability and theme consistency.
    */
   :root {
-    /* Legal Professional Blue - Justice & Trust */
-    --color-primary: 214 80% 45%;        /* Deep professional blue */
-    --color-primary-light: 214 85% 60%;  /* Lighter blue for hover states */
-    --color-primary-dark: 214 90% 35%;   /* Darker blue for emphasis */
+    /* ─── TECH AGENT DARK DESIGN SYSTEM ─── */
+    /* Primary: Electric Cyan — system accent */
+    --color-primary: 174 100% 44%;       /* #00E5CC - electric cyan */
+    --color-primary-light: 174 100% 60%; /* lighter cyan hover */
+    --color-primary-dark: 174 100% 32%;  /* darker cyan press */
 
-    /* Complementary Gold - Authority & Excellence */
-    --color-secondary: 40 85% 55%;       /* Professional gold accent */
-    --color-secondary-light: 40 90% 70%; /* Light gold for backgrounds */
-    --color-secondary-dark: 40 75% 45%;
+    /* Secondary: Muted Steel — supporting accent */
+    --color-secondary: 220 14% 55%;      /* cool steel gray */
+    --color-secondary-light: 220 14% 70%;
+    --color-secondary-dark: 220 14% 40%;
 
-    /* Text colors - high contrast for readability */
-    --color-text-primary: 0 0% 15%;    /* Main headings, important text */
-    --color-text-secondary: 0 0% 35%;  /* Body text, descriptions */
-    --color-text-muted: 0 0% 64%;      /* Captions, helper text */
+    /* Text: Near-white hierarchy on dark bg */
+    --color-text-primary: 210 20% 92%;   /* primary text */
+    --color-text-secondary: 210 12% 65%; /* secondary text */
+    --color-text-muted: 210 10% 42%;     /* muted / disabled */
 
-    /* Surface colors - for backgrounds and borders */
-    --color-surface: 0 0% 100%;        /* Main background (white) */
-    --color-surface-elevated: 0 0% 92%; /* Cards, elevated surfaces */
-    --color-border: 0 0% 90%;          /* Borders, dividers */
+    /* Surface: Deep dark layered system */
+    --color-surface: 222 20% 6%;         /* #090d14 - near black base */
+    --color-surface-elevated: 220 18% 10%; /* #131920 - card surface */
+    --color-border: 220 16% 18%;         /* hairline border */
 
-    /*  Neutral color - use only in special cases, avoid for text */
-    --color-neutral: 0 0% 64%;
+    /* Neutral */
+    --color-neutral: 220 14% 46%;
 
-    --color-success: 142 76% 36%;
-    --color-warning: 38 92% 50%;
-    --color-danger: 0 84% 60%;
-    --color-info: 188 94% 42%;
+    /* Status colors - vibrant on dark */
+    --color-success: 145 80% 48%;
+    --color-warning: 43 95% 56%;
+    --color-danger: 0 80% 62%;
+    --color-info: 200 95% 55%;
 
-    --color-success-bg: 138 76% 97%;
-    --color-warning-bg: 48 100% 96%;
-    --color-danger-bg: 0 93% 97%;
-    --color-info-bg: 204 100% 97%;
+    --color-success-bg: 145 80% 48% / 0.12;
+    --color-warning-bg: 43 95% 56% / 0.12;
+    --color-danger-bg: 0 80% 62% / 0.12;
+    --color-info-bg: 200 95% 55% / 0.12;
 
-    /* Legal Professional Typography */
-    --font-family-sans: 'Lato', 'Helvetica Neue', 'Arial', sans-serif;
-    --font-family-serif: 'EB Garamond', 'Georgia', serif;
+    /* Tech Typography */
+    --font-family-sans: 'Space Grotesk', 'Inter', 'Helvetica Neue', sans-serif;
+    --font-family-serif: 'Space Grotesk', 'Inter', sans-serif;
     --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 
-    --border-radius-sm: 0.375rem;
-    --border-radius: 0.5rem;
-    --border-radius-md: 0.75rem;
-    --border-radius-lg: 1rem;
-    --border-radius-xl: 1.5rem;
+    /* Sharp corners — agent system feel */
+    --border-radius-sm: 0.125rem;
+    --border-radius: 0.25rem;
+    --border-radius-md: 0.375rem;
+    --border-radius-lg: 0.5rem;
+    --border-radius-xl: 0.75rem;
 
-    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    /* Dark-tuned shadows with cyan glow */
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.6);
+    --shadow-sm: 0 1px 4px 0 rgb(0 0 0 / 0.7);
+    --shadow: 0 4px 12px -2px rgb(0 0 0 / 0.7);
+    --shadow-md: 0 8px 24px -4px rgb(0 0 0 / 0.7);
+    --shadow-lg: 0 20px 40px -8px rgb(0 0 0 / 0.8);
+    --shadow-xl: 0 30px 60px -12px rgb(0 0 0 / 0.9);
   }
 
-  /*
-   * Dark Mode - Comprehensive optimization for contrast and visual effects
-   * Follows WCAG AA standards with minimum 4.5:1 text contrast ratio
-   */
+  /* Dark mode mirrors root — this is already a dark-first system */
   .dark {
-    /* Brand colors optimization for dark mode - increased brightness */
-    --color-primary: 214 90% 65%;      /* Brighter legal blue for dark backgrounds */
-    --color-primary-light: 214 95% 75%; /* Light variant */
-    --color-primary-dark: 214 85% 55%; /* Dark variant */
-
-    --color-secondary: 40 90% 65%;     /* Brighter gold for dark mode */
-    --color-secondary-light: 40 95% 80%;
-    --color-secondary-dark: 40 80% 55%;
-
-    /* Text colors - high contrast for readability */
-    --color-text-primary: 0 0% 95%;    /* Near white, optimal contrast */
-    --color-text-secondary: 0 0% 80%;  /* Secondary text, still clear */
-    --color-text-muted: 0 0% 60%;      /* Muted text, moderate contrast */
-
-    /* Surface colors - layered dark system */
-    --color-surface: 0 0% 8%;          /* Very dark background, near black */
-    --color-surface-elevated: 0 0% 12%; /* Card background, slightly lighter */
-    --color-border: 0 0% 20%;          /* Borders, adequate contrast */
-
-    /* Status colors optimization for dark mode - brighter and more saturated */
-    --color-success: 145 80% 50%;      /* Brighter green */
-    --color-warning: 45 95% 60%;       /* Brighter yellow */
-    --color-danger: 0 85% 65%;         /* Brighter red */
-    --color-info: 200 95% 55%;         /* Brighter blue */
-
-    /* Status background colors - semi-transparent for dark mode */
-    --color-success-bg: 145 80% 50% / 0.15; /* Semi-transparent green background */
-    --color-warning-bg: 45 95% 60% / 0.15;  /* Semi-transparent yellow background */
-    --color-danger-bg: 0 85% 65% / 0.15;    /* Semi-transparent red background */
-    --color-info-bg: 200 95% 55% / 0.15;    /* Semi-transparent blue background */
-
-    /* Neutral color adjustment for dark mode */
-    --color-neutral: 0 0% 70%;         /* Brighter neutral for dark backgrounds */
-
-    /* Shadows for dark mode - softer to avoid being too heavy */
-    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.4);
-    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.5), 0 1px 2px -1px rgb(0 0 0 / 0.5);
-    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
-    --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
-    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
-    --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.7);
+    --color-primary: 174 100% 44%;
+    --color-primary-light: 174 100% 60%;
+    --color-primary-dark: 174 100% 32%;
+    --color-secondary: 220 14% 55%;
+    --color-secondary-light: 220 14% 70%;
+    --color-secondary-dark: 220 14% 40%;
+    --color-text-primary: 210 20% 92%;
+    --color-text-secondary: 210 12% 65%;
+    --color-text-muted: 210 10% 42%;
+    --color-surface: 222 20% 6%;
+    --color-surface-elevated: 220 18% 10%;
+    --color-border: 220 16% 18%;
+    --color-neutral: 220 14% 46%;
+    --color-success: 145 80% 48%;
+    --color-warning: 43 95% 56%;
+    --color-danger: 0 80% 62%;
+    --color-info: 200 95% 55%;
+    --color-success-bg: 145 80% 48% / 0.12;
+    --color-warning-bg: 43 95% 56% / 0.12;
+    --color-danger-bg: 0 80% 62% / 0.12;
+    --color-info-bg: 200 95% 55% / 0.12;
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.6);
+    --shadow-sm: 0 1px 4px 0 rgb(0 0 0 / 0.7);
+    --shadow: 0 4px 12px -2px rgb(0 0 0 / 0.7);
+    --shadow-md: 0 8px 24px -4px rgb(0 0 0 / 0.7);
+    --shadow-lg: 0 20px 40px -8px rgb(0 0 0 / 0.8);
+    --shadow-xl: 0 30px 60px -12px rgb(0 0 0 / 0.9);
   }
 
-  /* Add your custom components here */
+  /* ─── TECH AGENT CUSTOM COMPONENTS ─── */
 
-  /* Legal Market Hero Section */
+  /* Scanline grid background effect */
+  .tech-grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--color-border) / 0.4) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--color-border) / 0.4) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Hero - dark command center */
   .hero-gradient {
-    @apply bg-gradient-to-br from-primary via-primary-light to-secondary;
+    background: hsl(var(--color-surface));
   }
 
   .hero-overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-surface/90 via-surface/50 to-transparent;
+    @apply absolute inset-0;
+    background: radial-gradient(ellipse 80% 60% at 60% 50%, hsl(174 100% 44% / 0.06) 0%, transparent 70%);
   }
 
-  /* Skill Card Component */
+  /* Accent line — terminal cursor style */
+  .accent-line {
+    @apply inline-block w-2 h-5 bg-primary align-middle ml-1;
+    animation: blink 1.2s step-end infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Skill Card Component — dark panel */
   .skill-card {
-    @apply card card-elevated hover:shadow-lg transition-all duration-300 cursor-pointer;
-    @apply border border-border hover:border-primary;
+    @apply bg-surface-elevated border border-border transition-all duration-200 cursor-pointer;
+    @apply hover:border-primary/60;
+    box-shadow: inset 0 1px 0 hsl(var(--color-border) / 0.5);
+  }
+  .skill-card:hover {
+    box-shadow: 0 0 0 1px hsl(174 100% 44% / 0.3), 0 4px 20px hsl(174 100% 44% / 0.08);
   }
 
   .skill-card-badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
-    @apply bg-primary/10 text-primary;
+    @apply inline-flex items-center px-2 py-0.5 text-xs font-mono font-medium uppercase tracking-wider;
+    @apply border border-primary/30 text-primary bg-primary/10;
   }
 
-  /* Video Card Component */
+  /* Video Card Component — dark panel */
   .video-card {
-    @apply card overflow-hidden hover:shadow-md transition-all duration-300;
-    @apply border border-border hover:border-primary/50;
+    @apply bg-surface-elevated border border-border overflow-hidden transition-all duration-200;
+    @apply hover:border-primary/40;
   }
 
   .video-thumbnail {
-    @apply relative w-full aspect-video overflow-hidden bg-surface-elevated;
+    @apply relative w-full aspect-video overflow-hidden bg-surface;
   }
 
-  /* Community Section Styling */
-  .community-stats {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg;
-    @apply bg-secondary/10 text-secondary-dark font-semibold;
-  }
-
-  /* Section Headers */
+  /* Section Headers — minimal monospace style */
   .section-title {
-    @apply font-serif text-4xl md:text-5xl font-bold text-primary;
-    @apply mb-4;
+    @apply font-mono text-3xl md:text-4xl font-bold text-primary;
+    @apply mb-4 tracking-tight;
   }
 
   .section-subtitle {
-    @apply text-lg md:text-xl text-secondary font-normal max-w-2xl;
+    @apply text-base md:text-lg text-secondary font-normal max-w-2xl font-sans;
   }
 
-  /* Category Pills */
+  /* Category Pills — sharp tag style */
   .category-pill {
-    @apply px-4 py-2 rounded-full border-2 border-border;
-    @apply hover:border-primary hover:bg-primary/5 transition-all cursor-pointer;
-    @apply text-sm font-medium text-secondary;
+    @apply px-3 py-1.5 border border-border text-xs font-mono uppercase tracking-wider;
+    @apply hover:border-primary/60 hover:text-primary transition-all cursor-pointer text-secondary;
   }
 
   .category-pill.active {
-    @apply border-primary bg-primary text-surface;
+    @apply border-primary text-primary bg-primary/10;
+  }
+
+  /* Stat block */
+  .tech-stat {
+    @apply border-l-2 border-primary pl-4;
+  }
+
+  /* Glowing primary button effect */
+  .btn-primary {
+    @apply relative overflow-hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-200;
+    background: hsl(174 100% 44% / 0.15);
+  }
+  .btn-primary:hover::after {
+    @apply opacity-100;
+  }
+
+  /* Tag prefix — [SYSTEM] style labels */
+  .sys-label {
+    @apply text-xs font-mono text-primary/70 uppercase tracking-widest;
+  }
+
+  /* Divider with center label */
+  .tech-divider {
+    @apply flex items-center gap-4 text-xs font-mono text-muted uppercase tracking-widest;
+  }
+  .tech-divider::before,
+  .tech-divider::after {
+    content: '';
+    @apply flex-1 h-px bg-border;
   }
 
 } /* End of @layer components */

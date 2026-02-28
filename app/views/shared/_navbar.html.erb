@@ -1,59 +1,45 @@
-<!-- Classic Navbar - Traditional, clean design inspired by Bootstrap -->
-<!--
-STYLE VARIANTS - Uncomment or modify classes below to customize:
-
-Background:
-- Light (default): bg-white dark:bg-gray-800
-- Elevated: bg-surface-elevated
-- Custom: bg-gray-50 dark:bg-gray-900
-
-Border:
-- Bottom border (default): border-b border-gray-200 dark:border-gray-700
-- No border: remove "border-b border-gray-200"
-- Thick border: border-b-2 border-gray-300
-
-Shadow:
-- None (default): no shadow
-- Subtle: shadow-sm
-- Medium: shadow-md
-
-Size:
-- Compact: h-14
-- Normal (default): h-16
-- Large: h-20
--->
+<!-- Tech Agent Navbar — Minimal dark command bar -->
 <!-- DO NOT modify data-controller, data-action, or data-dropdown-target attributes -->
 
 <div data-controller="dropdown" data-dropdown-close-on-click-outside-value="false">
-  <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-    <div class="container-xl mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
+  <nav class="bg-surface border-b border-border sticky top-0 z-40">
+    <div class="container-xl mx-auto px-6">
+      <div class="flex items-center justify-between h-14">
 
-        <!-- Logo -->
-        <div class="flex items-center">
-          <%= link_to Rails.application.config.x.appname, root_path, class: "text-xl font-bold text-gray-900 dark:text-white" %>
+        <!-- Logo — monospace system ID -->
+        <div class="flex items-center gap-3">
+          <%= link_to root_path, class: "flex items-center gap-2 group" do %>
+            <div class="w-6 h-6 border border-primary flex items-center justify-center">
+              <div class="w-2.5 h-2.5 bg-primary"></div>
+            </div>
+            <span class="font-mono text-sm font-bold text-primary tracking-widest uppercase group-hover:text-primary-light transition-colors">
+              <%= Rails.application.config.x.appname %>
+            </span>
+          <% end %>
+          <span class="hidden md:inline text-border text-xs font-mono select-none">|</span>
+          <span class="hidden md:inline text-muted text-xs font-mono tracking-widest">LEGAL_SKILL_HUB</span>
         </div>
 
         <!-- Desktop navigation -->
-        <div class="hidden md:flex items-center space-x-8">
+        <div class="hidden md:flex items-center gap-6">
           <%= render 'shared/nav_links' %>
         </div>
 
         <!-- Desktop auth -->
-        <div class="hidden md:flex items-center space-x-4">
+        <div class="hidden md:flex items-center gap-3">
           <% if current_user %>
             <%= render 'shared/user_dropdown' %>
           <% else %>
-            <%= link_to "Sign In", sign_in_path, class: "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium" %>
-            <%= link_to "Sign Up", sign_up_path, class: "btn-primary btn-sm" %>
+            <%= link_to "LOGIN", sign_in_path, class: "text-secondary text-xs font-mono tracking-widest hover:text-primary transition-colors px-3 py-1.5 border border-transparent hover:border-border" %>
+            <%= link_to "REGISTER", sign_up_path, class: "btn-primary btn-sm font-mono text-xs tracking-widest" %>
           <% end %>
         </div>
 
         <!-- Mobile hamburger - DO NOT REMOVE -->
         <button type="button"
                 data-action="click->dropdown#toggle"
-                class="md:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-          <%= lucide_icon "menu", class: "w-6 h-6" %>
+                class="md:hidden p-2 text-secondary hover:text-primary border border-transparent hover:border-border transition-all">
+          <%= lucide_icon "menu", class: "w-5 h-5" %>
         </button>
       </div>
     </div>
@@ -62,31 +48,32 @@ Size:
   <!-- Mobile drawer - DO NOT REMOVE this structure -->
   <div data-dropdown-target="menu" class="hidden fixed inset-0 z-50 md:hidden">
     <!-- Background overlay -->
-    <div class="fixed inset-0 bg-black/50" data-action="click->dropdown#close"></div>
+    <div class="fixed inset-0 bg-black/70 backdrop-blur-sm" data-action="click->dropdown#close"></div>
 
-    <!-- Drawer content -->
-    <div class="fixed right-0 top-0 h-full w-64 bg-white dark:bg-gray-800 shadow-xl overflow-y-auto">
-      <div class="p-4">
+    <!-- Drawer content — dark panel -->
+    <div class="fixed right-0 top-0 h-full w-64 bg-surface-elevated border-l border-border overflow-y-auto">
+      <div class="p-5">
         <!-- Close button -->
         <button type="button"
                 data-action="click->dropdown#close"
-                class="mb-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-          <%= lucide_icon "x", class: "w-6 h-6" %>
+                class="mb-6 p-1.5 hover:text-primary text-secondary border border-transparent hover:border-border transition-all">
+          <%= lucide_icon "x", class: "w-5 h-5" %>
         </button>
 
+        <div class="mb-2 text-xs font-mono text-muted tracking-widest uppercase">Navigation</div>
         <!-- Mobile navigation -->
-        <div class="mb-6 flex flex-col space-y-2">
+        <div class="mb-6 flex flex-col gap-1">
           <%= render 'shared/nav_links' %>
         </div>
 
         <!-- Mobile user menu -->
-        <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+        <div class="border-t border-border pt-4">
           <% if current_user %>
             <%= render 'shared/user_dropdown' %>
           <% else %>
-            <div class="flex flex-col space-y-2">
-              <%= link_to "Sign In", sign_in_path, class: "btn-ghost btn-md w-full" %>
-              <%= link_to "Sign Up", sign_up_path, class: "btn-primary btn-md w-full" %>
+            <div class="flex flex-col gap-2">
+              <%= link_to "LOGIN", sign_in_path, class: "btn-ghost btn-md w-full font-mono text-xs tracking-widest text-center" %>
+              <%= link_to "REGISTER", sign_up_path, class: "btn-primary btn-md w-full font-mono text-xs tracking-widest text-center" %>
             </div>
           <% end %>
         </div>
