@@ -29,7 +29,7 @@ class Skill < ApplicationRecord
   end
 
   def customer_email
-    "noreply@legalskillhub.com"
+    "noreply@lxskill.com"
   end
 
   def payment_description

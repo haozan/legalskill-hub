@@ -6,18 +6,18 @@
     <div class="container-xl mx-auto px-6">
       <div class="flex items-center justify-between h-14">
 
-        <!-- Logo — monospace system ID -->
+        <!-- Logo — geometric icon -->
         <div class="flex items-center gap-3">
           <%= link_to root_path, class: "flex items-center gap-2 group" do %>
-            <div class="w-6 h-6 border border-primary flex items-center justify-center">
-              <div class="w-2.5 h-2.5 bg-primary"></div>
+            <div class="w-6 h-6 border border-primary flex items-center justify-center group-hover:border-primary-light transition-colors">
+              <div class="w-2.5 h-2.5 bg-primary group-hover:bg-primary-light transition-colors"></div>
             </div>
             <span class="font-mono text-sm font-bold text-primary tracking-widest uppercase group-hover:text-primary-light transition-colors">
               <%= Rails.application.config.x.appname %>
             </span>
           <% end %>
           <span class="hidden md:inline text-border text-xs font-mono select-none">|</span>
-          <span class="hidden md:inline text-muted text-xs font-mono tracking-widest">LEGAL_SKILL_HUB</span>
+          <span class="hidden md:inline text-muted text-xs font-mono tracking-widest">AI 法律技能平台</span>
         </div>
 
         <!-- Desktop navigation -->
@@ -30,8 +30,8 @@
           <% if current_user %>
             <%= render 'shared/user_dropdown' %>
           <% else %>
-            <%= link_to "LOGIN", sign_in_path, class: "text-secondary text-xs font-mono tracking-widest hover:text-primary transition-colors px-3 py-1.5 border border-transparent hover:border-border" %>
-            <%= link_to "REGISTER", sign_up_path, class: "btn-primary btn-sm font-mono text-xs tracking-widest" %>
+            <%= link_to "登录", sign_in_path, class: "text-secondary text-xs font-mono tracking-widest hover:text-primary transition-colors px-3 py-1.5 border border-transparent hover:border-border" %>
+            <%= link_to "注册", sign_up_path, class: "btn-primary btn-sm font-mono text-xs tracking-widest" %>
           <% end %>
         </div>
 
@@ -60,7 +60,7 @@
           <%= lucide_icon "x", class: "w-5 h-5" %>
         </button>
 
-        <div class="mb-2 text-xs font-mono text-muted tracking-widest uppercase">Navigation</div>
+        <div class="mb-2 text-xs font-mono text-muted tracking-widest uppercase">导航菜单</div>
         <!-- Mobile navigation -->
         <div class="mb-6 flex flex-col gap-1">
           <%= render 'shared/nav_links' %>
@@ -72,8 +72,8 @@
             <%= render 'shared/user_dropdown' %>
           <% else %>
             <div class="flex flex-col gap-2">
-              <%= link_to "LOGIN", sign_in_path, class: "btn-ghost btn-md w-full font-mono text-xs tracking-widest text-center" %>
-              <%= link_to "REGISTER", sign_up_path, class: "btn-primary btn-md w-full font-mono text-xs tracking-widest text-center" %>
+              <%= link_to "登录", sign_in_path, class: "btn-ghost btn-md w-full font-mono text-xs tracking-widest text-center" %>
+              <%= link_to "注册", sign_up_path, class: "btn-primary btn-md w-full font-mono text-xs tracking-widest text-center" %>
             </div>
           <% end %>
         </div>

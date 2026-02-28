@@ -1,4 +1,4 @@
-# Seed data for LegalSkill Hub
+# Seed data for LXSkill
 
 puts "Cleaning database..."
 Skill.destroy_all
