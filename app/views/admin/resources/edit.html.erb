@@ -26,14 +26,8 @@
           <%= form.text_field :url, placeholder: "请输入完整URL (https://...)" %>
         </div>
 
-        <!-- Resource type -->
-        <div class="form-group">
-          <%= form.label :resource_type, "资源类型" %>
-          <%= form.select :resource_type, 
-                options_for_select([['视频资源', 'video'], ['网站资源', 'website']], @resource.resource_type),
-                {}, 
-                class: "form-select" %>
-        </div>
+        <!-- Resource type (hidden, always website) -->
+        <%= form.hidden_field :resource_type, value: "website" %>
 
         <!-- Description -->
         <div class="form-group">
