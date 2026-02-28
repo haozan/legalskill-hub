@@ -29,9 +29,13 @@ class Identity::PasswordResetsController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by_token_for!(:password_reset, params[:sid])
+    # 防御性处理：移除可能由邮件客户端添加的空白字符
+    raw_sid = params[:sid]
+    trimmed_sid = raw_sid&.strip
+    
+    @user = User.find_by_token_for!(:password_reset, trimmed_sid)
   rescue StandardError
-    redirect_to new_identity_password_reset_path, alert: "That password reset link is invalid"
+    redirect_to new_identity_password_reset_path, alert: "该密码重置链接已失效"
   end
 
   def user_params
