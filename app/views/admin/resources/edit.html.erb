@@ -26,6 +26,15 @@
           <%= form.text_field :url, placeholder: "请输入完整URL (https://...)" %>
         </div>
 
+        <!-- Resource tag -->
+        <div class="form-group">
+          <%= form.label :resource_tag, "资源分类" %>
+          <%= form.select :resource_tag, 
+                options_for_select([['请选择分类', '']] + Resource::RESOURCE_TAG_NAMES.map { |k, v| [v, k] }, @resource.resource_tag),
+                {}, 
+                class: "form-select" %>
+        </div>
+
         <!-- Resource type (hidden, always website) -->
         <%= form.hidden_field :resource_type, value: "website" %>
 

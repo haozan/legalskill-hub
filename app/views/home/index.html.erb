@@ -75,13 +75,26 @@
 <!-- SECTION: Recommended Resources -->
 <section id="recommended-resources" class="py-16 bg-surface-elevated border-t border-border">
   <div class="container-xl mx-auto px-6">
-    <% resources = Resource.published.ordered %>
-    <% websites = Resource.published.ordered.websites %>
-    <% if websites.any? %>
+    <% websites = Resource.published.ordered.websites.by_tag(params[:tag]) %>
+    <% if websites.any? || params[:tag].present? %>
       <!-- Section Header -->
       <div class="mb-12">
         <h2 class="section-title">推荐网站资源</h2>
         <p class="section-subtitle mt-2">精选法律学习与实践网站，助力专业成长</p>
+      </div>
+
+      <!-- Tag Filter -->
+      <div class="flex flex-wrap gap-2 mb-10">
+        <%= link_to root_path(anchor: 'recommended-resources'), 
+              class: "category-pill #{params[:tag].blank? ? 'active' : ''}" do %>
+          全部
+        <% end %>
+        <% Resource::RESOURCE_TAG_NAMES.each do |tag_key, tag_name| %>
+          <%= link_to root_path(tag: tag_key, anchor: 'recommended-resources'), 
+                class: "category-pill #{params[:tag] == tag_key ? 'active' : ''}" do %>
+            <%= tag_name %>
+          <% end %>
+        <% end %>
       </div>
 
       <div class="grid md:grid-cols-2 gap-3">
@@ -101,6 +114,11 @@
                 </div>
                 <% if resource.description.present? %>
                   <p class="text-xs text-secondary leading-relaxed line-clamp-2"><%= resource.description %></p>
+                <% end %>
+                <% if resource.resource_tag.present? %>
+                  <span class="inline-block mt-2 px-2 py-0.5 bg-primary/10 border border-primary/30 text-xs font-mono text-primary">
+                    <%= resource.tag_name %>
+                  </span>
                 <% end %>
               </div>
             </div>

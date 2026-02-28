@@ -45,6 +45,6 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def resource_params
-    params.require(:resource).permit(:title, :url, :resource_type, :description, :position, :published)
+    params.require(:resource).permit(:title, :url, :resource_type, :resource_tag, :description, :position, :published)
   end
 end
