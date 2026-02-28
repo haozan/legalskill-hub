@@ -1,6 +1,7 @@
 # Seed data for LXSkill
 
 puts "Cleaning database..."
+Resource.destroy_all
 Skill.destroy_all
 VideoResource.destroy_all
 Category.destroy_all
@@ -131,8 +132,59 @@ end
 
 puts "Created #{Skill.count} skills"
 
+puts "Creating resources..."
+resources = [
+  {
+    title: "法律人入门视频课程",
+    url: "https://www.bilibili.com/video/BV1xx411c7Xm",
+    resource_type: "video",
+    description: "适合刚进入法律行业的新人，系统讲解法律实务基础知识",
+    position: 1,
+    published: true
+  },
+  {
+    title: "AI法律工具使用指南",
+    url: "https://www.bilibili.com/video/BV1xx411c7Xn",
+    resource_type: "video",
+    description: "如何利用AI提升法律工作效率，实战案例详解",
+    position: 2,
+    published: true
+  },
+  {
+    title: "青狮营法律社区",
+    url: "https://qingshiying.com",
+    resource_type: "website",
+    description: "法律人交流学习平台，提供专业法律资源与交流机会",
+    position: 3,
+    published: true
+  },
+  {
+    title: "法律文书模板库",
+    url: "https://templates.lxskill.com",
+    resource_type: "website",
+    description: "海量法律文书模板，免费下载使用",
+    position: 4,
+    published: true
+  },
+  {
+    title: "案例分析精品课",
+    url: "https://www.bilibili.com/video/BV1xx411c7Xo",
+    resource_type: "video",
+    description: "经典案例深度解析，帮助你提升案件分析能力",
+    position: 5,
+    published: true
+  }
+]
+
+resources.each do |resource_data|
+  Resource.create!(resource_data)
+end
+
+puts "Created #{Resource.count} resources"
+
 puts "Seed data created successfully!"
 puts "Summary:"
 puts "  - #{Category.count} categories"
 puts "  - #{VideoResource.count} video resources"
 puts "  - #{Skill.count} skills"
+puts "  - #{Resource.count} resources"

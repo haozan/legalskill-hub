@@ -84,6 +84,7 @@ Rails.application.routes.draw do
 
   # Do not write business logic at admin dashboard
   namespace :admin do
+    resources :resources
     resources :skills
     resources :video_resources
     resources :categories
