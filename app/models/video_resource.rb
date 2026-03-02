@@ -81,8 +81,9 @@ class VideoResource < ApplicationRecord
   private
 
   def should_fetch_cover?
-    # cover_image 为空，或者 bilibili_url 发生了变更
-    cover_image.blank? || saved_change_to_bilibili_url?
+    # 只有 cover_image 为空时才自动抓取
+    # 如果管理员手动填写了 cover_image，则不覆盖
+    cover_image.blank?
   end
 
   def auto_fetch_bilibili_cover
