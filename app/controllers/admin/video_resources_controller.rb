@@ -45,6 +45,6 @@ class Admin::VideoResourcesController < Admin::BaseController
   end
 
   def video_resource_params
-    params.require(:video_resource).permit(:title, :bilibili_url, :duration, :views_count, :category_id)
+    params.require(:video_resource).permit(:title, :bilibili_url, :duration, :views_count, :category_id, :cover_image)
   end
 end

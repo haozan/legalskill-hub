@@ -41,8 +41,13 @@
       </div>
 
       <!-- Video Player -->
-      <%# 转换 Bilibili URL 为嵌入播放器URL %>
-      <% embed_url = @video.bilibili_url.present? ? @video.bilibili_url.gsub('www.bilibili.com/video/', 'player.bilibili.com/player.html?bvid=') : nil %>
+      <%# 转换 Bilibili URL 为嵌入播放器URL（使用官方推荐格式） %>
+      <% if @video.bilibili_url.present? %>
+        <% bvid = @video.bilibili_url.gsub('https://www.bilibili.com/video/', '').gsub('/', '') %>
+        <% embed_url = "//player.bilibili.com/player.html?isOutside=true&bvid=#{bvid}&page=1" %>
+      <% else %>
+        <% embed_url = nil %>
+      <% end %>
       <div class="aspect-video bg-surface-elevated border border-border overflow-hidden mb-8">
         <% if embed_url.present? %>
           <iframe
@@ -81,7 +86,7 @@
             <% @related_videos.each do |video| %>
               <div class="video-card bg-surface-elevated">
                 <div class="video-thumbnail">
-                  <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=600&h=340&fit=crop&q=80"
+                  <img src="<%= video.cover_image.presence || 'https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=600&h=340&fit=crop&q=80' %>"
                        alt="<%= video.title %>"
                        class="w-full h-full object-cover opacity-60">
                   <%= link_to video_resource_path(video),
