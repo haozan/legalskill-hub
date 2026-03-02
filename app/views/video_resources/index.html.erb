@@ -32,7 +32,7 @@
             <div class="video-thumbnail">
               <img src="<%= video.cover_image_url %>"
                    alt="<%= video.title %>"
-                   class="w-full h-full object-cover opacity-60"
+                   class="w-full h-full object-cover"
                    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=600&h=340&fit=crop&q=80';">
               <%= link_to video_resource_path(video),
                     class: "absolute inset-0 flex items-center justify-center hover:bg-primary/5 transition-colors" do %>

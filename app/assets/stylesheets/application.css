@@ -185,6 +185,17 @@
     @apply relative w-full aspect-video overflow-hidden bg-surface;
   }
 
+  /* 封面图遮罩：底部渐变保证文字/按钮可读性，不遮挡整体封面 */
+  .video-thumbnail::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(
+      to bottom,
+      transparent 40%,
+      hsl(222 20% 6% / 0.5) 100%
+    );
+  }
+
   /* Section Headers — minimal monospace style */
   .section-title {
     @apply font-mono text-3xl md:text-4xl font-bold text-primary;
