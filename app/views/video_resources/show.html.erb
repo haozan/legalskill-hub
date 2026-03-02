@@ -41,10 +41,12 @@
       </div>
 
       <!-- Video Player -->
+      <%# 转换 Bilibili URL 为嵌入播放器URL %>
+      <% embed_url = @video.bilibili_url.present? ? @video.bilibili_url.gsub('www.bilibili.com/video/', 'player.bilibili.com/player.html?bvid=') : nil %>
       <div class="aspect-video bg-surface-elevated border border-border overflow-hidden mb-8">
-        <% if @video.bilibili_url.present? %>
+        <% if embed_url.present? %>
           <iframe
-            src="<%= @video.bilibili_url %>"
+            src="<%= embed_url %>"
             class="w-full h-full"
             scrolling="no"
             border="0"
