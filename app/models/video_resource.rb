@@ -14,8 +14,10 @@ class VideoResource < ApplicationRecord
   end
 
   # 返回封面URL：优先用已存入的 cover_image，否则回退到默认占位图
+  # 同时将 http:// 转换为 https:// 避免浏览器混合内容拦截
   def cover_image_url
-    cover_image.presence || "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=600&h=340&fit=crop&q=80"
+    url = cover_image.presence || "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=600&h=340&fit=crop&q=80"
+    url.gsub(/\Ahttp:\/\//, "https://")
   end
 
   # 从 bilibili_url 解析出 bvid（支持多种URL格式）
@@ -86,6 +88,8 @@ class VideoResource < ApplicationRecord
   def auto_fetch_bilibili_cover
     cover_url = fetch_bilibili_cover_url
     if cover_url.present?
+      # 统一转换为 https:// 避免混合内容问题
+      cover_url = cover_url.gsub(/\Ahttp:\/\//, "https://")
       # 使用 update_column 避免再次触发 callbacks
       update_column(:cover_image, cover_url)
       Rails.logger.info "[VideoResource] 已自动获取B站封面: #{cover_url}"
