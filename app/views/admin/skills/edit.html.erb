@@ -66,7 +66,7 @@
         <div class="form-group">
           <%= form.label :category_id, "Category" %>
           <%= form.select :category_id,
-              options_for_select([['Select Category', '']] + Category.all.map { |item| [item.name, item.id] }, @skill.category_id) %>
+              options_for_select([['选择技能分类', '']] + @skill_categories.map { |item| [item.name, item.id] }, @skill.category_id) %>
         </div>
 
         <!-- Form Actions -->

@@ -10,6 +10,7 @@ class Admin::SkillsController < Admin::BaseController
 
   def new
     @skill = Skill.new
+    @skill_categories = Category.for_skill.order(:name)
   end
 
   def create
@@ -23,6 +24,7 @@ class Admin::SkillsController < Admin::BaseController
   end
 
   def edit
+    @skill_categories = Category.for_skill.order(:name)
   end
 
   def update

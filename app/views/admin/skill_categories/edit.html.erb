@@ -1,0 +1,40 @@
+<% content_for :title, "编辑技能分类" %>
+
+<div class="container-md">
+  <div class="flex items-center space-x-4">
+    <%= link_to admin_skill_categories_path, class: "btn-ghost text-sm py-1 px-3" do %>
+      <%= lucide_icon "arrow-left", class: "w-4 h-4 mr-2" %>
+      返回技能分类列表
+    <% end %>
+  </div>
+
+  <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-50 mt-4 mb-8">编辑技能分类</h1>
+
+  <div class="card bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+    <div class="card-body">
+      <%= form_with model: [:admin, @skill_category], url: admin_skill_category_path(@skill_category.id), method: :patch, local: true, class: "space-y-6" do |form| %>
+        <div class="form-group">
+          <%= form.label :name, "分类名称" %>
+          <%= form.text_field :name, placeholder: "例如：民事诉讼" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :slug, "Slug" %>
+          <%= form.text_field :slug, placeholder: "例如：civil-litigation" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :description, "分类描述" %>
+          <%= form.text_area :description, rows: 4, placeholder: "简要描述该分类包含的技能类型..." %>
+        </div>
+
+        <div class="flex justify-end space-x-3">
+          <%= link_to admin_skill_category_path(@skill_category.id), class: "btn-ghost" do %>
+            取消
+          <% end %>
+          <%= form.submit "保存修改", class: "btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

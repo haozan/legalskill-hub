@@ -2,11 +2,11 @@ class VideoResourcesController < ApplicationController
   before_action :set_video_resource, only: [:show]
 
   def index
-    @categories = Category.all
+    @categories = Category.for_video.order(:name)
     @videos = VideoResource.includes(:category).order(created_at: :desc)
 
     if params[:category].present?
-      category = Category.friendly.find(params[:category])
+      category = Category.for_video.friendly.find(params[:category])
       @videos = @videos.where(category: category)
     end
 

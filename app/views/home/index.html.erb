@@ -8,60 +8,31 @@
          style="background: radial-gradient(circle, hsl(174 100% 44%) 0%, transparent 70%);"></div>
   </div>
 
-  <div class="relative z-10 container-xl mx-auto px-6 py-24">
-    <!-- Status bar -->
-    <div class="flex items-center gap-3 mb-12">
-      <div class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
-      <span class="font-mono text-xs text-primary tracking-widest uppercase">系统运行中 — AI 法律龙虾技能平台</span>
+  <div class="relative z-10 container-xl mx-auto px-6 py-24 text-center">
+    <!-- 主标题 -->
+    <div class="mb-12">
+      <h1 class="font-mono text-7xl md:text-[10rem] font-bold leading-none tracking-tight">
+        <span class="text-secondary">效果好，</span><span class="text-primary">还便宜</span>
+      </h1>
     </div>
 
-    <div class="max-w-4xl">
-      <!-- Headline -->
-      <div class="mb-8">
-        <div class="sys-label mb-4">// LXSKILL v2.0</div>
-        <h1 class="font-mono text-4xl md:text-6xl font-bold text-primary leading-none tracking-tight">
-          让每位律师<br>
-          <span class="text-primary">拥有专属</span><br>
-          <span class="text-secondary">7 x 24 AI 龙虾助理</span><span class="accent-line"></span>
-        </h1>
-      </div>
-
-      <p class="text-secondary text-lg md:text-xl leading-relaxed max-w-2xl mb-12 font-sans">
-        智能辅助案件分析 · 文档自动生成 · 法条精准检索<br>
-        <span class="text-muted text-sm font-mono">借助 AI 技术与实战资源，助力律师在竞争中脱颖而出</span>
+    <!-- 副标题 -->
+    <div class="mb-12">
+      <p class="font-mono text-4xl md:text-6xl font-bold leading-none tracking-tight">
+        <span class="text-secondary">律师 AI 助手，就用</span><span style="color: hsl(174, 100%, 44%)">青狮龙虾</span><span class="accent-line"></span>
       </p>
+    </div>
 
-      <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 mb-16">
-        <%= link_to skills_path, class: "btn-primary btn-lg inline-flex items-center gap-3 font-mono text-sm tracking-wider" do %>
-          <%= lucide_icon "terminal", class: "w-4 h-4" %>
-          <span>进入技能市场</span>
-        <% end %>
-        <%= link_to video_resources_path, class: "btn-outline btn-lg inline-flex items-center gap-3 font-mono text-sm tracking-wider" do %>
-          <%= lucide_icon "play-circle", class: "w-4 h-4" %>
-          <span>查看视频资源</span>
-        <% end %>
-      </div>
-
-      <!-- Stats — terminal data readout -->
-      <div class="flex flex-wrap gap-8 border-t border-border pt-8">
-        <div class="tech-stat">
-          <div class="font-mono text-3xl font-bold text-primary">5000<span class="text-primary/50">+</span></div>
-          <div class="text-xs font-mono text-muted tracking-wider mt-1">活跃用户</div>
-        </div>
-        <div class="tech-stat">
-          <div class="font-mono text-3xl font-bold text-primary">200<span class="text-primary/50">+</span></div>
-          <div class="text-xs font-mono text-muted tracking-wider mt-1">技能包</div>
-        </div>
-        <div class="tech-stat">
-          <div class="font-mono text-3xl font-bold text-primary">24<span class="text-primary/50">/7</span></div>
-          <div class="text-xs font-mono text-muted tracking-wider mt-1">AI 支持</div>
-        </div>
-        <div class="tech-stat">
-          <div class="font-mono text-3xl font-bold text-primary">99<span class="text-primary/50">%</span></div>
-          <div class="text-xs font-mono text-muted tracking-wider mt-1">满意度</div>
-        </div>
-      </div>
+    <!-- CTA 按钮 -->
+    <div class="flex items-center justify-center gap-4 flex-wrap">
+      <button class="btn-primary btn-md font-mono text-sm tracking-widest inline-flex items-center gap-2">
+        <%= lucide_icon "send", class: "w-4 h-4" %>
+        <span>申请试用</span>
+      </button>
+      <%= link_to "#video-resources", class: "btn-outline btn-md font-mono text-sm tracking-widest inline-flex items-center gap-2" do %>
+        <%= lucide_icon "rocket", class: "w-4 h-4" %>
+        <span>立即安装部署</span>
+      <% end %>
     </div>
   </div>
 
@@ -72,69 +43,102 @@
   </div>
 </section>
 
-<!-- SECTION: Recommended Resources -->
-<section id="recommended-resources" class="py-16 bg-surface-elevated border-t border-border">
-  <div class="container-xl mx-auto px-6">
-    <% websites = Resource.published.ordered.websites.by_tag(params[:tag]) %>
-    <% if websites.any? || params[:tag].present? %>
-      <!-- Section Header -->
-      <div class="mb-12">
-        <h2 class="section-title">推荐网站资源</h2>
-        <p class="section-subtitle mt-2">精选法律学习与实践网站，助力专业成长</p>
+<!-- SECTION: 3 Reasons -->
+<section id="reasons" class="py-20 bg-surface-elevated border-t border-border">
+  <div class="container-xl mx-auto">
+    <!-- Section Header -->
+    <div class="mb-12">
+      <h2 class="section-title !mb-0">3 点使用<span style="color: hsl(174, 100%, 44%)">青狮龙虾</span>的理由</h2>
+      <p class="section-subtitle mt-2">效果好、更安全、还便宜——专为律师而生</p>
+    </div>
+
+    <!-- Reasons Grid -->
+    <% skill_count = Skill.count %>
+    <div class="grid md:grid-cols-3 gap-6" style="grid-template-rows: auto;">
+
+      <!-- 理由一 -->
+      <div class="px-8 py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
+        <div class="font-mono font-bold leading-none pb-10" style="font-size: 7rem; color: hsl(174, 100%, 44%)">
+          <%= skill_count %>
+        </div>
+        <h3 class="font-mono text-lg font-bold text-primary pb-5 tracking-tight">效果好｜<%= skill_count %> 个律师工作场景，量身定制 Skill</h3>
+        <p class="text-secondary text-sm leading-loose">
+          每一个 Skill 均由律师参与设计，深度覆盖办案、阅卷、咨询、合同审核、庭审笔录、日志记录等全执业场景。不是通用 AI 套壳，是真正懂律师业务的专属助手。
+        </p>
       </div>
 
-      <!-- Tag Filter -->
-      <div class="flex flex-wrap gap-2 mb-10">
-        <%= link_to root_path(anchor: 'recommended-resources'), 
-              class: "category-pill #{params[:tag].blank? ? 'active' : ''}" do %>
-          全部
-        <% end %>
-        <% Resource::RESOURCE_TAG_NAMES.each do |tag_key, tag_name| %>
-          <%= link_to root_path(tag: tag_key, anchor: 'recommended-resources'), 
-                class: "category-pill #{params[:tag] == tag_key ? 'active' : ''}" do %>
-            <%= tag_name %>
+      <!-- 理由二 -->
+      <div class="px-8 py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
+        <div class="font-mono font-bold leading-none pb-10" style="font-size: 7rem; color: hsl(174, 100%, 44%)">
+          100%
+        </div>
+        <h3 class="font-mono text-lg font-bold text-primary pb-5 tracking-tight">更安全｜核心代码 100% 自研、可控</h3>
+        <p class="text-secondary text-sm leading-loose">
+          全套核心代码独立研发，不依赖任何第三方框架。您的每一份案件资料、每一次对话记录，均在自主可控的系统内流转，零第三方数据中转。
+        </p>
+      </div>
+
+      <!-- 理由三 -->
+      <div class="px-8 py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
+        <div class="font-mono font-bold leading-none pb-10" style="font-size: 7rem; color: hsl(174, 100%, 44%)">
+          40%
+        </div>
+        <h3 class="font-mono text-lg font-bold text-primary pb-5 tracking-tight">还便宜｜独有技术，直降 40% Token 成本</h3>
+        <p class="text-secondary text-sm leading-loose">
+          独有上下文记忆压缩技术，在保证对话记忆连贯性的前提下，平均节约约 40% 的 Token 使用成本。用得越多，省得越多。
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: Comparison Table -->
+<section id="comparison" class="py-20 bg-surface border-t border-border">
+  <div class="container-xl mx-auto">
+    <div class="mb-12">
+      <h2 class="section-title !mb-0"><span style="color: hsl(174, 100%, 44%)">青狮龙虾</span> vs 竞品对比</h2>
+      <p class="section-subtitle mt-2">为什么专业律师选择青狮龙虾，而不是 OpenClaw 或 Claude Code</p>
+    </div>
+
+    <div class="overflow-x-auto">
+              <table class="w-full font-mono text-sm border-separate border-spacing-0">
+        <!-- Header -->
+        <thead>
+          <tr class="border-b border-border">
+            <th class="text-left py-4 pr-8 text-muted font-normal tracking-widest text-xs uppercase w-1/3"></th>
+            <th class="text-center py-4 px-6 text-secondary font-bold text-base w-[22%]">OpenClaw</th>
+            <th class="text-center py-4 px-6 text-secondary font-bold text-base w-[22%]">Claude Code</th>
+            <th class="text-center py-4 px-6 font-bold text-base w-[22%]" style="color: hsl(174, 100%, 44%)">
+              青狮龙虾
+              <div class="text-xs font-normal tracking-widest mt-1" style="color: hsl(174, 100%, 44% / 0.7)">推荐</div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% [
+            ["目标用户",         "大众人群",           "专业开发者",      "律师 / 法律从业者"],
+            ["专为律师设计",     "❌",                 "❌",              "✅ 全场景覆盖"],
+            ["全栈集成",         "⚠️ 功能割裂",        "❌ 需自行搭建",   "✅ 统一全栈"],
+            ["生产环境就绪",     "⚠️ 依赖第三方",      "❌ 手动配置",     "✅ 开箱即用"],
+            ["一键部署",         "⚠️ 平台锁定",        "❌",              "✅ 随处部署"],
+            ["开发/生产隔离",    "❌",                 "❌",              "✅ 自动隔离"],
+            ["自动备份",         "❌",                 "❌",              "✅ 内置免费"],
+            ["AI 成本控制",      "❌ 按 Token 付费",  "❌ 按 Token 付费", "✅ 智能压缩节省 40%"],
+            ["数据主权",         "❌ 平台托管",        "✅",              "✅ 完全自有"],
+            ["使用界面",         "Web UI",            "终端",            "Web UI + 终端"],
+          ].each_with_index do |(label, openclaw, claude, qingclaw), i| %>
+            <tr class="border-b border-border/50 <%= i.even? ? 'bg-surface-elevated/30' : '' %>">
+              <td class="py-4 pr-8 text-muted tracking-wide text-xs uppercase"><%= label %></td>
+              <td class="py-4 px-6 text-center text-secondary"><%= openclaw %></td>
+              <td class="py-4 px-6 text-center text-secondary"><%= claude %></td>
+              <td class="py-4 px-6 text-center font-semibold" style="color: hsl(174, 100%, 44%)"><%= qingclaw %></td>
+            </tr>
           <% end %>
-        <% end %>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-3">
-        <% websites.limit(6).each do |resource| %>
-          <%= link_to resource.url, 
-                target: "_blank", 
-                rel: "noopener noreferrer",
-                class: "block group bg-surface border border-border hover:border-primary/50 p-4 transition-all duration-200" do %>
-            <div class="flex items-start gap-3">
-              <div class="flex-shrink-0 w-10 h-10 border border-primary/30 flex items-center justify-center bg-primary/5 group-hover:bg-primary/10 transition-colors">
-                <%= lucide_icon "link", class: "w-5 h-5 text-primary" %>
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="flex items-start justify-between gap-2 mb-1">
-                  <h4 class="font-sans text-sm font-semibold text-primary group-hover:text-primary-light transition-colors"><%= resource.title %></h4>
-                  <%= lucide_icon "external-link", class: "flex-shrink-0 w-3 h-3 text-muted group-hover:text-primary transition-colors" %>
-                </div>
-                <% if resource.description.present? %>
-                  <p class="text-xs text-secondary leading-relaxed line-clamp-2"><%= resource.description %></p>
-                <% end %>
-                <% if resource.resource_tag.present? %>
-                  <span class="inline-block mt-2 px-2 py-0.5 bg-primary/10 border border-primary/30 text-xs font-mono text-primary">
-                    <%= resource.tag_name %>
-                  </span>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-
-      <% if websites.count > 6 %>
-      <div class="mt-8 text-center">
-        <%= link_to resources_path, class: "btn-outline btn-md inline-flex items-center gap-2 font-mono text-xs tracking-widest" do %>
-          <span>查看更多网站</span>
-          <%= lucide_icon "arrow-right", class: "w-3 h-3" %>
-        <% end %>
-      </div>
-      <% end %>
-    <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -144,7 +148,7 @@
     <!-- Section Header -->
     <div class="flex items-end justify-between mb-12">
       <div>
-        <h2 class="section-title">精选视频资源</h2>
+        <h2 class="section-title !mb-0">精选视频资源</h2>
         <p class="section-subtitle mt-2">实战性的龙虾技能使用视频，掌握核心技能</p>
       </div>
       <%= link_to video_resources_path, class: "hidden md:flex items-center gap-2 text-xs font-mono text-primary hover:text-primary-light tracking-wider" do %>
@@ -154,12 +158,14 @@
     </div>
 
     <!-- Category Filter -->
-    <% categories = Category.all %>
-    <% if categories.any? %>
+    <% video_categories = Category.for_video.order(:name) %>
+    <% if video_categories.any? %>
     <div class="flex flex-wrap gap-2 mb-10">
-      <button class="category-pill active">全部</button>
-      <% categories.each do |category| %>
-      <button class="category-pill"><%= category.name %></button>
+      <%= link_to video_resources_path, class: "category-pill active" do %>全部<% end %>
+      <% video_categories.each do |category| %>
+        <%= link_to video_resources_path(category: category.slug), class: "category-pill" do %>
+          <%= category.name %>
+        <% end %>
       <% end %>
     </div>
     <% end %>
@@ -215,14 +221,13 @@
 
 <!-- SECTION: Skills Market -->
 <section id="skills-market" class="py-20 bg-surface-elevated border-t border-border">
-  <div class="container-xl mx-auto px-6">
+  <div class="container-xl mx-auto">
     <!-- Section Header -->
     <div class="flex items-end justify-between mb-12">
       <div>
-        <h2 class="section-title">龙虾技能市场</h2>
+        <h2 class="section-title !mb-0">青狮龙虾 Skill 市场</h2>
         <p class="section-subtitle mt-2">
           专业律师上传的实用技能包 — 文档模板 · AI提示词 · 办案指南
-          <span class="font-mono text-primary ml-2">¥99/pkg</span>
         </p>
       </div>
       <%= link_to skills_path, class: "hidden md:flex items-center gap-2 text-xs font-mono text-primary hover:text-primary-light tracking-wider" do %>
@@ -231,52 +236,49 @@
       <% end %>
     </div>
 
-    <!-- Category Filter -->
+    <!-- Category Filter（来自数据库） -->
     <div class="flex flex-wrap gap-2 mb-10">
-      <button class="category-pill active">全部</button>
-      <button class="category-pill">民事案件</button>
-      <button class="category-pill">刑事案件</button>
-      <button class="category-pill">行政案件</button>
-      <button class="category-pill">公司法务</button>
-    </div>
-
-    <!-- Skills Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-      <% [
-        { cat: "CIVIL", title: "离婚案件技能包", desc: "完整离婚诉讼文书模板、财产分割工具、抚养权策略、AI辅助案例检索提示词", files: 18, dl: "1,234", author: "陈律师", rating: "4.8" },
-        { cat: "CRIMINAL", title: "刑事辩护全流程", desc: "从会见到庭审辩护全套文书，AI证据分析提示词与量刑建议生成工具", files: 25, dl: "2,567", author: "李律师", rating: "4.9" },
-        { cat: "CORPORATE", title: "股权激励方案设计", desc: "创业公司股权激励完整方案，期权池设计、员工激励协议、AI辅助估值计算", files: 12, dl: "876", author: "王律师", rating: "4.7" },
-        { cat: "ADMIN", title: "行政诉讼实战", desc: "行政复议与诉讼全流程指南，AI辅助行政法规检索与适用建议", files: 15, dl: "654", author: "赵律师", rating: "4.6" },
-        { cat: "CIVIL", title: "合同纠纷处理方案", desc: "买卖、服务、租赁常见合同纠纷处理模板，违约责任认定与损失计算工具", files: 20, dl: "1,890", author: "周律师", rating: "4.9" },
-        { cat: "CORPORATE", title: "投融资法律文件包", desc: "天使轮到C轮投资协议模板、尽职调查清单、AI辅助估值分析与风险预警", files: 22, dl: "743", author: "吴律师", rating: "4.8" },
-      ].each do |sk| %>
-        <div class="skill-card p-5">
-          <div class="flex items-start justify-between mb-4">
-            <span class="skill-card-badge"><%= sk[:cat] %></span>
-            <div class="flex items-center gap-1 text-xs font-mono text-primary">
-              <span>★</span>
-              <span><%= sk[:rating] %></span>
-            </div>
-          </div>
-
-          <h3 class="font-sans text-base font-semibold text-primary mb-2"><%= sk[:title] %></h3>
-          <p class="text-secondary text-sm mb-5 leading-relaxed line-clamp-2"><%= sk[:desc] %></p>
-
-          <div class="flex items-center gap-4 mb-4 text-xs font-mono text-muted">
-            <span><%= lucide_icon "file-text", class: "w-3 h-3 inline mr-1" %><%= sk[:files] %> 模板</span>
-            <span><%= lucide_icon "download", class: "w-3 h-3 inline mr-1" %><%= sk[:dl] %> 下载</span>
-          </div>
-
-          <div class="flex items-center justify-between pt-4 border-t border-border">
-            <span class="text-xs font-mono text-muted">BY <%= sk[:author] %></span>
-            <div class="flex items-center gap-3">
-              <span class="font-mono font-bold text-primary text-sm">¥99</span>
-              <button class="btn-primary btn-xs font-mono text-xs tracking-wider">获取</button>
-            </div>
-          </div>
-        </div>
+      <%= link_to skills_path, class: "category-pill #{'active' if params[:category].blank?}" do %>全部<% end %>
+      <% @skill_categories.each do |cat| %>
+        <%= link_to skills_path(category: cat.slug), class: "category-pill #{'active' if params[:category] == cat.slug}" do %>
+          <%= cat.name %>
+        <% end %>
       <% end %>
     </div>
+
+    <!-- Skills Grid（来自数据库） -->
+    <% if @featured_skills.any? %>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+        <% @featured_skills.each do |skill| %>
+          <div class="skill-card p-5">
+            <div class="flex items-start justify-between mb-4">
+              <span class="skill-card-badge"><%= skill.category&.name || "通用" %></span>
+              <div class="flex items-center gap-1 text-xs font-mono text-primary">
+                <span>★</span>
+                <span><%= skill.rating %></span>
+              </div>
+            </div>
+
+            <h3 class="font-sans text-base font-semibold text-primary mb-2"><%= skill.title %></h3>
+            <p class="text-secondary text-sm mb-5 leading-relaxed line-clamp-2"><%= skill.description %></p>
+
+            <div class="flex items-center gap-4 mb-4 text-xs font-mono text-muted">
+              <span><%= lucide_icon "file-text", class: "w-3 h-3 inline mr-1" %><%= skill.template_count %> 模板</span>
+              <span><%= lucide_icon "download", class: "w-3 h-3 inline mr-1" %><%= number_with_delimiter(skill.download_count) %> 下载</span>
+            </div>
+
+            <div class="flex items-center justify-between pt-4 border-t border-border">
+              <span class="text-xs font-mono text-muted">BY <%= skill.author_name %></span>
+              <%= link_to skill_path(skill), class: "btn-primary btn-xs font-mono text-xs tracking-wider" do %>获取<% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-16 text-secondary font-mono text-sm">
+        暂无技能，敬请期待...
+      </div>
+    <% end %>
 
     <div class="mt-8 text-center">
       <%= link_to skills_path, class: "btn-outline btn-md inline-flex items-center gap-2 font-mono text-xs tracking-widest" do %>
@@ -290,84 +292,83 @@
 <!-- SECTION: Community -->
 <section id="community" class="py-20 bg-surface border-t border-border">
   <div class="container-xl mx-auto px-6">
+
+    <!-- Section Header -->
+    <div class="mb-14">
+      <h2 class="section-title !mb-0">199 元加入青狮龙虾社群</h2>
+      <p class="section-subtitle mt-2">按大区组建，为了让你们真的能见面</p>
+    </div>
+
     <div class="grid lg:grid-cols-2 gap-16 items-start">
-      <!-- Left -->
+
+      <!-- Left: 大区 + 理念 -->
       <div>
-        <h2 class="section-title mb-4">加入青狮龙虾社群</h2>
-        <p class="text-secondary text-base leading-relaxed mb-8">
-          中国法律行业专业社群，汇聚顶尖律师，分享实战经验 · 讨论热点案件 · 拓展职业人脉
-        </p>
 
-        <!-- Stats -->
-        <div class="grid grid-cols-2 gap-4 mb-8">
-          <div class="bg-surface-elevated border border-border p-5">
-            <div class="font-mono text-3xl font-bold text-primary mb-1">5000+</div>
-            <div class="text-xs font-mono text-muted tracking-wider">活跃成员</div>
-          </div>
-          <div class="bg-surface-elevated border border-border p-5">
-            <div class="font-mono text-3xl font-bold text-primary mb-1">200+</div>
-            <div class="text-xs font-mono text-muted tracking-wider">每日话题</div>
-          </div>
-        </div>
-
-        <!-- Benefits -->
-        <div class="space-y-3 mb-8">
-          <% [
-            ["实战案例分享", "每日热点案例解析，学习顶尖律师的办案思路"],
-            ["职业人脉拓展", "结识同行专家，建立高质量的法律人脉网络"],
-            ["专属资源获取", "优先获取最新法律资讯与独家技能资源"],
-          ].each do |title, desc| %>
-            <div class="flex items-start gap-4 py-3 border-b border-border last:border-0">
-              <div class="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-              <div>
-                <div class="text-primary text-sm font-medium mb-0.5"><%= title %></div>
-                <div class="text-muted text-xs font-sans"><%= desc %></div>
+        <!-- 7大区 -->
+        <div class="mb-8">
+          <div class="mb-4"></div>
+          <div class="grid grid-cols-2 gap-2">
+            <% [
+              ["华北群", "北京 · 天津 · 石家庄 · 太原 · 呼和浩特 · 济南"],
+              ["东北群", "沈阳 · 长春 · 哈尔滨"],
+              ["长三角", "上海 · 南京 · 杭州 · 合肥"],
+              ["华中群", "郑州 · 武汉 · 长沙 · 南昌"],
+              ["华南群", "广州 · 深圳 · 福州 · 南宁 · 海口"],
+              ["西南群", "重庆 · 成都 · 贵阳 · 昆明 · 拉萨"],
+              ["西北群", "西安 · 兰州 · 西宁 · 银川 · 乌鲁木齐"],
+            ].each do |region, cities| %>
+              <div class="bg-surface-elevated border border-border hover:border-primary/40 transition-colors p-3">
+                <div class="text-primary text-xs font-mono font-bold tracking-widest mb-1"><%= region %></div>
+                <div class="text-muted text-xs font-sans"><%= cities %></div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
 
-        <%= link_to "#community", class: "btn-primary btn-md inline-flex items-center gap-2 font-mono text-xs tracking-wider" do %>
-          <%= lucide_icon "arrow-right", class: "w-3 h-3" %>
-          <span>加入社群</span>
-        <% end %>
+        <!-- 创始人的话 -->
+        <div class="border-l-2 border-primary pl-5 space-y-4">
+          <p class="text-secondary text-base leading-relaxed">
+            7 个群，按大区分，<span class="text-primary font-semibold">就近入群</span>。
+          </p>
+          <p class="text-secondary text-base leading-relaxed">
+            每个区，主要城市之间<span class="text-primary font-semibold">高铁两小时</span>都能到。
+          </p>
+          <p class="text-secondary text-base leading-relaxed">
+            法律这行靠信任——坐下来面对面聊 OpenClaw，比什么都强。
+          </p>
+        </div>
+
       </div>
 
-      <!-- Right: Community panel -->
-      <div class="bg-surface-elevated border border-border p-6">
+      <!-- Right: 二维码 + 入群流程 -->
+      <div class="bg-surface-elevated border border-border p-8 flex flex-col items-center">
+
         <!-- QR Code -->
-        <div class="flex justify-center mb-6">
-          <div class="relative w-48 h-48 bg-surface border border-primary/20 p-3 group hover:border-primary/40 transition-all duration-300">
-            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <%= image_tag "qingshiying-qrcode.png", 
-                alt: "青狮营社群二维码",
-                class: "relative z-10 w-full h-full object-contain" %>
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-surface-elevated to-transparent p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <p class="text-center text-xs font-mono text-primary tracking-wider">扫码加入青狮营</p>
-            </div>
-          </div>
+        <div class="relative w-52 h-52 bg-surface border border-primary/20 p-3 group hover:border-primary/40 transition-all duration-300 mb-6">
+          <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <%= image_tag "qingshiying-qrcode.png",
+              alt: "青狮龙虾社群二维码",
+              class: "relative z-10 w-full h-full object-contain" %>
         </div>
 
-        <!-- Live Topics -->
-        <div class="mb-3 text-xs font-mono text-muted tracking-widest uppercase">// 实时话题</div>
-        <div class="space-y-2">
+        <p class="text-xs font-mono text-muted tracking-widest mb-8">微信扫码 · 按大区入群</p>
+
+        <!-- 入群流程 -->
+        <div class="w-full space-y-3">
+          <div class="text-xs font-mono text-muted tracking-widest uppercase mb-3">// 入群流程</div>
           <% [
-            ["新公司法实施后的合规要点", "235"],
-            ["离婚案件财产分割实战经验", "189"],
-            ["刑事案件证据收集技巧", "156"],
-          ].each do |topic, count| %>
-            <div class="flex items-center gap-3 p-3 bg-surface border border-border hover:border-primary/40 transition-colors">
-              <div class="w-1 h-1 rounded-full bg-primary flex-shrink-0 animate-pulse"></div>
-              <div class="flex-1 text-sm text-secondary text-sm"><%= topic %></div>
-              <span class="text-xs font-mono text-primary"><%= count %></span>
+            ["01", "扫码添加创始人微信"],
+            ["02", "告知所在省会城市"],
+            ["03", "被拉入对应大区群"],
+            ["04", "线上社群答疑+线下碰头"],
+          ].each do |step, desc| %>
+            <div class="flex items-center gap-4 py-2 border-b border-border last:border-0">
+              <span class="font-mono text-xs text-primary w-6 flex-shrink-0"><%= step %></span>
+              <span class="text-sm text-secondary"><%= desc %></span>
             </div>
           <% end %>
         </div>
 
-        <!-- Free badge -->
-        <div class="mt-4 border border-primary/30 bg-primary/5 p-3 text-center">
-          <span class="font-mono text-sm font-bold text-primary tracking-wider">// 访问权限：¥199 一次性</span>
-        </div>
       </div>
     </div>
   </div>
@@ -389,10 +390,10 @@
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <%= link_to sign_up_path, class: "btn-primary btn-lg inline-flex items-center gap-3 font-mono text-sm tracking-wider" do %>
-        <%= lucide_icon "user-plus", class: "w-4 h-4" %>
-        <span>免费注册</span>
-      <% end %>
+      <button class="btn-primary btn-lg inline-flex items-center gap-3 font-mono text-sm tracking-wider">
+        <%= lucide_icon "send", class: "w-4 h-4" %>
+        <span>申请试用</span>
+      </button>
       <%= link_to "#skills-market", class: "btn-outline btn-lg inline-flex items-center gap-3 font-mono text-sm tracking-wider" do %>
         <%= lucide_icon "package", class: "w-4 h-4" %>
         <span>探索技能</span>
@@ -409,11 +410,11 @@
         <div class="w-5 h-5 border border-primary flex items-center justify-center">
           <div class="w-2 h-2 bg-primary"></div>
         </div>
-        <span class="font-mono text-sm font-bold text-primary tracking-widest">LXSKILL</span>
+        <span class="font-mono text-sm font-bold text-primary tracking-widest">青狮龙虾 QingClaw</span>
       </div>
 
       <div class="text-xs font-mono text-muted text-center">
-        © 2024 LXSkill — AI 法律技能平台
+        © 2025 青狮龙虾 QingClaw — 律师 AI 助手
       </div>
     </div>
   </div>

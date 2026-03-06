@@ -3,11 +3,11 @@ class SkillsController < ApplicationController
   before_action :set_skill, only: [:show, :purchase]
 
   def index
-    @categories = Category.all
+    @categories = Category.for_skill.order(:name)
     @skills = Skill.includes(:category).order(created_at: :desc)
 
     if params[:category].present?
-      category = Category.friendly.find(params[:category])
+      category = Category.for_skill.friendly.find(params[:category])
       @skills = @skills.where(category: category)
     end
 

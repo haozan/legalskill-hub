@@ -96,6 +96,7 @@ Rails.application.routes.draw do
     resources :skills
     resources :video_resources
     resources :categories
+    resources :skill_categories
     resources :payments, only: [:index, :show]
     resources :users, only: [:index, :show]
     resources :admin_oplogs, only: [:index, :show]

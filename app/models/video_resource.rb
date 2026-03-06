@@ -1,6 +1,8 @@
 class VideoResource < ApplicationRecord
   belongs_to :category
 
+  validate :category_must_be_video_type
+
   validates :title, presence: true
   validates :bilibili_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: "must be a valid URL" }
   validates :category, presence: true
@@ -79,6 +81,11 @@ class VideoResource < ApplicationRecord
   end
 
   private
+
+  def category_must_be_video_type
+    return unless category
+    errors.add(:category, "必须是视频分类") unless category.category_type == "video"
+  end
 
   def should_fetch_cover?
     # 只有 cover_image 为空时才自动抓取
