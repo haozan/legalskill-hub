@@ -9,6 +9,7 @@ import FlatpickrController from "./flatpickr_controller"
 import SystemMonitorController from "./system_monitor_controller"
 import FlashController from "./flash_controller"
 import WechatLoginController from "./wechat_login_controller"
+import WechatPayController from "./wechat_pay_controller"
 
 const application = Application.start()
 
@@ -21,5 +22,6 @@ application.register("flatpickr", FlatpickrController)
 application.register("system-monitor", SystemMonitorController)
 application.register("flash", FlashController)
 application.register("wechat-login", WechatLoginController)
+application.register("wechat-pay", WechatPayController)
 
 window.Stimulus = application

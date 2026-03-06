@@ -78,6 +78,15 @@ Rails.application.routes.draw do
     post 'mp', to: 'mp#callback'
     get  'qrcode', to: 'qrcode#show'
     get  'check',  to: 'qrcode#check'
+
+    # WeChat Pay routes
+    namespace :pay do
+      get  'order',         to: 'orders#new',       as: :order_new
+      post 'order',         to: 'orders#create',    as: :order_create
+      get  'order/success', to: 'orders#success',   as: :order_success
+      get  'status/:out_trade_no', to: 'status#show', as: :status
+      post 'notify',        to: 'notify#callback',  as: :notify
+    end
   end
 
   # write your business logic routes here
