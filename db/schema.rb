@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_05_130023) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_06_094511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -245,7 +245,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_05_130023) do
     t.string "uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "wechat_openid"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["wechat_openid"], name: "index_users_on_wechat_openid", unique: true
   end
 
   create_table "video_resources", force: :cascade do |t|
@@ -258,6 +260,18 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_05_130023) do
     t.datetime "updated_at", null: false
     t.string "cover_image"
     t.index ["category_id"], name: "index_video_resources_on_category_id"
+  end
+
+  create_table "wechat_orders", force: :cascade do |t|
+    t.string "out_trade_no"
+    t.integer "amount"
+    t.string "status", default: "pending"
+    t.bigint "user_id"
+    t.string "wechat_transaction_id"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["out_trade_no"], name: "index_wechat_orders_on_out_trade_no", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
