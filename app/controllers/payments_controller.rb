@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!, except: [:webhook]
+  before_action :require_profile_complete, if: :user_signed_in?
   before_action :set_payment, only: [:pay, :success, :failure]
   skip_before_action :verify_authenticity_token, only: [:webhook], raise: false
 

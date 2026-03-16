@@ -31,7 +31,8 @@ class Wechat::QrcodeController < ApplicationController
     session_record = user.sessions.create!
     cookies.signed.permanent[:session_token] = { value: session_record.id, httponly: true }
 
-    render json: { status: "ok", redirect_url: root_path }
+    redirect_url = user.profile_complete? ? root_path : profile_setup_path
+    render json: { status: "ok", redirect_url: redirect_url }
   rescue => e
     Rails.logger.error("WeChat check error: #{e.message}")
     render json: { error: "登录失败，请重试" }, status: :internal_server_error

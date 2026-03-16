@@ -64,3 +64,5 @@ yarn-debug.log*
 
 # WeChat Pay certificates (sensitive)
 certs/
+
+vendor/bundle/

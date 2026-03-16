@@ -35,6 +35,13 @@ class User < ApplicationRecord
 
   has_many :sessions, dependent: :destroy
   has_many :payments, dependent: :destroy
+  has_one :profile, class_name: "UserProfile", dependent: :destroy
+
+  delegate :phone, :company, :province, :city, :district, to: :profile, allow_nil: true
+
+  def profile_complete?
+    profile.present? && profile.phone.present? && profile.company.present? && profile.province.present?
+  end
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
@@ -107,13 +114,17 @@ class User < ApplicationRecord
     user = find_by(wechat_openid: openid)
     return user if user
 
-    create!(
-      wechat_openid: openid,
-      email:         generate_email("wx_#{openid.last(8)}"),
-      name:          "微信用户",
-      provider:      "wechat",
-      verified:      false
-    )
+    transaction do
+      user = create!(
+        wechat_openid: openid,
+        email:         generate_email("wx_#{openid.last(8)}"),
+        name:          "微信用户",
+        provider:      "wechat",
+        verified:      false
+      )
+      user.create_profile!
+      user
+    end
   end
 
   # write your own code here

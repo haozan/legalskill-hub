@@ -8,6 +8,7 @@ gem "rack-cors"
 
 gem "pg", ">= 1.1"
 gem "figaro"
+gem "china_sms"
 gem "cssbundling-rails"
 gem "jsbundling-rails"
 gem "propshaft", "~> 1.1.0"

@@ -1,0 +1,58 @@
+<%# DEV ONLY — Mock login user picker %>
+<div class="min-h-screen bg-surface tech-grid-bg flex items-center justify-center px-4 py-12">
+  <div class="relative w-full max-w-md">
+
+    <!-- Panel header -->
+    <div class="bg-yellow-500/10 border border-yellow-500/40 border-b-0 px-6 py-4 flex items-center gap-3">
+      <span class="font-mono text-xs text-yellow-400 tracking-widest">⚠ DEV ONLY :: 模拟登录</span>
+    </div>
+
+    <!-- Panel body -->
+    <div class="bg-surface-elevated border border-yellow-500/40 p-8">
+      <div class="mb-6">
+        <div class="sys-label mb-1 text-yellow-400/70">// 选择用户身份登录</div>
+        <p class="text-xs font-mono text-muted mt-1">仅开发环境可见，生产环境此页面不存在</p>
+      </div>
+
+      <!-- Quick: auto dev account -->
+      <div class="mb-6">
+        <%= button_to dev_mock_login_path, method: :post,
+              class: "w-full font-mono text-xs tracking-wider border border-yellow-500/50 text-yellow-400 hover:bg-yellow-500/10 transition-colors py-3",
+              data: { turbo: false } do %>
+          ⚡ 一键登录（自动创建 Dev 账号）
+        <% end %>
+      </div>
+
+      <!-- Divider -->
+      <div class="tech-divider my-4">或选择已有用户</div>
+
+      <!-- User list -->
+      <% if @users.any? %>
+        <div class="space-y-2 max-h-80 overflow-y-auto">
+          <% @users.each do |user| %>
+            <%= button_to dev_mock_login_path, method: :post,
+                  params: { user_id: user.id },
+                  class: "w-full text-left flex items-center gap-3 px-4 py-3 border border-border hover:border-yellow-500/40 hover:bg-yellow-500/5 transition-colors",
+                  data: { turbo: false } do %>
+              <div class="w-8 h-8 bg-surface border border-border flex items-center justify-center shrink-0">
+                <span class="font-mono text-xs text-primary"><%= user.name.to_s.first.upcase %></span>
+              </div>
+              <div class="flex-1 min-w-0 text-left">
+                <div class="font-mono text-sm text-primary truncate"><%= user.name %></div>
+                <div class="font-mono text-xs text-muted truncate"><%= user.email %></div>
+              </div>
+              <span class="font-mono text-xs text-muted/40 shrink-0">#<%= user.id %></span>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-xs font-mono text-muted text-center py-4">暂无用户，点击上方按钮自动创建</p>
+      <% end %>
+
+      <!-- Back -->
+      <div class="mt-6 pt-4 border-t border-border text-center">
+        <%= link_to "← 返回登录页", sign_in_path, class: "text-xs font-mono text-muted hover:text-primary transition-colors" %>
+      </div>
+    </div>
+  </div>
+</div>

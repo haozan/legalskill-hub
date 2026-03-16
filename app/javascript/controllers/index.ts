@@ -10,6 +10,9 @@ import SystemMonitorController from "./system_monitor_controller"
 import FlashController from "./flash_controller"
 import WechatLoginController from "./wechat_login_controller"
 import WechatPayController from "./wechat_pay_controller"
+import ProfileSetupController from "./profile_setup_controller"
+import ProfileEditController from "./profile_edit_controller"
+import LawFirmAutocompleteController from "./law_firm_autocomplete_controller"
 
 const application = Application.start()
 
@@ -23,5 +26,8 @@ application.register("system-monitor", SystemMonitorController)
 application.register("flash", FlashController)
 application.register("wechat-login", WechatLoginController)
 application.register("wechat-pay", WechatPayController)
+application.register("profile-setup", ProfileSetupController)
+application.register("profile-edit", ProfileEditController)
+application.register("law-firm-autocomplete", LawFirmAutocompleteController)
 
 window.Stimulus = application

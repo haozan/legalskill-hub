@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_06_094511) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_16_095844) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -182,6 +182,16 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_06_094511) do
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
 
+  create_table "law_firms", force: :cascade do |t|
+    t.string "name"
+    t.string "province"
+    t.string "city"
+    t.string "district"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_law_firms_on_name", unique: true
+  end
+
   create_table "payments", force: :cascade do |t|
     t.string "payable_type", null: false
     t.bigint "payable_id", null: false
@@ -236,6 +246,20 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_06_094511) do
     t.index ["slug"], name: "index_skills_on_slug", unique: true
   end
 
+  create_table "user_profiles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.string "phone"
+    t.string "company"
+    t.string "province"
+    t.string "city"
+    t.string "district"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["phone"], name: "index_user_profiles_on_phone", unique: true
+    t.index ["user_id"], name: "index_user_profiles_on_user_id", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email", null: false
@@ -248,6 +272,17 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_06_094511) do
     t.string "wechat_openid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["wechat_openid"], name: "index_users_on_wechat_openid", unique: true
+  end
+
+  create_table "verification_codes", force: :cascade do |t|
+    t.string "mobile", null: false
+    t.string "code", null: false
+    t.string "purpose", default: "profile", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "failed_attempts", default: 0, null: false
+    t.index ["mobile", "purpose"], name: "index_verification_codes_on_mobile_and_purpose"
   end
 
   create_table "video_resources", force: :cascade do |t|
@@ -278,4 +313,5 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_06_094511) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admin_oplogs", "administrators"
   add_foreign_key "sessions", "users"
+  add_foreign_key "user_profiles", "users"
 end

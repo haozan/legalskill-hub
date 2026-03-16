@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate
+  before_action :authenticate_user!
+  before_action :require_profile_complete
 
   def show
     @user = current_user
@@ -11,50 +12,44 @@ class ProfilesController < ApplicationController
 
   def update
     @user = current_user
+    profile = @user.profile || @user.build_profile
 
-    if @user.update(user_params)
-      need_email_verification = @user.previous_changes.include?(:email)
-      if need_email_verification
-        send_email_verification
-        additional_notice = "and sent a verification email to your new email address"
-      end
-      redirect_to profile_path, notice: "Profile updated #{additional_notice}"
+    # 更新 user name
+    @user.update(name: params[:name]) if params[:name].present?
+
+    # 解析律所：优先用选中的已有律所，否则用输入的文本自动创建
+    company_name = resolve_company_name
+
+    # 更新 profile 中可编辑的字段
+    profile_attrs = { company: company_name }
+    profile_attrs[:province] = params[:province] if params[:province].present?
+    profile_attrs[:city]     = params[:city]     if params[:city].present?
+    profile_attrs[:district] = params[:district]  # 可为空
+
+    if profile.update(profile_attrs)
+      redirect_to profile_path, notice: "资料已更新"
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  def edit_password
-    @user = current_user
-  end
-
-  def update_password
-    @user = current_user
-
-    unless @user.authenticate(params[:user][:current_password])
-      flash.now[:alert] = "Password not correct"
-      render :edit_password, status: :unprocessable_entity
-      return
-    end
-
-    if @user.update(password_params)
-      redirect_to profile_path, notice: "Password updated"
-    else
-      render :edit_password, status: :unprocessable_entity
-    end
-  end
-
   private
 
-  def user_params
-    params.require(:user).permit(:name, :email)
-  end
+  def resolve_company_name
+    # 用户从下拉选中了已有律所
+    if params[:law_firm_id].present?
+      firm = LawFirm.find_by(id: params[:law_firm_id])
+      return firm.name if firm
+    end
 
-  def password_params
-    params.require(:user).permit(:password, :password_confirmation)
-  end
+    # 用户手动输入了律所名
+    company = params[:company].to_s.strip
+    if company.present?
+      # 自动 find_or_create，保证后台有记录
+      LawFirm.find_or_create_by(name: company)
+      return company
+    end
 
-  def send_email_verification
-    UserMailer.with(user: @user).email_verification.deliver_later
+    nil
   end
 end

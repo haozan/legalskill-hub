@@ -1,0 +1,112 @@
+<% content_for :title, "完善个人资料 — 青狮龙虾" %>
+
+<div class="min-h-screen flex items-center justify-center py-12 px-4" data-controller="profile-setup">
+  <div class="w-full max-w-lg">
+
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <div class="w-16 h-16 bg-primary flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-surface font-mono">
+        Q
+      </div>
+      <h1 class="text-2xl font-bold text-primary font-mono">完善个人资料</h1>
+      <p class="text-muted text-sm mt-2">仅需一步，即可开始使用青狮龙虾的全部功能</p>
+    </div>
+
+    <!-- Error Banner -->
+    <% if @error %>
+      <div class="mb-6 px-4 py-3 border border-red-500/30 bg-red-500/10 text-red-400 text-sm font-mono">
+        <%= @error %>
+      </div>
+    <% end %>
+
+    <!-- Form Card -->
+    <div class="border border-border bg-surface-elevated p-8">
+      <%= form_with url: profile_setup_path, method: :post, data: { turbo: false } do |f| %>
+
+        <!-- 姓名 -->
+        <div class="mb-5">
+          <label class="block text-xs font-mono text-muted mb-2 tracking-wider uppercase">姓名</label>
+          <%= f.text_field :name,
+              placeholder: "您的真实姓名",
+              value: current_user.name.presence&.exclude?("微信用户") ? current_user.name : "",
+              class: "w-full bg-surface border border-border text-primary font-mono text-sm px-4 py-3 focus:outline-none focus:border-primary transition-colors placeholder-muted" %>
+        </div>
+
+        <!-- 律所 -->
+        <div class="mb-5">
+          <label class="block text-xs font-mono text-muted mb-2 tracking-wider uppercase">所属律所</label>
+          <%= f.text_field :company,
+              placeholder: "请输入律所全称",
+              required: true,
+              class: "w-full bg-surface border border-border text-primary font-mono text-sm px-4 py-3 focus:outline-none focus:border-primary transition-colors placeholder-muted" %>
+        </div>
+
+        <!-- 省市区 -->
+        <div class="mb-5">
+          <label class="block text-xs font-mono text-muted mb-2 tracking-wider uppercase">所在地区</label>
+          <div class="grid grid-cols-3 gap-3">
+            <select name="province" id="province-select" required
+                    data-profile-setup-target="province"
+                    data-action="change->profile-setup#onProvinceChange"
+                    class="bg-surface border border-border text-primary font-mono text-sm px-3 py-3 focus:outline-none focus:border-primary transition-colors">
+              <option value="">省/直辖市</option>
+            </select>
+            <select name="city" id="city-select" required
+                    data-profile-setup-target="city"
+                    data-action="change->profile-setup#onCityChange"
+                    class="bg-surface border border-border text-primary font-mono text-sm px-3 py-3 focus:outline-none focus:border-primary transition-colors">
+              <option value="">市</option>
+            </select>
+            <select name="district" id="district-select"
+                    data-profile-setup-target="district"
+                    class="bg-surface border border-border text-primary font-mono text-sm px-3 py-3 focus:outline-none focus:border-primary transition-colors">
+              <option value="">区/县（可选）</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 手机号 + 验证码 -->
+        <div class="mb-5">
+          <label class="block text-xs font-mono text-muted mb-2 tracking-wider uppercase">手机号码</label>
+          <div class="flex gap-3">
+            <%= f.telephone_field :mobile,
+                placeholder: "11 位大陆手机号",
+                required: true,
+                maxlength: 11,
+                data: { profile_setup_target: "mobile" },
+                class: "flex-1 bg-surface border border-border text-primary font-mono text-sm px-4 py-3 focus:outline-none focus:border-primary transition-colors placeholder-muted" %>
+            <button type="button"
+                    data-action="click->profile-setup#sendCode"
+                    data-profile-setup-target="sendBtn"
+                    class="shrink-0 px-4 py-3 border border-border text-secondary font-mono text-xs hover:text-primary hover:border-primary transition-colors whitespace-nowrap">
+              获取验证码
+            </button>
+          </div>
+          <p data-profile-setup-target="smsMsg" class="mt-1 text-xs font-mono text-muted hidden"></p>
+        </div>
+
+        <div class="mb-8">
+          <label class="block text-xs font-mono text-muted mb-2 tracking-wider uppercase">短信验证码</label>
+          <%= f.text_field :code,
+              placeholder: "4 位验证码",
+              maxlength: 4,
+              required: true,
+              class: "w-full bg-surface border border-border text-primary font-mono text-sm px-4 py-3 focus:outline-none focus:border-primary transition-colors placeholder-muted" %>
+          <% if Rails.env.development? %>
+            <p class="mt-1 text-xs font-mono text-yellow-500">⚠ 开发模式：点击获取验证码后，验证码会直接显示在上方提示中</p>
+          <% end %>
+        </div>
+
+        <%= f.submit "完成，开始使用",
+            class: "w-full bg-primary text-surface font-mono text-sm py-4 hover:opacity-90 transition-opacity cursor-pointer tracking-wider" %>
+
+      <% end %>
+    </div>
+
+    <!-- Footer note -->
+    <p class="text-center text-xs text-muted font-mono mt-6">
+      手机号仅用于账号安全验证，不会对外公开
+    </p>
+
+  </div>
+</div>

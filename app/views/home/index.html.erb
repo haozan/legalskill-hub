@@ -11,24 +11,20 @@
   <div class="relative z-10 container-xl mx-auto px-6 py-24 text-center">
     <!-- 主标题 -->
     <div class="mb-12">
-      <h1 class="font-mono text-7xl md:text-[10rem] font-bold leading-none tracking-tight">
-        <span class="text-secondary">效果好，</span><span class="text-primary">还便宜</span>
+      <h1 class="font-mono text-4xl md:text-6xl font-bold leading-tight tracking-tight">
+        <span class="text-secondary">律师 AI 助手，</span><span class="text-primary">就用青狮龙虾</span>
       </h1>
     </div>
 
     <!-- 副标题 -->
     <div class="mb-12">
-      <p class="font-mono text-4xl md:text-6xl font-bold leading-none tracking-tight">
-        <span class="text-secondary">律师 AI 助手，就用</span><span style="color: hsl(174, 100%, 44%)">青狮龙虾</span><span class="accent-line"></span>
+      <p class="font-mono text-xl md:text-3xl font-bold leading-none tracking-tight">
+        <span class="text-secondary">让每一位律师拥有 </span><span style="color: hsl(174, 100%, 44%)">7x24 AI 助手</span><span class="accent-line"></span>
       </p>
     </div>
 
     <!-- CTA 按钮 -->
     <div class="flex items-center justify-center gap-4 flex-wrap">
-      <%= link_to wechat_pay_order_new_path, class: "btn-primary btn-md font-mono text-sm tracking-widest inline-flex items-center gap-2" do %>
-        <%= lucide_icon "send", class: "w-4 h-4" %>
-        <span>申请试用</span>
-      <% end %>
       <%= link_to "#video-resources", class: "btn-outline btn-md font-mono text-sm tracking-widest inline-flex items-center gap-2" do %>
         <%= lucide_icon "rocket", class: "w-4 h-4" %>
         <span>立即安装部署</span>
@@ -390,10 +386,6 @@
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <%= link_to wechat_pay_order_new_path, class: "btn-primary btn-lg inline-flex items-center gap-3 font-mono text-sm tracking-wider" do %>
-        <%= lucide_icon "send", class: "w-4 h-4" %>
-        <span>申请试用</span>
-      <% end %>
       <%= link_to "#skills-market", class: "btn-outline btn-lg inline-flex items-center gap-3 font-mono text-sm tracking-wider" do %>
         <%= lucide_icon "package", class: "w-4 h-4" %>
         <span>探索技能</span>
@@ -413,8 +405,9 @@
         <span class="font-mono text-sm font-bold text-primary tracking-widest">青狮龙虾 QingClaw</span>
       </div>
 
-      <div class="text-xs font-mono text-muted text-center">
-        © 2025 青狮龙虾 QingClaw — 律师 AI 助手
+      <div class="flex flex-col items-center gap-2 text-xs font-mono text-muted text-center">
+        <span>© 2025 青狮龙虾 QingClaw — 律师 AI 助手</span>
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors opacity-60 hover:opacity-100">粤ICP备16116037号-10</a>
       </div>
     </div>
   </div>

@@ -1,5 +1,6 @@
 class SkillsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :require_profile_complete, if: :user_signed_in?
   before_action :set_skill, only: [:show, :purchase]
 
   def index

@@ -1,0 +1,72 @@
+<% content_for :title, "律所管理" %>
+
+<div class="container-xl">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-50">律所管理</h1>
+    <%= link_to "新增律所", new_admin_law_firm_path, class: "btn-primary" %>
+  </div>
+
+  <!-- 搜索 -->
+  <div class="card bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 mb-6">
+    <div class="card-body">
+      <%= form_with url: admin_law_firms_path, method: :get, class: "flex gap-4 items-center" do |f| %>
+        <div class="flex-1">
+          <%= f.text_field :q, value: params[:q], placeholder: "搜索律所名称", class: "form-input w-full" %>
+        </div>
+        <%= f.submit "搜索", class: "btn-primary" %>
+        <%= link_to "清除", admin_law_firms_path, class: "btn-ghost" %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- 列表 -->
+  <div class="card bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+    <div class="card-body p-0">
+      <% if @law_firms.any? %>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-800">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">ID</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">律所名称</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">所在地区</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">创建时间</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">操作</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+              <% @law_firms.each do |firm| %>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <td class="px-6 py-4 whitespace-nowrap font-mono text-sm text-gray-500">#<%= firm.id %></td>
+                  <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100"><%= firm.name %></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                    <%= [firm.province, firm.city, firm.district].compact_blank.join(" ") %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                    <%= firm.created_at.strftime("%Y-%m-%d") %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-center text-sm space-x-2">
+                    <%= link_to "编辑", edit_admin_law_firm_path(firm), class: "btn-sm btn-outline" %>
+                    <%= button_to "删除", admin_law_firm_path(firm), method: :delete,
+                        data: { turbo_confirm: "确认删除「#{firm.name}」？" },
+                        class: "btn-sm btn-danger" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+          暂无律所数据，<%= link_to "点击新增", new_admin_law_firm_path, class: "text-blue-500 underline" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @law_firms.respond_to?(:current_page) %>
+    <div class="flex justify-center mt-6">
+      <%= paginate @law_firms %>
+    </div>
+  <% end %>
+</div>

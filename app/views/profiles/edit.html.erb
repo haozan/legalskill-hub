@@ -1,35 +1,78 @@
-<div class="container-sm py-12">
-    <div class="card-elevated">
-      <div class="card-body">
-        <h1 class="text-2xl font-bold text-primary mb-8">Edit Profile</h1>
+<div class="container-sm py-12" data-controller="profile-edit">
+  <div class="card-elevated">
+    <div class="card-body">
+      <h1 class="text-2xl font-bold font-mono text-primary mb-8">编辑资料</h1>
 
-        <%= form_with model: @user, url: profile_path, method: :patch, local: true, class: "space-y-6" do |form| %>
-          <div>
-            <%= form.label :name, required: true do %>
-              Name
-            <% end %>
-            <%= form.text_field :name, required: true, autocomplete: "name", placeholder: "Enter your name" %>
-          </div>
+      <%= form_with url: profile_path, method: :patch, local: true, class: "space-y-6" do |form| %>
+        <div>
+          <label class="form-label">姓名 <span class="text-red-400">*</span></label>
+          <%= text_field_tag :name, @user.name, required: true, autocomplete: "name",
+                placeholder: "请输入姓名",
+                class: "form-input w-full" %>
+        </div>
 
-          <div>
-            <%= form.label :email do %>
-              Email
-            <% end %>
-            <%= form.email_field :email, required: true, autocomplete: "email", placeholder: "Enter your email" %>
-            <div class="form-help">
-              Email verification required after changes
-            </div>
+        <!-- 律所 autocomplete -->
+        <div data-controller="law-firm-autocomplete" class="relative">
+          <label class="form-label">所在律所 <span class="text-red-400">*</span></label>
+          <input type="text"
+                 data-law-firm-autocomplete-target="input"
+                 data-action="input->law-firm-autocomplete#onInput"
+                 value="<%= @user.company %>"
+                 placeholder="输入律所名称搜索或新建"
+                 autocomplete="off"
+                 class="form-input w-full" />
+          <!-- 隐藏字段：若选中已有律所，传 law_firm_id；否则传 company 文本 -->
+          <input type="hidden" name="law_firm_id" data-law-firm-autocomplete-target="hidden" value="" />
+          <input type="hidden" name="company"
+                 data-law-firm-autocomplete-target="companyText"
+                 value="<%= @user.company %>" />
+          <!-- 下拉列表 -->
+          <div data-law-firm-autocomplete-target="dropdown"
+               class="hidden absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 shadow-lg rounded">
+            <ul data-law-firm-autocomplete-target="list" class="max-h-48 overflow-y-auto py-1"></ul>
           </div>
+        </div>
 
-          <div class="pt-4">
-            <div class="flex justify-end space-x-3">
-              <%= form.submit "Save Changes", class: "btn-primary" %>
-              <%= link_to "Cancel", profile_path, class: "btn-ghost" %>
-            </div>
+        <!-- 省市区三级联动 -->
+        <div>
+          <label class="form-label">所在地区</label>
+          <div class="grid grid-cols-3 gap-2">
+            <select name="province"
+                    data-profile-edit-target="province"
+                    data-selected="<%= @user.province %>"
+                    data-action="change->profile-edit#onProvinceChange"
+                    class="form-input">
+              <option value="">请选择省</option>
+            </select>
+            <select name="city"
+                    data-profile-edit-target="city"
+                    data-selected="<%= @user.city %>"
+                    data-action="change->profile-edit#onCityChange"
+                    class="form-input">
+              <option value="">请选择市</option>
+            </select>
+            <select name="district"
+                    data-profile-edit-target="district"
+                    data-selected="<%= @user.district %>"
+                    class="form-input">
+              <option value="">请选择区/县</option>
+            </select>
           </div>
-        <% end %>
-      </div>
-    </div>
+        </div>
+
+        <div>
+          <label class="form-label">手机号</label>
+          <div class="font-mono text-sm text-muted px-3 py-2 border border-border bg-surface">
+            <%= @user.phone.presence || "—" %>
+            <span class="ml-2 text-xs">（不可修改）</span>
+          </div>
+        </div>
+
+        <div class="pt-4 flex justify-end space-x-3">
+          <%= link_to "取消", profile_path, class: "btn-ghost" %>
+          <%= form.submit "保存修改", class: "btn-primary" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

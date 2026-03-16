@@ -1,0 +1,14 @@
+<% content_for :title, "新增律所" %>
+
+<div class="container-xl max-w-2xl">
+  <div class="flex items-center gap-4 mb-8">
+    <%= link_to "← 律所列表", admin_law_firms_path, class: "text-sm text-gray-500 hover:text-gray-700" %>
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-50">新增律所</h1>
+  </div>
+
+  <div class="card bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+    <div class="card-body">
+      <%= render "form", law_firm: @law_firm %>
+    </div>
+  </div>
+</div>

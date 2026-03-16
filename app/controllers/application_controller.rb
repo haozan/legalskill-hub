@@ -40,6 +40,12 @@ class ApplicationController < ActionController::Base
 
   alias_method :authenticate, :authenticate_user!
 
+  def require_profile_complete
+    return unless user_signed_in?
+    return if current_user.profile_complete?
+    redirect_to profile_setup_path, alert: "请先完善个人资料"
+  end
+
   def set_current_request_details
     Current.user_agent = request.user_agent
     Current.ip_address = request.ip
