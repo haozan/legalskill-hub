@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   end
   post '/webhooks/stripe', to: 'payments#webhook'
   # Authentication routes（微信登录专用，邮箱/密码/设备相关已移除）
+  # sign_in_path 别名 → 微信扫码登录页，保持兼容旧引用
+  get 'sign_in', to: redirect('/wechat/qrcode'), as: :sign_in
   delete 'sign_out', to: 'sessions#destroy', as: :sign_out
 
   get  "/auth/failure",            to: "sessions/omniauth#failure"
