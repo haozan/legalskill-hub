@@ -1,0 +1,44 @@
+<% content_for :title, "律所详情 · #{@law_firm.name}" %>
+
+<div class="container-xl max-w-2xl">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-50"><%= @law_firm.name %></h1>
+    <div class="flex gap-3">
+      <%= link_to "编辑", edit_admin_law_firm_path(@law_firm), class: "btn-outline btn-sm" %>
+      <%= link_to "返回列表", admin_law_firms_path, class: "btn-ghost btn-sm" %>
+    </div>
+  </div>
+
+  <div class="card bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+    <div class="card-body divide-y divide-gray-200 dark:divide-gray-700">
+      <div class="flex py-3">
+        <span class="w-32 text-sm text-gray-500 dark:text-gray-400">ID</span>
+        <span class="font-mono text-sm">#<%= @law_firm.id %></span>
+      </div>
+      <div class="flex py-3">
+        <span class="w-32 text-sm text-gray-500 dark:text-gray-400">律所名称</span>
+        <span class="font-medium"><%= @law_firm.name %></span>
+      </div>
+      <div class="flex py-3">
+        <span class="w-32 text-sm text-gray-500 dark:text-gray-400">省份</span>
+        <span><%= @law_firm.province.presence || "—" %></span>
+      </div>
+      <div class="flex py-3">
+        <span class="w-32 text-sm text-gray-500 dark:text-gray-400">城市</span>
+        <span><%= @law_firm.city.presence || "—" %></span>
+      </div>
+      <div class="flex py-3">
+        <span class="w-32 text-sm text-gray-500 dark:text-gray-400">区/县</span>
+        <span><%= @law_firm.district.presence || "—" %></span>
+      </div>
+      <div class="flex py-3">
+        <span class="w-32 text-sm text-gray-500 dark:text-gray-400">创建时间</span>
+        <span class="text-sm text-gray-500"><%= @law_firm.created_at.strftime("%Y-%m-%d %H:%M") %></span>
+      </div>
+      <div class="flex py-3">
+        <span class="w-32 text-sm text-gray-500 dark:text-gray-400">更新时间</span>
+        <span class="text-sm text-gray-500"><%= @law_firm.updated_at.strftime("%Y-%m-%d %H:%M") %></span>
+      </div>
+    </div>
+  </div>
+</div>
