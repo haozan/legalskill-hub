@@ -5,5 +5,7 @@ class HomeController < ApplicationController
   def index
     @featured_skills = Skill.includes(:category).order(download_count: :desc).limit(6)
     @skill_categories = Category.for_skill.order(:name)
+    @hero_video_url   = SiteSetting.get("hero_video_url")
+    @hero_video_title = SiteSetting.get("hero_video_title").presence || "青狮龙虾快速上手"
   end
 end
