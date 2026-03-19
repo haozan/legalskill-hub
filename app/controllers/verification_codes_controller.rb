@@ -30,6 +30,7 @@ class VerificationCodesController < ApplicationController
     end
   rescue => e
     Rails.logger.error("SmsSender error: #{e.message}")
-    render json: { message: "短信发送失败，请稍后重试" }, status: :service_unavailable
+    msg = "短信发送失败：#{e.message}"
+    render json: { message: msg }, status: :service_unavailable
   end
 end

@@ -5,8 +5,10 @@ class SmsSender
   YUNPIAN_TPL_URL = "https://sms.yunpian.com/v2/sms/tpl_single_send.json".freeze
 
   def self.deliver(mobile, code)
-    apikey  = Figaro.env.YUNPIAN_API_KEY
-    company = Figaro.env.YUNPIAN_SIGN  # 签名，如"深圳青狮科技"
+    apikey  = Figaro.env.YUNPIAN_API_KEY.presence || ENV["YUNPIAN_API_KEY"]
+    company = Figaro.env.YUNPIAN_SIGN.presence    || ENV["YUNPIAN_SIGN"] || "深圳青狮科技"
+
+    raise "YUNPIAN_API_KEY 未配置" if apikey.blank?
 
     tpl_value = URI.encode_www_form(
       "#company#" => company,
@@ -23,7 +25,7 @@ class SmsSender
 
     result = JSON.parse(response.body)
     unless result["code"] == 0
-      raise "云片短信发送失败 [mobile=#{mobile}]: code=#{result['code']} msg=#{result['msg']} detail=#{result['detail']}"
+      raise "云片 code=#{result['code']} msg=#{result['msg']} detail=#{result['detail']}"
     end
 
     result
