@@ -25,7 +25,7 @@ class VerificationCodesController < ApplicationController
     if Rails.env.development?
       render json: { message: "开发模式：验证码为 #{vcode.code}" }, status: :ok
     else
-      SmsSender.deliver(mobile, "您的验证码是 #{vcode.code}，5分钟内有效")
+      SmsSender.deliver(mobile, vcode.code)
       render json: { message: "验证码已发送到您的手机" }, status: :ok
     end
   rescue => e
