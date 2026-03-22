@@ -8,31 +8,31 @@
          style="background: radial-gradient(circle, hsl(174 100% 44%) 0%, transparent 70%);"></div>
   </div>
 
-  <div class="relative z-10 container-xl mx-auto px-6 py-24 text-center">
+  <div class="relative z-10 container-xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
     <!-- 主标题 -->
-    <div class="mb-12">
-      <h1 class="font-mono text-4xl md:text-6xl font-bold leading-tight tracking-tight">
-        <span class="text-secondary">律师 AI 助手，</span><span class="text-primary">就用青狮龙虾</span>
+    <div class="mb-8 sm:mb-12">
+      <h1 class="font-mono text-3xl sm:text-4xl md:text-6xl font-bold leading-tight tracking-tight">
+        <span class="text-secondary">律师 AI 助手，</span><br class="sm:hidden"><span class="text-primary">就用青狮龙虾</span>
       </h1>
     </div>
 
     <!-- 副标题 -->
-    <div class="mb-12">
-      <p class="font-mono text-xl md:text-3xl font-bold leading-none tracking-tight">
+    <div class="mb-8 sm:mb-12">
+      <p class="font-mono text-lg sm:text-xl md:text-3xl font-bold leading-snug tracking-tight">
         <span class="text-secondary">让每一位律师拥有 </span><span style="color: hsl(174, 100%, 44%)">7x24 AI 助手</span><span class="accent-line"></span>
       </p>
     </div>
 
     <!-- CTA 按钮 -->
-    <div class="flex items-center justify-center gap-4 flex-wrap">
-      <%= link_to "#video-resources", class: "btn-outline btn-md font-mono text-sm tracking-widest inline-flex items-center gap-2" do %>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+      <%= link_to "#video-resources", class: "btn-outline btn-md font-mono text-sm tracking-widest inline-flex items-center justify-center gap-2 w-full sm:w-auto" do %>
         <%= lucide_icon "rocket", class: "w-4 h-4" %>
         <span>立即安装部署</span>
       <% end %>
       <% if @hero_video_url.present? %>
         <button
           onclick="document.getElementById('hero-video-modal').classList.remove('hidden');document.getElementById('hero-video-player').play()"
-          class="btn-md font-mono text-sm tracking-widest inline-flex items-center gap-2"
+          class="btn-md font-mono text-sm tracking-widest inline-flex items-center justify-center gap-2 w-full sm:w-auto"
           style="background: hsl(174,100%,44%); color: #0a0f0d; font-weight: 700;">
           <%= lucide_icon "play-circle", class: "w-4 h-4" %>
           <span>观看演示</span>
@@ -101,20 +101,20 @@
 
     <!-- 定价对比表 -->
     <!-- 定价对比表 -->
-    <div class="relative overflow-x-auto pt-6">
+    <div class="relative overflow-x-auto pt-6 -mx-4 sm:mx-0 px-4 sm:px-0">
 
-      <table class="w-full font-mono text-sm border-separate border-spacing-0">
+      <table class="w-full font-mono text-sm border-separate border-spacing-0 min-w-[600px]">
         <thead>
           <tr>
             <th class="text-left py-5 pr-6 text-muted font-normal tracking-widest text-xs uppercase w-1/5 border-b border-border"></th>
 
             <!-- 方案一 -->
-            <th class="text-center py-5 px-4 border-b border-border w-[20%]">
+            <th class="text-center py-4 px-2 sm:py-5 sm:px-4 border-b border-border w-[20%]">
               <div class="text-xs text-muted tracking-widest uppercase mb-2">方案 1</div>
-              <div class="text-sm text-muted/60 mb-4">1 年期使用权</div>
-              <div class="text-sm text-muted font-mono mb-0" style="text-decoration: line-through;">原价 1999 元</div>
+              <div class="text-xs sm:text-sm text-muted/60 mb-3 sm:mb-4">1 年期使用权</div>
+              <div class="text-xs sm:text-sm text-muted font-mono mb-0" style="text-decoration: line-through;">原价 1999 元</div>
               <div class="text-sm mb-1 invisible">&nbsp;</div>
-              <div class="text-3xl font-bold text-primary mb-1">999<span class="text-sm font-normal text-muted ml-1">元</span></div>
+              <div class="text-2xl sm:text-3xl font-bold text-primary mb-1">999<span class="text-xs sm:text-sm font-normal text-muted ml-1">元</span></div>
               <div class="text-xs text-muted invisible mb-3">&nbsp;</div>
               <%= link_to wechat_qrcode_path, class: "btn-outline btn-sm font-mono text-xs tracking-widest inline-flex items-center gap-1.5 w-full justify-center" do %>
                 <%= lucide_icon "shopping-cart", class: "w-3.5 h-3.5" %>
@@ -123,12 +123,12 @@
             </th>
 
             <!-- 方案二 -->
-            <th class="text-center py-5 px-4 border-b border-border w-[20%]">
+            <th class="text-center py-4 px-2 sm:py-5 sm:px-4 border-b border-border w-[20%]">
               <div class="text-xs text-muted tracking-widest uppercase mb-2">方案 2</div>
-              <div class="text-sm text-muted/60 mb-4">线上课程 + 1 年期使用权</div>
-              <div class="text-sm text-muted line-through font-mono mb-0 invisible">&nbsp;</div>
+              <div class="text-xs sm:text-sm text-muted/60 mb-3 sm:mb-4">线上课程 + 1 年期使用权</div>
+              <div class="text-xs sm:text-sm text-muted line-through font-mono mb-0 invisible">&nbsp;</div>
               <div class="text-sm mb-1 invisible" aria-hidden="true">&nbsp;</div>
-              <div class="text-3xl font-bold text-primary mb-1">1999<span class="text-sm font-normal text-muted ml-1">元</span></div>
+              <div class="text-2xl sm:text-3xl font-bold text-primary mb-1">1999<span class="text-xs sm:text-sm font-normal text-muted ml-1">元</span></div>
               <div class="text-xs text-muted invisible mb-3">&nbsp;</div>
               <%= link_to wechat_qrcode_path, class: "btn-outline btn-sm font-mono text-xs tracking-widest inline-flex items-center gap-1.5 w-full justify-center" do %>
                 <%= lucide_icon "shopping-cart", class: "w-3.5 h-3.5" %>
@@ -137,13 +137,13 @@
             </th>
 
             <!-- 方案三 -->
-            <th class="text-center py-5 px-4 border-b w-[20%]" style="border-color: hsl(174,100%,44%); background: hsl(174,100%,44%,0.04);">
+            <th class="text-center py-4 px-2 sm:py-5 sm:px-4 border-b w-[20%]" style="border-color: hsl(174,100%,44%); background: hsl(174,100%,44%,0.04);">
               <div class="text-xs text-muted tracking-widest uppercase mb-2">方案 3</div>
-              <div class="text-sm text-muted/60 mb-4">线下课程 + 1 年期使用权</div>
-              <div id="plan3-origin-price" class="text-sm text-muted font-mono mb-0 invisible" style="text-decoration: line-through;">&nbsp;</div>
+              <div class="text-xs sm:text-sm text-muted/60 mb-3 sm:mb-4">线下课程 + 1 年期使用权</div>
+              <div id="plan3-origin-price" class="text-xs sm:text-sm text-muted font-mono mb-0 invisible" style="text-decoration: line-through;">&nbsp;</div>
               <div class="text-xs mb-1 invisible">&nbsp;</div>
-              <div class="text-3xl font-bold mb-1" style="color: hsl(174,100%,44%)">
-                <span id="plan3-total">2999</span><span class="text-sm font-normal text-muted ml-1">元/人</span>
+              <div class="text-2xl sm:text-3xl font-bold mb-1" style="color: hsl(174,100%,44%)">
+                <span id="plan3-total">2999</span><span class="text-xs sm:text-sm font-normal text-muted ml-1">元/人</span>
               </div>
               <div id="plan3-grand-total" class="text-xs text-muted invisible mb-3">&nbsp;</div>
               <%= link_to wechat_qrcode_path, class: "btn-sm font-mono text-xs tracking-widest inline-flex items-center gap-1.5 w-full justify-center", style: "background: hsl(174,100%,44%); color: #0a0f0d; font-weight: 700;" do %>
@@ -153,13 +153,13 @@
             </th>
 
             <!-- 方案四 -->
-            <th class="text-center py-5 px-4 border-b border-border w-[20%]">
+            <th class="text-center py-4 px-2 sm:py-5 sm:px-4 border-b border-border w-[20%]">
               <div class="text-xs text-muted tracking-widest uppercase mb-2">方案 4</div>
-              <div class="text-sm text-muted/60 mb-4">团队线下内训</div>
-              <div class="text-sm text-muted font-mono mb-0" style="text-decoration: line-through;">原价 2999 元</div>
+              <div class="text-xs sm:text-sm text-muted/60 mb-3 sm:mb-4">团队线下内训</div>
+              <div class="text-xs sm:text-sm text-muted font-mono mb-0" style="text-decoration: line-through;">原价 2999 元</div>
               <div class="text-xs mb-1 invisible">&nbsp;</div>
-              <div class="text-3xl font-bold text-primary mb-1">
-                <span id="plan4-total">1999</span><span class="text-sm font-normal text-muted ml-1">元/人</span>
+              <div class="text-2xl sm:text-3xl font-bold text-primary mb-1">
+                <span id="plan4-total">1999</span><span class="text-xs sm:text-sm font-normal text-muted ml-1">元/人</span>
               </div>
               <div id="plan4-grand-total" class="text-xs text-muted mb-3">共计 <span id="plan4-count-display">29,985</span> 元</div>
               <%= link_to wechat_qrcode_path, class: "btn-outline btn-sm font-mono text-xs tracking-widest inline-flex items-center gap-1.5 w-full justify-center" do %>
@@ -272,26 +272,26 @@
         <table class="min-w-full divide-y divide-border">
           <thead>
             <tr class="bg-surface-elevated">
-              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest w-16 whitespace-nowrap">序号</th>
-              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">技能名称</th>
-              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">使用场景</th>
-              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">AI 完成度</th>
-              <th class="px-5 py-3 text-center text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">演示</th>
+              <th class="px-3 sm:px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest w-10 sm:w-16 whitespace-nowrap">序号</th>
+              <th class="px-3 sm:px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">技能名称</th>
+              <th class="hidden sm:table-cell px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">使用场景</th>
+              <th class="hidden md:table-cell px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">AI 完成度</th>
+              <th class="hidden md:table-cell px-5 py-3 text-center text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">演示</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-border">
             <% @delivered_skills.each_with_index do |skill, idx| %>
               <tr class="<%= idx.even? ? 'bg-surface' : 'bg-surface-elevated/30' %> hover:bg-primary/5 transition-colors">
-                <td class="px-5 py-4 text-sm font-mono font-bold text-muted/60">
+                <td class="px-3 sm:px-5 py-4 text-sm font-mono font-bold text-muted/60">
                   <%= "%02d" % (idx + 1) %>
                 </td>
-                <td class="px-5 py-4 text-sm font-semibold text-primary">
+                <td class="px-3 sm:px-5 py-4 text-sm font-semibold text-primary">
                   <%= skill.name %>
                 </td>
-                <td class="px-5 py-4 text-sm text-secondary max-w-xs">
+                <td class="hidden sm:table-cell px-5 py-4 text-sm text-secondary max-w-xs">
                   <%= skill.scenario.present? ? skill.scenario : "—" %>
                 </td>
-                <td class="px-5 py-4">
+                <td class="hidden md:table-cell px-5 py-4">
                   <% if skill.ai_completion.present? %>
                     <div style="display:flex; align-items:center; gap:8px; min-width:120px;">
                       <div style="flex:1; height:6px; background:rgba(128,128,128,0.2); border-radius:9999px; overflow:hidden;">
@@ -303,12 +303,12 @@
                     <span class="text-muted/40 text-sm">—</span>
                   <% end %>
                 </td>
-                <td class="px-5 py-4 text-center">
+                <td class="hidden md:table-cell px-5 py-4 text-center">
                   <% if skill.demo_video_url.present? %>
                     <%= link_to skill.demo_video_url, target: "_blank", rel: "noopener noreferrer",
                         class: "inline-flex items-center gap-1 text-xs font-mono text-primary hover:text-primary-light transition-colors" do %>
                       <%= lucide_icon "play-circle", class: "w-4 h-4" %>
-                      <span class="hidden sm:inline">演示</span>
+                      <span>演示</span>
                     <% end %>
                   <% else %>
                     <span class="text-muted/40 text-xs">—</span>
@@ -328,45 +328,45 @@
 
 <!-- SECTION: 3 Reasons -->
 <section id="reasons" class="py-20 bg-surface-elevated border-t border-border">
-  <div class="container-xl mx-auto">
+  <div class="container-xl mx-auto px-4 sm:px-6">
     <!-- Section Header -->
-    <div class="mb-12">
+    <div class="mb-10 sm:mb-12">
       <h2 class="section-title !mb-0">3 点使用<span style="color: hsl(174, 100%, 44%)">青狮龙虾</span>的理由</h2>
       <p class="section-subtitle mt-2">效果好、更安全、还便宜——专为律师而生</p>
     </div>
 
     <!-- Reasons Grid -->
     <% skill_count = @delivered_skills.count %>
-    <div class="grid md:grid-cols-3 gap-6" style="grid-template-rows: auto;">
+    <div class="grid sm:grid-cols-3 gap-6 px-4 sm:px-0" style="grid-template-rows: auto;">
 
       <!-- 理由一 -->
-      <div class="px-8 py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
-        <div class="font-mono font-bold leading-none pb-10" style="font-size: 7rem; color: hsl(174, 100%, 44%)">
+      <div class="px-6 py-6 sm:px-8 sm:py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
+        <div class="font-mono font-bold leading-none pb-6 sm:pb-10" style="font-size: clamp(4rem, 15vw, 7rem); color: hsl(174, 100%, 44%)">
           <%= skill_count %>
         </div>
-        <h3 class="font-mono text-lg font-bold text-primary pb-5 tracking-tight">效果好｜<%= skill_count %> 个律师工作场景，量身定制 Skill</h3>
+        <h3 class="font-mono text-base sm:text-lg font-bold text-primary pb-3 sm:pb-5 tracking-tight">效果好｜<%= skill_count %> 个律师工作场景，量身定制 Skill</h3>
         <p class="text-secondary text-sm leading-loose">
           每一个 Skill 均由律师参与设计，深度覆盖办案、阅卷、咨询、合同审核、庭审笔录、日志记录等全执业场景。不是通用 AI 套壳，是真正懂律师业务的专属助手。
         </p>
       </div>
 
       <!-- 理由二 -->
-      <div class="px-8 py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
-        <div class="font-mono font-bold leading-none pb-10" style="font-size: 7rem; color: hsl(174, 100%, 44%)">
+      <div class="px-6 py-6 sm:px-8 sm:py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
+        <div class="font-mono font-bold leading-none pb-6 sm:pb-10" style="font-size: clamp(4rem, 15vw, 7rem); color: hsl(174, 100%, 44%)">
           100%
         </div>
-        <h3 class="font-mono text-lg font-bold text-primary pb-5 tracking-tight">更安全｜核心代码 100% 自研、可控</h3>
+        <h3 class="font-mono text-base sm:text-lg font-bold text-primary pb-3 sm:pb-5 tracking-tight">更安全｜核心代码 100% 自研、可控</h3>
         <p class="text-secondary text-sm leading-loose">
           全套核心代码独立研发，不依赖任何第三方框架。您的每一份案件资料、每一次对话记录，均在自主可控的系统内流转，零第三方数据中转。
         </p>
       </div>
 
       <!-- 理由三 -->
-      <div class="px-8 py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
-        <div class="font-mono font-bold leading-none pb-10" style="font-size: 7rem; color: hsl(174, 100%, 44%)">
+      <div class="px-6 py-6 sm:px-8 sm:py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
+        <div class="font-mono font-bold leading-none pb-6 sm:pb-10" style="font-size: clamp(4rem, 15vw, 7rem); color: hsl(174, 100%, 44%)">
           40%
         </div>
-        <h3 class="font-mono text-lg font-bold text-primary pb-5 tracking-tight">还便宜｜独有技术，直降 40% Token 成本</h3>
+        <h3 class="font-mono text-base sm:text-lg font-bold text-primary pb-3 sm:pb-5 tracking-tight">还便宜｜独有技术，直降 40% Token 成本</h3>
         <p class="text-secondary text-sm leading-loose">
           独有上下文记忆压缩技术，在保证对话记忆连贯性的前提下，平均节约约 40% 的 Token 使用成本。用得越多，省得越多。
         </p>
@@ -457,16 +457,16 @@
 <%# SECTION: Skills Market — 已隐藏，与「交付技能」板块重叠 %>
 
 <!-- SECTION: Community -->
-<section id="community" class="py-20 bg-surface border-t border-border">
-  <div class="container-xl mx-auto px-6">
+<section id="community" class="py-16 sm:py-20 bg-surface border-t border-border">
+  <div class="container-xl mx-auto px-4 sm:px-6">
 
     <!-- Section Header -->
-    <div class="mb-14">
+    <div class="mb-10 sm:mb-14">
       <h2 class="section-title !mb-0">199 元加入青狮龙虾社群</h2>
       <p class="section-subtitle mt-2">按大区组建，为了让你们真的能见面</p>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-16 items-start">
+    <div class="grid lg:grid-cols-2 gap-8 sm:gap-16 items-start">
 
       <!-- Left: 大区 + 理念 -->
       <div>
@@ -508,7 +508,7 @@
       </div>
 
       <!-- Right: 二维码 + 入群流程 -->
-      <div class="bg-surface-elevated border border-border p-8 flex flex-col items-center">
+      <div class="bg-surface-elevated border border-border p-5 sm:p-8 flex flex-col items-center">
 
         <!-- QR Code -->
         <div class="relative w-52 h-52 bg-surface border border-primary/20 p-3 group hover:border-primary/40 transition-all duration-300 mb-6">
@@ -547,17 +547,17 @@
   <div class="absolute inset-0 pointer-events-none"
        style="background: radial-gradient(ellipse 60% 50% at 50% 50%, hsl(174 100% 44% / 0.05) 0%, transparent 70%);"></div>
 
-  <div class="relative z-10 container-xl mx-auto px-6 text-center">
+  <div class="relative z-10 container-xl mx-auto px-4 sm:px-6 text-center">
     <div class="sys-label mb-4 justify-center flex">// 启动序列</div>
-    <h2 class="font-mono text-3xl md:text-4xl font-bold text-primary mb-4 tracking-tight">
+    <h2 class="font-mono text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 tracking-tight">
       立即开启您的法律 AI 之旅
     </h2>
-    <p class="text-secondary text-base mb-10 max-w-xl mx-auto leading-relaxed">
+    <p class="text-secondary text-sm sm:text-base mb-8 sm:mb-10 max-w-xl mx-auto leading-relaxed">
       加入 5000+ 专业律师，体验 AI 驱动的法律实务平台
     </p>
 
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <%= link_to "#skills-market", class: "btn-outline btn-lg inline-flex items-center gap-3 font-mono text-sm tracking-wider" do %>
+    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+      <%= link_to "#skills-market", class: "btn-outline btn-lg inline-flex items-center justify-center gap-3 font-mono text-sm tracking-wider w-full sm:w-auto" do %>
         <%= lucide_icon "package", class: "w-4 h-4" %>
         <span>探索技能</span>
       <% end %>
