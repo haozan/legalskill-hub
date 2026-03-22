@@ -196,7 +196,7 @@
                       class="w-7 h-7 rounded-full flex items-center justify-center font-mono text-base font-bold transition-all leading-none"
                       style="background: hsl(174,100%,44%); color: #0a0f0d; border: 1.5px solid hsl(174,100%,44%);">+</button>
                   </div>
-                  <div class="text-xs font-mono" style="color: hsl(174,100%,44%); opacity: 0.8;">每人立减 300 元</div>
+                  <div id="plan3-tip" class="text-xs font-mono" style="color: hsl(174,100%,44%); opacity: 0.85;">点击 + 享受团购价</div>
                 </td>
                 <td class="py-3 px-4 text-center text-sm border-b border-border/30 text-secondary"><%= v4 %></td>
               </tr>
@@ -562,14 +562,25 @@
     var totalEl = document.getElementById('plan3-total');
     var minusEl = document.getElementById('plan3-minus');
     var plusEl  = document.getElementById('plan3-plus');
+    var tipEl   = document.getElementById('plan3-tip');
     if (!countEl || !totalEl) return;
 
     plan3Count = Math.max(1, Math.min(plan3MaxCount, plan3Count + delta));
     var unitPrice = plan3BasePrice - (plan3Count - 1) * plan3Discount;
     var total = unitPrice * plan3Count;
+    var totalSaved = (plan3Count - 1) * plan3Discount * plan3Count;
 
     countEl.textContent = plan3Count;
     totalEl.textContent = total.toLocaleString();
+
+    if (tipEl) {
+      if (plan3Count === 1) {
+        tipEl.textContent = '点击 + 享受团购价';
+      } else {
+        var perSave = (plan3Count - 1) * plan3Discount;
+        tipEl.textContent = '每人立减 ' + perSave + ' 元，共减 ' + totalSaved + ' 元';
+      }
+    }
 
     if (minusEl) {
       minusEl.style.opacity = plan3Count <= 1 ? '0.3' : '1';
