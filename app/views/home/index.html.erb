@@ -274,7 +274,7 @@
     </div>
 
     <!-- Reasons Grid -->
-    <% skill_count = Skill.count %>
+    <% skill_count = @delivered_skills.count { |s| s.ai_completion.present? } %>
     <div class="grid md:grid-cols-3 gap-6" style="grid-template-rows: auto;">
 
       <!-- 理由一 -->
