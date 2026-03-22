@@ -111,6 +111,12 @@ Rails.application.routes.draw do
     resources :video_resources
     resources :categories
     resources :skill_categories
+    resources :delivered_skills do
+      member do
+        post :move_up
+        post :move_down
+      end
+    end
     resources :payments, only: [:index, :show]
     resources :users, only: [:index, :show]
     resources :law_firms

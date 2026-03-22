@@ -1,0 +1,16 @@
+<% content_for :title, "编辑交付技能" %>
+
+<div class="container-xl max-w-2xl">
+  <div class="flex items-center gap-3 mb-8">
+    <%= link_to admin_delivered_skills_path, class: "text-gray-500 hover:text-gray-900 dark:hover:text-gray-100" do %>
+      <%= lucide_icon "arrow-left", class: "w-5 h-5" %>
+    <% end %>
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-50">编辑：<%= @delivered_skill.name %></h1>
+  </div>
+
+  <div class="card bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+    <div class="card-body">
+      <%= render "form", delivered_skill: @delivered_skill %>
+    </div>
+  </div>
+</div>

@@ -210,3 +210,32 @@ puts "  - #{Category.count} categories"
 puts "  - #{VideoResource.count} video resources"
 puts "  - #{Skill.count} skills"
 puts "  - #{Resource.count} resources"
+
+# ── 交付技能 ──────────────────────────────────────────────
+puts "\nSeeding DeliveredSkills..."
+DeliveredSkill.delete_all
+
+delivered_skills_data = [
+  { name: "安装部署青狮龙虾",       scenario: "首次领养龙虾，完成本地/服务器安装与激活",  time_saved: "节约 2h",       cost_saved: nil },
+  { name: "案件数据脱敏",           scenario: "将案件材料中的姓名、身份证等敏感信息批量脱敏", time_saved: "节约 1h/案",    cost_saved: "节约 300元/案" },
+  { name: "配置企业微信、飞书",     scenario: "在企业微信或飞书中接入龙虾，随时随地使用",  time_saved: "节约 1h",       cost_saved: nil },
+  { name: "AI 合同审核 Word 版",    scenario: "上传合同，一键输出带批注的审核意见 Word 文档", time_saved: "节约 3h/份",    cost_saved: "节约 2000元/份" },
+  { name: "AI 文书撰写 Word 版",    scenario: "根据案情自动起草起诉书、答辩状、代理意见等法律文书", time_saved: "节约 4h/份",    cost_saved: "节约 1500元/份" },
+  { name: "AI 制作 PPT",            scenario: "将案件或法律知识一键转化为专业 PPT 汇报稿", time_saved: "节约 3h/份",    cost_saved: "节约 800元/份" },
+  { name: "AI 配图",                scenario: "为文章、PPT、公众号自动生成配套图片",        time_saved: "节约 1h/篇",    cost_saved: nil },
+  { name: "AI 公众号写作",          scenario: "输入主题，自动生成适合律师品牌的公众号文章",  time_saved: "节约 3h/篇",    cost_saved: "节约 500元/篇" },
+  { name: "AI 公众号排版/发文",     scenario: "将文章自动排版并推送至微信公众号",            time_saved: "节约 1h/篇",    cost_saved: nil },
+  { name: "AI 写书",                scenario: "系统化输出法律专著、培训教材、案例汇编",      time_saved: "节约 20h/本",   cost_saved: "节约 5000元/本" },
+  { name: "AI 搭建本地知识库",      scenario: "将所有案件、法规、文书沉淀为可检索的私有知识库", time_saved: "节约 10h",      cost_saved: nil },
+  { name: "AI 阅卷",                scenario: "批量处理卷宗，自动提取关键信息与时间线",      time_saved: "节约 50%阅卷时间", cost_saved: "节约 2000元/案" },
+  { name: "AI 诉讼可视化",          scenario: "自动生成案件时间轴、关系图、证据链图示",      time_saved: "节约 4h/案",    cost_saved: "节约 1000元/案" },
+  { name: "AI 视频剪辑",            scenario: "将庭审视频、培训录像自动剪辑并生成字幕",      time_saved: "节约 5h/个",    cost_saved: nil },
+  { name: "AI 创作你自己的 Skill",  scenario: "学会自主设计专属业务场景的 Skill，持续解锁新能力", time_saved: nil,             cost_saved: nil },
+  { name: "更多技能持续上线中…",    scenario: "根据律师社群反馈，定期新增真实场景技能",      time_saved: nil,             cost_saved: nil },
+]
+
+delivered_skills_data.each_with_index do |attrs, idx|
+  DeliveredSkill.create!(attrs.merge(position: idx + 1))
+end
+
+puts "  - #{DeliveredSkill.count} delivered skills seeded"

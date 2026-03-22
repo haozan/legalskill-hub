@@ -1,0 +1,110 @@
+<% content_for :title, "交付技能管理" %>
+
+<div class="container-xl">
+  <div class="flex items-center justify-between mb-8">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-50">交付技能管理</h1>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">管理首页「交付技能」板块的内容与排序</p>
+    </div>
+    <%= link_to new_admin_delivered_skill_path, class: "btn-primary" do %>
+      <%= lucide_icon "plus", class: "w-5 h-5 mr-2" %>
+      新增技能
+    <% end %>
+  </div>
+
+  <div class="card bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+    <div class="card-body p-0">
+      <% if @delivered_skills.any? %>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-800">
+              <tr>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">序号</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">技能名称</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">场景</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">节约时间</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">节约费用</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">视频演示</th>
+                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">排序</th>
+                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">操作</th>
+              </tr>
+            </thead>
+            <tbody class="bg-gray-50 dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+              <% @delivered_skills.each_with_index do |skill, idx| %>
+                <tr class="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                  <td class="px-4 py-4 text-sm font-mono font-bold text-gray-500 dark:text-gray-400">
+                    <%= "%02d" % (idx + 1) %>
+                  </td>
+                  <td class="px-4 py-4 text-sm font-semibold text-gray-900 dark:text-gray-100">
+                    <%= skill.name %>
+                  </td>
+                  <td class="px-4 py-4 text-sm text-gray-600 dark:text-gray-300 max-w-xs">
+                    <%= skill.scenario.present? ? truncate(skill.scenario, length: 40) : "—" %>
+                  </td>
+                  <td class="px-4 py-4 text-sm text-gray-600 dark:text-gray-300">
+                    <%= skill.time_saved.present? ? skill.time_saved : "—" %>
+                  </td>
+                  <td class="px-4 py-4 text-sm text-gray-600 dark:text-gray-300">
+                    <%= skill.cost_saved.present? ? skill.cost_saved : "—" %>
+                  </td>
+                  <td class="px-4 py-4 text-sm">
+                    <% if skill.demo_video_url.present? %>
+                      <%= link_to skill.demo_video_url, target: "_blank", rel: "noopener",
+                          class: "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1" do %>
+                        <%= lucide_icon "play-circle", class: "w-4 h-4" %>
+                        <span class="text-xs">查看</span>
+                      <% end %>
+                    <% else %>
+                      <span class="text-gray-400 text-xs">—</span>
+                    <% end %>
+                  </td>
+                  <td class="px-4 py-4 text-center">
+                    <div class="flex justify-center items-center gap-1">
+                      <%= button_to move_up_admin_delivered_skill_path(skill),
+                          method: :post,
+                          class: "p-1.5 text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors #{'opacity-30 pointer-events-none' if idx == 0}",
+                          title: "上移",
+                          disabled: idx == 0 do %>
+                        <%= lucide_icon "chevron-up", class: "w-4 h-4" %>
+                      <% end %>
+                      <%= button_to move_down_admin_delivered_skill_path(skill),
+                          method: :post,
+                          class: "p-1.5 text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors #{'opacity-30 pointer-events-none' if idx == @delivered_skills.length - 1}",
+                          title: "下移",
+                          disabled: idx == @delivered_skills.length - 1 do %>
+                        <%= lucide_icon "chevron-down", class: "w-4 h-4" %>
+                      <% end %>
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 text-center">
+                    <div class="flex justify-center items-center gap-2">
+                      <%= link_to edit_admin_delivered_skill_path(skill),
+                          class: "p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors" do %>
+                        <%= lucide_icon "pencil", class: "w-4 h-4" %>
+                      <% end %>
+                      <%= button_to admin_delivered_skill_path(skill),
+                          method: :delete,
+                          data: { confirm: "确定删除「#{skill.name}」？" },
+                          class: "p-2 text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors" do %>
+                        <%= lucide_icon "trash-2", class: "w-4 h-4" %>
+                      <% end %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <div class="text-center py-16">
+          <%= lucide_icon "layers", class: "w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" %>
+          <p class="text-gray-500 dark:text-gray-400 mb-4">暂无交付技能，点击右上角添加</p>
+          <%= link_to new_admin_delivered_skill_path, class: "btn-primary" do %>
+            <%= lucide_icon "plus", class: "w-4 h-4 mr-1" %>
+            新增技能
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

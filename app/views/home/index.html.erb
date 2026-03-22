@@ -161,24 +161,7 @@
               ["线上会议答疑",  "> 12 次",             "> 12 次",              "> 12 次",       false],
               ["远程协助",      "✅",                  "✅",                  "✅",             false],
               ["线下面对面交付","—",                   "✅",                  "✅",             false],
-              # 分组标题
-              ["交付技能",   "",                    "",                    "",              true],
-              ["01 · 安装部署青狮龙虾",       "✅", "✅", "✅", false],
-              ["02 · 案件数据脱敏",           "✅", "✅", "✅", false],
-              ["03 · 配置企业微信、飞书",     "✅", "✅", "✅", false],
-              ["04 · AI 合同审核 Word 版",    "✅", "✅", "✅", false],
-              ["05 · AI 文书撰写 Word 版",    "✅", "✅", "✅", false],
-              ["06 · AI 制作 PPT",            "✅", "✅", "✅", false],
-              ["07 · AI 配图",                "✅", "✅", "✅", false],
-              ["08 · AI 公众号写作",          "✅", "✅", "✅", false],
-              ["09 · AI 公众号排版/发文",     "✅", "✅", "✅", false],
-              ["10 · AI 写书",                "✅", "✅", "✅", false],
-              ["11 · AI 搭建本地知识库",      "✅", "✅", "✅", false],
-              ["12 · AI 阅卷",                "✅", "✅", "✅", false],
-              ["13 · AI 诉讼可视化",          "✅", "✅", "✅", false],
-              ["14 · AI 视频剪辑",            "✅", "✅", "✅", false],
-              ["15 · AI 创作你自己的 Skill",  "✅", "✅", "✅", false],
-              ["16 · 更多技能上线中…",        "✅", "✅", "✅", false],
+              # 交付技能行已移至独立「交付技能」板块展示
             ]
           %>
           <% rows.each_with_index do |(label, v1, v2, v3, is_group), i| %>
@@ -208,6 +191,70 @@
     <p class="text-center text-xs font-mono text-muted/60 mt-8">
       支持发票 · 支持公户付款
     </p>
+
+  </div>
+</section>
+
+<!-- SECTION: 交付技能 -->
+<section id="delivered-skills" class="py-20 bg-surface border-t border-border">
+  <div class="container-xl mx-auto px-6">
+
+    <!-- Section Header -->
+    <div class="mb-10">
+      <h2 class="font-mono text-3xl md:text-4xl font-bold text-primary tracking-tight mb-3">交付技能</h2>
+      <p class="text-secondary text-base max-w-xl">每一个 Skill 均由律师参与设计，覆盖真实执业场景——交付即可上手，开箱即用</p>
+    </div>
+
+    <% if @delivered_skills.any? %>
+      <div class="overflow-x-auto rounded-xl border border-border">
+        <table class="min-w-full divide-y divide-border">
+          <thead>
+            <tr class="bg-surface-elevated">
+              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest w-16">序号</th>
+              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest">技能名称</th>
+              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest hidden md:table-cell">使用场景</th>
+              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest hidden sm:table-cell">节约时间</th>
+              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest hidden sm:table-cell">节约费用</th>
+              <th class="px-5 py-3 text-center text-xs font-mono font-medium text-muted uppercase tracking-widest">演示</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border">
+            <% @delivered_skills.each_with_index do |skill, idx| %>
+              <tr class="<%= idx.even? ? 'bg-surface' : 'bg-surface-elevated/30' %> hover:bg-primary/5 transition-colors">
+                <td class="px-5 py-4 text-sm font-mono font-bold text-muted/60">
+                  <%= "%02d" % (idx + 1) %>
+                </td>
+                <td class="px-5 py-4 text-sm font-semibold text-primary">
+                  <%= skill.name %>
+                </td>
+                <td class="px-5 py-4 text-sm text-secondary hidden md:table-cell max-w-xs">
+                  <%= skill.scenario.present? ? skill.scenario : "—" %>
+                </td>
+                <td class="px-5 py-4 text-sm font-mono hidden sm:table-cell" style="color: hsl(174,100%,44%)">
+                  <%= skill.time_saved.present? ? skill.time_saved : "—" %>
+                </td>
+                <td class="px-5 py-4 text-sm font-mono hidden sm:table-cell" style="color: hsl(174,100%,44%)">
+                  <%= skill.cost_saved.present? ? skill.cost_saved : "—" %>
+                </td>
+                <td class="px-5 py-4 text-center">
+                  <% if skill.demo_video_url.present? %>
+                    <%= link_to skill.demo_video_url, target: "_blank", rel: "noopener noreferrer",
+                        class: "inline-flex items-center gap-1 text-xs font-mono text-primary hover:text-primary-light transition-colors" do %>
+                      <%= lucide_icon "play-circle", class: "w-4 h-4" %>
+                      <span class="hidden sm:inline">演示</span>
+                    <% end %>
+                  <% else %>
+                    <span class="text-muted/40 text-xs">—</span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p class="text-muted text-sm font-mono">技能整理中，敬请期待…</p>
+    <% end %>
 
   </div>
 </section>

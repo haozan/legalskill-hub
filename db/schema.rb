@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_18_153811) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_22_042436) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,6 +79,17 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_18_153811) do
     t.index ["category_type"], name: "index_categories_on_category_type"
     t.index ["name"], name: "index_categories_on_name", unique: true
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "delivered_skills", force: :cascade do |t|
+    t.integer "position"
+    t.string "name"
+    t.text "scenario"
+    t.string "time_saved"
+    t.string "cost_saved"
+    t.string "demo_video_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -192,6 +203,36 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_18_153811) do
     t.index ["name"], name: "index_law_firms_on_name", unique: true
   end
 
+  create_table "offline_class_enrollments", force: :cascade do |t|
+    t.bigint "offline_class_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "attendee_count", default: 1, null: false
+    t.bigint "payment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offline_class_id", "user_id"], name: "idx_enrollment_unique", unique: true
+    t.index ["offline_class_id"], name: "index_offline_class_enrollments_on_offline_class_id"
+    t.index ["payment_id"], name: "index_offline_class_enrollments_on_payment_id"
+    t.index ["user_id"], name: "index_offline_class_enrollments_on_user_id"
+  end
+
+  create_table "offline_classes", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "city", null: false
+    t.date "date", null: false
+    t.string "location", null: false
+    t.text "description"
+    t.text "preview_note"
+    t.jsonb "preview_videos", default: []
+    t.integer "attendees_count", default: 0
+    t.string "status", default: "open"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city"], name: "index_offline_classes_on_city"
+    t.index ["date"], name: "index_offline_classes_on_date"
+    t.index ["status"], name: "index_offline_classes_on_status"
+  end
+
   create_table "payments", force: :cascade do |t|
     t.string "payable_type", null: false
     t.bigint "payable_id", null: false
@@ -236,6 +277,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_18_153811) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_site_settings_on_key", unique: true
+  end
+
+  create_table "skill_showcases", force: :cascade do |t|
+    t.string "title"
+    t.string "scenario"
+    t.string "demo_video_url"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "skills", force: :cascade do |t|
@@ -320,6 +370,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_18_153811) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admin_oplogs", "administrators"
+  add_foreign_key "offline_class_enrollments", "offline_classes"
+  add_foreign_key "offline_class_enrollments", "payments"
+  add_foreign_key "offline_class_enrollments", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "user_profiles", "users"
 end
