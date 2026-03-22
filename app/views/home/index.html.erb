@@ -145,18 +145,36 @@
 
       <!-- 卡片3：方案三（推荐） -->
       <div class="border p-4 flex flex-col" style="border-color:hsl(174,100%,44%); background:hsl(174,100%,44%,0.04);">
-        <div class="flex items-baseline justify-between mb-1">
+        <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
             <div class="text-xs text-muted tracking-widest uppercase font-mono">方案 3</div>
             <span class="text-xs font-mono px-1.5 py-0.5" style="background:hsl(174,100%,44%); color:#0a0f0d;">推荐</span>
           </div>
           <div class="text-xs text-muted/60">线下课程 + 1 年期</div>
         </div>
-        <div class="flex items-baseline gap-3 mt-2 mb-3">
-          <div class="text-2xl font-bold font-mono" style="color:hsl(174,100%,44%);">2999<span class="text-xs font-normal text-muted ml-1">元/人</span></div>
+        <!-- 价格行 -->
+        <div class="flex items-center justify-between mb-1">
+          <div>
+            <span id="m-plan3-origin-price" class="text-xs text-muted font-mono invisible" style="text-decoration:line-through;">原价 2999 元</span>
+            <div class="text-2xl font-bold font-mono" style="color:hsl(174,100%,44%);"><span id="m-plan3-total">2999</span><span class="text-xs font-normal text-muted ml-1">元/人</span></div>
+            <div id="m-plan3-grand-total" class="text-xs text-muted invisible">&nbsp;</div>
+          </div>
+          <!-- 加减人数 -->
+          <div class="flex flex-col items-center gap-1">
+            <div class="flex items-center gap-3">
+              <button type="button" onclick="updatePlan3(-1)"
+                class="w-8 h-8 rounded-full flex items-center justify-center font-mono text-lg font-bold transition-all leading-none"
+                style="background:hsl(174,100%,44%,0.15); color:hsl(174,100%,44%); border:1.5px solid hsl(174,100%,44%);">−</button>
+              <span class="font-bold text-base w-12 text-center font-mono" style="color:hsl(174,100%,44%);"><span id="m-plan3-count">1</span> 人</span>
+              <button type="button" onclick="updatePlan3(1)"
+                class="w-8 h-8 rounded-full flex items-center justify-center font-mono text-lg font-bold transition-all leading-none"
+                style="background:hsl(174,100%,44%); color:#0a0f0d; border:1.5px solid hsl(174,100%,44%);">+</button>
+            </div>
+            <div id="m-plan3-tip" class="text-xs font-mono text-center leading-4" style="color:hsl(174,100%,44%); opacity:0.85;">点击 +<br>享受团购价</div>
+          </div>
         </div>
-        <ul class="text-xs text-secondary space-y-1 mb-4">
-          <li>· 线下课，龙虾 1 只 / 1 年</li>
+        <ul class="text-xs text-secondary space-y-1 my-3">
+          <li>· 线下课，龙虾 <span id="m-plan3-lobster-count">1</span> 只 / 1 年</li>
           <li>· 会议答疑 12 次+ · 远程服务</li>
           <li>· 线下交付</li>
         </ul>
@@ -168,17 +186,33 @@
 
       <!-- 卡片4：方案四 -->
       <div class="border border-border bg-surface-elevated p-4 flex flex-col">
-        <div class="flex items-baseline justify-between mb-1">
+        <div class="flex items-center justify-between mb-3">
           <div class="text-xs text-muted tracking-widest uppercase font-mono">方案 4</div>
           <div class="text-xs text-muted/60">团队线下内训</div>
         </div>
-        <div class="flex items-baseline gap-3 mt-2 mb-1">
-          <div class="text-2xl font-bold text-primary font-mono">1999<span class="text-xs font-normal text-muted ml-1">元/人</span></div>
-          <div class="text-xs text-muted font-mono" style="text-decoration:line-through;">原价 2999 元</div>
+        <!-- 价格行 -->
+        <div class="flex items-center justify-between mb-1">
+          <div>
+            <div class="text-xs text-muted font-mono" style="text-decoration:line-through;">原价 2999 元/人</div>
+            <div class="text-2xl font-bold text-primary font-mono"><span id="m-plan4-total">1999</span><span class="text-xs font-normal text-muted ml-1">元/人</span></div>
+            <div id="m-plan4-grand-total" class="text-xs text-muted">共计 <span id="m-plan4-count-display">29,985</span> 元</div>
+          </div>
+          <!-- 加减人数 -->
+          <div class="flex flex-col items-center gap-1">
+            <div class="flex items-center gap-3">
+              <button type="button" onclick="updatePlan4(-1)"
+                class="w-8 h-8 rounded-full flex items-center justify-center font-mono text-lg font-bold transition-all leading-none"
+                style="background:rgba(100,116,139,0.15); color:#64748b; border:1.5px solid #64748b;">−</button>
+              <span class="font-bold text-base w-12 text-center text-primary font-mono whitespace-nowrap"><span id="m-plan4-count">15</span> 人</span>
+              <button type="button" onclick="updatePlan4(1)"
+                class="w-8 h-8 rounded-full flex items-center justify-center font-mono text-lg font-bold transition-all leading-none"
+                style="background:#64748b; color:#fff; border:1.5px solid #64748b;">+</button>
+            </div>
+            <div id="m-plan4-tip" class="text-xs font-mono text-muted/70 text-center leading-4">最低 15 人起</div>
+          </div>
         </div>
-        <div class="text-xs text-muted mb-3">最低 15 人 · 龙虾 15 只</div>
-        <ul class="text-xs text-secondary space-y-1 mb-4">
-          <li>· 线下内训，≤15 人</li>
+        <ul class="text-xs text-secondary space-y-1 my-3">
+          <li>· 线下内训，<span id="m-plan4-lobster-count">15</span> 只龙虾 / 1 年</li>
           <li>· 会议答疑 12 次+ · 远程服务</li>
           <li>· 线下交付</li>
         </ul>
@@ -691,49 +725,50 @@
     var originPriceEl   = document.getElementById('plan3-origin-price');
     var lobsterCountEl  = document.getElementById('plan3-lobster-count');
     var grandTotalEl = document.getElementById('plan3-grand-total');
-    if (!countEl || !totalEl) return;
+    // 移动端镜像元素
+    var mCountEl       = document.getElementById('m-plan3-count');
+    var mTotalEl       = document.getElementById('m-plan3-total');
+    var mTipEl         = document.getElementById('m-plan3-tip');
+    var mOriginEl      = document.getElementById('m-plan3-origin-price');
+    var mLobsterEl     = document.getElementById('m-plan3-lobster-count');
+    var mGrandTotalEl  = document.getElementById('m-plan3-grand-total');
 
     plan3Count = Math.max(1, Math.min(plan3MaxCount, plan3Count + delta));
-    var unitPrice = plan3BasePrice - (plan3Count - 1) * plan3Discount;
+    var unitPrice  = plan3BasePrice - (plan3Count - 1) * plan3Discount;
     var totalSaved = (plan3Count - 1) * plan3Discount * plan3Count;
+    var perSave    = (plan3Count - 1) * plan3Discount;
 
-    countEl.textContent = plan3Count;
-    totalEl.textContent = unitPrice.toLocaleString();
+    // 桌面更新
+    if (countEl) countEl.textContent = plan3Count;
+    if (totalEl) totalEl.textContent = unitPrice.toLocaleString();
+    if (lobsterCountEl) lobsterCountEl.textContent = '青狮龙虾 ' + plan3Count + ' 只';
 
-    var perSave = (plan3Count - 1) * plan3Discount;
-
-    if (lobsterCountEl) {
-      lobsterCountEl.textContent = '青狮龙虾 ' + plan3Count + ' 只';
+    function applyOrigin(el) {
+      if (!el) return;
+      if (plan3Count === 1) { el.classList.add('invisible'); el.textContent = '\u00a0'; }
+      else { el.classList.remove('invisible'); el.textContent = '原价 2999 元'; }
     }
+    applyOrigin(originPriceEl);
+    applyOrigin(mOriginEl);
 
-    if (originPriceEl) {
-      if (plan3Count === 1) {
-        originPriceEl.classList.add('invisible');
-        originPriceEl.textContent = '\u00a0';
-      } else {
-        originPriceEl.classList.remove('invisible');
-        originPriceEl.textContent = '原价 2999 元';
-      }
+    function applyGrandTotal(el) {
+      if (!el) return;
+      if (plan3Count === 1) { el.classList.add('invisible'); el.textContent = '\u00a0'; }
+      else { el.classList.remove('invisible'); el.textContent = '共计 ' + (unitPrice * plan3Count).toLocaleString() + ' 元'; }
     }
+    applyGrandTotal(grandTotalEl);
+    applyGrandTotal(mGrandTotalEl);
 
-    if (grandTotalEl) {
-      if (plan3Count === 1) {
-        grandTotalEl.classList.add('invisible');
-        grandTotalEl.textContent = '\u00a0';
-      } else {
-        var grandTotal = unitPrice * plan3Count;
-        grandTotalEl.classList.remove('invisible');
-        grandTotalEl.textContent = '共计 ' + grandTotal.toLocaleString() + ' 元';
-      }
-    }
+    var tipHtml = plan3Count === 1
+      ? '点击 +<br>享受团购价'
+      : '每人立减 ' + perSave + ' 元<br>共减 ' + totalSaved + ' 元';
+    if (tipEl) tipEl.innerHTML = tipHtml;
+    if (mTipEl) mTipEl.innerHTML = tipHtml;
 
-    if (tipEl) {
-      if (plan3Count === 1) {
-        tipEl.innerHTML = '点击 +<br>享受团购价';
-      } else {
-        tipEl.innerHTML = '每人立减 ' + perSave + ' 元<br>共减 ' + totalSaved + ' 元';
-      }
-    }
+    // 移动端计数/价格
+    if (mCountEl) mCountEl.textContent = plan3Count;
+    if (mTotalEl) mTotalEl.textContent = unitPrice.toLocaleString();
+    if (mLobsterEl) mLobsterEl.textContent = plan3Count;
 
     if (minusEl) {
       minusEl.style.opacity = plan3Count <= 1 ? '0.3' : '1';
@@ -764,24 +799,33 @@
     var plusEl         = document.getElementById('plan4-plus');
     var tipEl          = document.getElementById('plan4-tip');
     var lobsterEl      = document.getElementById('plan4-lobster-count');
-    if (!countEl || !totalEl) return;
+    // 移动端镜像元素
+    var mCountEl       = document.getElementById('m-plan4-count');
+    var mDisplayEl     = document.getElementById('m-plan4-count-display');
+    var mTotalEl       = document.getElementById('m-plan4-total');
+    var mTipEl         = document.getElementById('m-plan4-tip');
+    var mLobsterEl     = document.getElementById('m-plan4-lobster-count');
 
     plan4Count = Math.max(plan4MinCount, plan4Count + delta);
     var total = plan4Count * plan4UnitPrice;
 
-    countEl.textContent  = plan4Count;
-    totalEl.textContent  = plan4UnitPrice.toLocaleString();
+    // 桌面
+    if (countEl) countEl.textContent = plan4Count;
+    if (totalEl) totalEl.textContent = plan4UnitPrice.toLocaleString();
     if (countDisplayEl) countDisplayEl.textContent = total.toLocaleString();
     if (lobsterEl) lobsterEl.textContent = '青狮龙虾 ' + plan4Count + ' 只';
 
-    if (tipEl) {
-      if (plan4Count === plan4MinCount) {
-        tipEl.innerHTML = '最低 15 人起';
-      } else {
-        var saved = (2999 - plan4UnitPrice) * plan4Count;
-        tipEl.innerHTML = '每人立减 1000 元<br>共减 ' + saved.toLocaleString() + ' 元';
-      }
-    }
+    // 移动端
+    if (mCountEl) mCountEl.textContent = plan4Count;
+    if (mTotalEl) mTotalEl.textContent = plan4UnitPrice.toLocaleString();
+    if (mDisplayEl) mDisplayEl.textContent = total.toLocaleString();
+    if (mLobsterEl) mLobsterEl.textContent = plan4Count;
+
+    var tipHtml = plan4Count === plan4MinCount
+      ? '最低 15 人起'
+      : '每人立减 1000 元<br>共减 ' + ((2999 - plan4UnitPrice) * plan4Count).toLocaleString() + ' 元';
+    if (tipEl) tipEl.innerHTML = tipHtml;
+    if (mTipEl) mTipEl.innerHTML = tipHtml;
 
     if (minusEl) {
       minusEl.style.opacity = plan4Count <= plan4MinCount ? '0.3' : '1';
