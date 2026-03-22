@@ -231,11 +231,11 @@
                 </td>
                 <td class="px-5 py-4 hidden sm:table-cell">
                   <% if skill.ai_completion.present? %>
-                    <div class="flex items-center gap-2 min-w-[100px]">
-                      <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                        <div class="h-1.5 rounded-full" style="width: <%= skill.ai_completion %>%; background: hsl(174,100%,44%)"></div>
+                    <div style="display:flex; align-items:center; gap:8px; min-width:120px;">
+                      <div style="flex:1; height:6px; background:rgba(128,128,128,0.2); border-radius:9999px; overflow:hidden;">
+                        <div style="height:6px; border-radius:9999px; background:hsl(174,100%,44%); width:<%= skill.ai_completion %>%;"></div>
                       </div>
-                      <span class="text-xs font-mono w-8 text-right" style="color: hsl(174,100%,44%)"><%= skill.ai_completion %>%</span>
+                      <span style="font-size:12px; font-family:monospace; color:hsl(174,100%,44%); min-width:32px; text-align:right;"><%= skill.ai_completion %>%</span>
                     </div>
                   <% else %>
                     <span class="text-muted/40 text-sm">—</span>
