@@ -683,7 +683,12 @@
     if (lobsterEl) lobsterEl.textContent = '青狮龙虾 ' + plan4Count + ' 只';
 
     if (tipEl) {
-      tipEl.textContent = plan4Count === plan4MinCount ? '最低 15 人起' : plan4Count + ' 人 · ' + plan4UnitPrice + ' 元/人';
+      if (plan4Count === plan4MinCount) {
+        tipEl.textContent = '最低 15 人起';
+      } else {
+        var saved = (2999 - plan4UnitPrice) * plan4Count;
+        tipEl.textContent = '每人立减 1000 元，共减 ' + saved.toLocaleString() + ' 元';
+      }
     }
 
     if (minusEl) {
