@@ -400,9 +400,9 @@
             <tr class="bg-surface-elevated">
               <th class="px-3 sm:px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest w-10 sm:w-16 whitespace-nowrap">序号</th>
               <th class="px-3 sm:px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">技能名称</th>
-              <th class="hidden sm:table-cell px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">使用场景</th>
-              <th class="hidden md:table-cell px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">AI 完成度</th>
-              <th class="hidden md:table-cell px-5 py-3 text-center text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">演示</th>
+              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">使用场景</th>
+              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">AI 完成度</th>
+              <th class="px-5 py-3 text-center text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">演示</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-border">
@@ -414,10 +414,10 @@
                 <td class="px-3 sm:px-5 py-4 text-sm font-semibold text-primary">
                   <%= skill.name %>
                 </td>
-                <td class="hidden sm:table-cell px-5 py-4 text-sm text-secondary max-w-xs">
+                <td class="px-5 py-4 text-sm text-secondary max-w-xs">
                   <%= skill.scenario.present? ? skill.scenario : "—" %>
                 </td>
-                <td class="hidden md:table-cell px-5 py-4">
+                <td class="px-5 py-4">
                   <% if skill.ai_completion.present? %>
                     <div style="display:flex; align-items:center; gap:8px; min-width:120px;">
                       <div style="flex:1; height:6px; background:rgba(128,128,128,0.2); border-radius:9999px; overflow:hidden;">
@@ -429,7 +429,7 @@
                     <span class="text-muted/40 text-sm">—</span>
                   <% end %>
                 </td>
-                <td class="hidden md:table-cell px-5 py-4 text-center">
+                <td class="px-5 py-4 text-center">
                   <% if skill.demo_video_url.present? %>
                     <%= link_to skill.demo_video_url, target: "_blank", rel: "noopener noreferrer",
                         class: "inline-flex items-center gap-1 text-xs font-mono text-primary hover:text-primary-light transition-colors" do %>
