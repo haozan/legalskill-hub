@@ -35,6 +35,8 @@ class User < ApplicationRecord
 
   has_many :sessions, dependent: :destroy
   has_many :payments, dependent: :destroy
+  has_many :wechat_orders, dependent: :destroy
+  has_many :offline_class_enrollments, dependent: :destroy
   has_one :profile, class_name: "UserProfile", dependent: :destroy
 
   delegate :phone, :company, :province, :city, :district, to: :profile, allow_nil: true

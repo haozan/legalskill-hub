@@ -1,0 +1,75 @@
+<% content_for :title, "线下班次管理" %>
+
+<div class="container-xl">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-50">线下班次管理</h1>
+    <%= link_to "新增班次", new_admin_offline_class_path, class: "btn-primary" %>
+  </div>
+
+  <div class="card bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+    <div class="card-body p-0">
+      <% if @offline_classes.any? %>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-800">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">日期</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">班次名称</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">城市</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">地点</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">报名 / 名额</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">状态</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">操作</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+              <% @offline_classes.each do |oc| %>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <td class="px-6 py-4 whitespace-nowrap font-mono text-sm text-gray-700 dark:text-gray-300">
+                    <%= oc.date.strftime("%Y-%m-%d") %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">
+                    <%= oc.title %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                    <%= oc.city %>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400 max-w-xs truncate">
+                    <%= oc.location %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                    <span class="font-mono font-bold <%= oc.full? ? 'text-red-500' : 'text-green-600' %>">
+                      <%= oc.attendees_count %> / <%= oc.capacity %>
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                    <% status_class = case oc.status
+                       when "open" then "bg-green-100 text-green-700"
+                       when "full" then "bg-orange-100 text-orange-700"
+                       when "cancelled" then "bg-red-100 text-red-700"
+                       end %>
+                    <span class="px-2 py-0.5 rounded text-xs font-medium <%= status_class %>">
+                      <%= { "open" => "报名中", "full" => "已满", "cancelled" => "已取消" }[oc.status] %>
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-center text-sm space-x-2">
+                    <%= link_to "报名详情", admin_offline_class_path(oc), class: "btn-sm btn-ghost" %>
+                    <%= link_to "编辑", edit_admin_offline_class_path(oc), class: "btn-sm btn-outline" %>
+                    <%= button_to "删除", admin_offline_class_path(oc), method: :delete,
+                        data: { turbo_confirm: "确认删除「#{oc.title}」班次？" },
+                        class: "btn-sm btn-danger" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+          <p class="text-lg mb-4">暂无班次</p>
+          <%= link_to "新增第一个班次", new_admin_offline_class_path, class: "btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

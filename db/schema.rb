@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_22_074949) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_22_134044) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -227,6 +227,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_22_074949) do
     t.string "status", default: "open"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "capacity", default: 10, null: false
     t.index ["city"], name: "index_offline_classes_on_city"
     t.index ["date"], name: "index_offline_classes_on_date"
     t.index ["status"], name: "index_offline_classes_on_status"
@@ -363,6 +364,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_22_074949) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity", default: 1, null: false
+    t.string "plan"
     t.index ["out_trade_no"], name: "index_wechat_orders_on_out_trade_no", unique: true
   end
 

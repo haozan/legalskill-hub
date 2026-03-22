@@ -1,0 +1,56 @@
+<%= form_with model: [:admin, offline_class], class: "space-y-6" do |f| %>
+  <% if offline_class.errors.any? %>
+    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+      <ul class="text-sm text-red-600 space-y-1">
+        <% offline_class.errors.full_messages.each do |msg| %>
+          <li>· <%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <%= f.label :title, "班次名称", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+      <%= f.text_field :title, placeholder: "如：青狮法律技能 · 北京班", class: "form-input w-full" %>
+    </div>
+
+    <div>
+      <%= f.label :city, "城市", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+      <%= f.text_field :city, placeholder: "如：北京", class: "form-input w-full" %>
+    </div>
+
+    <div>
+      <%= f.label :date, "日期", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+      <%= f.date_field :date, class: "form-input w-full" %>
+    </div>
+
+    <div>
+      <%= f.label :capacity, "名额上限", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+      <%= f.number_field :capacity, min: 1, max: 100, class: "form-input w-full" %>
+    </div>
+
+    <div class="md:col-span-2">
+      <%= f.label :location, "详细地点", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+      <%= f.text_field :location, placeholder: "如：北京市朝阳区XX大厦XX室", class: "form-input w-full" %>
+    </div>
+
+    <div>
+      <%= f.label :status, "状态", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+      <%= f.select :status,
+          [["报名中", "open"], ["已满", "full"], ["已取消", "cancelled"]],
+          {},
+          class: "form-input w-full" %>
+    </div>
+
+    <div class="md:col-span-2">
+      <%= f.label :description, "备注说明（可选）", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+      <%= f.text_area :description, rows: 3, placeholder: "班次备注、注意事项等", class: "form-input w-full" %>
+    </div>
+  </div>
+
+  <div class="flex gap-3">
+    <%= f.submit "保存", class: "btn-primary" %>
+    <%= link_to "取消", admin_offline_classes_path, class: "btn-ghost" %>
+  </div>
+<% end %>

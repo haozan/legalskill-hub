@@ -385,6 +385,105 @@
   </div>
 </section>
 
+<!-- SECTION: 线下课程班次 -->
+<% if @offline_classes.any? %>
+<section id="offline-classes" class="py-16 sm:py-20 bg-surface-elevated border-t border-border">
+  <div class="container-xl mx-auto px-6">
+
+    <!-- 标题 -->
+    <div class="mb-10">
+      <div class="flex items-center gap-3 mb-3">
+        <h2 class="font-mono text-3xl md:text-4xl font-bold text-primary tracking-tight">线下课程</h2>
+        <span class="px-2 py-0.5 text-xs font-mono rounded border border-border text-secondary tracking-widest">OFFLINE</span>
+      </div>
+      <p class="text-secondary text-base max-w-xl">面对面系统学习青狮龙虾实战技能，每期限 10 人，小班精讲</p>
+      <% unless user_signed_in? %>
+        <p class="text-xs text-muted mt-2">· 购买方案三后即可报名相应班次</p>
+      <% end %>
+      <% if user_signed_in? && @plan3_order.nil? %>
+        <p class="text-xs mt-2" style="color: hsl(174,100%,44%); opacity: 0.8;">· 你尚未购买方案三，无法报名线下班次</p>
+      <% end %>
+      <% if @plan3_order %>
+        <p class="text-xs mt-2 font-mono" style="color: hsl(174,100%,44%);">· 已购方案三（<%= @plan3_order.quantity %> 人），点击「报名」即可</p>
+      <% end %>
+    </div>
+
+    <!-- 班次卡片列表 -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <% @offline_classes.each do |oc| %>
+        <div id="offline-class-<%= oc.id %>" class="relative rounded-xl border border-border bg-surface p-5 flex flex-col gap-3 hover:border-primary/40 transition-colors">
+
+          <!-- 状态标签 -->
+          <% if oc.full? %>
+            <span class="absolute top-4 right-4 text-xs font-mono px-2 py-0.5 rounded bg-orange-500/10 text-orange-500 border border-orange-500/30">已满</span>
+          <% else %>
+            <span class="absolute top-4 right-4 text-xs font-mono px-2 py-0.5 rounded" style="background: hsl(174,100%,44%,0.1); color: hsl(174,100%,44%); border: 1px solid hsl(174,100%,44%,0.3);">报名中</span>
+          <% end %>
+
+          <!-- 标题 -->
+          <h3 class="font-bold text-base text-primary pr-16 leading-snug"><%= oc.title %></h3>
+
+          <!-- 信息行 -->
+          <div class="space-y-1.5 text-sm text-secondary">
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "calendar", class: "w-3.5 h-3.5 text-muted flex-shrink-0" %>
+              <span class="font-mono"><%= oc.date.strftime("%Y 年 %m 月 %d 日") %></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "map-pin", class: "w-3.5 h-3.5 text-muted flex-shrink-0" %>
+              <span><%= oc.city %> · <%= oc.location %></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <%= lucide_icon "users", class: "w-3.5 h-3.5 text-muted flex-shrink-0" %>
+              <span>
+                <span class="font-mono font-bold <%= oc.full? ? 'text-orange-500' : 'text-primary' %>"><%= oc.spots_remaining %></span>
+                <span class="text-muted"> / <%= oc.capacity %> 名额剩余</span>
+              </span>
+            </div>
+          </div>
+
+          <% if oc.description.present? %>
+            <p class="text-xs text-muted leading-relaxed border-t border-border pt-2"><%= oc.description %></p>
+          <% end %>
+
+          <!-- 报名按钮区 -->
+          <div class="mt-auto pt-1">
+            <% if !user_signed_in? %>
+              <%= link_to sign_in_path, class: "btn-sm w-full text-center font-mono text-xs tracking-widest inline-flex items-center justify-center gap-1.5 border border-border text-muted hover:text-primary hover:border-primary transition-colors" do %>
+                登录后报名
+              <% end %>
+            <% elsif oc.enrolled?(current_user) %>
+              <div class="text-center text-xs font-mono py-2 rounded-lg border border-border text-secondary">
+                ✅ 已报名（<%= oc.offline_class_enrollments.find_by(user: current_user)&.attendee_count %> 人）
+              </div>
+            <% elsif @plan3_order.nil? %>
+              <div class="text-center text-xs font-mono py-2 rounded-lg border border-border/50 text-muted cursor-not-allowed">
+                需购买方案三
+              </div>
+            <% elsif oc.full? %>
+              <div class="text-center text-xs font-mono py-2 rounded-lg border border-orange-500/30 text-orange-500">
+                班次已满
+              </div>
+            <% else %>
+              <%= button_to enroll_offline_class_path(oc),
+                  method: :post,
+                  class: "w-full btn-sm font-mono text-xs tracking-widest inline-flex items-center justify-center gap-1.5",
+                  style: "background: hsl(174,100%,44%); color: #0a0f0d; font-weight: 700;",
+                  data: { turbo_confirm: "确认报名「#{oc.title}」（共 #{@plan3_order.quantity} 人）？" } do %>
+                <%= lucide_icon "check-circle", class: "w-3.5 h-3.5" %>
+                报名（<%= @plan3_order.quantity %> 人）
+              <% end %>
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</section>
+<% end %>
+
 <!-- SECTION: 交付技能 -->
 <section id="delivered-skills" class="py-20 bg-surface border-t border-border">
   <div class="container-xl mx-auto px-6">

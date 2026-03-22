@@ -1,0 +1,90 @@
+<% content_for :title, "微信订单管理" %>
+
+<div class="container-xl">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-50">微信订单管理</h1>
+  </div>
+
+  <!-- 筛选 -->
+  <div class="card bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 mb-6">
+    <div class="card-body">
+      <%= form_with url: admin_wechat_orders_path, method: :get, class: "flex flex-wrap gap-4 items-center" do |f| %>
+        <%= f.select :plan,
+            [["全部方案", ""], ["方案一", "plan1"], ["方案二", "plan2"], ["方案三", "plan3"], ["方案四", "plan4"]],
+            { selected: params[:plan] },
+            class: "form-input" %>
+        <%= f.select :status,
+            [["全部状态", ""], ["待付款", "pending"], ["已付款", "paid"], ["失败", "failed"], ["关闭", "closed"]],
+            { selected: params[:status] },
+            class: "form-input" %>
+        <%= f.submit "筛选", class: "btn-primary" %>
+        <%= link_to "重置", admin_wechat_orders_path, class: "btn-ghost" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+    <div class="card-body p-0">
+      <% if @orders.any? %>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-800">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">用户</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">方案</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">人数</th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">金额</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">时间</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+              <% @orders.each do |order| %>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                      <%= order.user&.name.presence || order.user&.email || "—" %>
+                    </div>
+                    <div class="text-xs text-gray-400 font-mono"><%= order.out_trade_no %></div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm">
+                    <% plan_labels = { "plan1" => "方案一", "plan2" => "方案二", "plan3" => "方案三", "plan4" => "方案四" } %>
+                    <span class="<%= order.plan3? ? 'text-emerald-600 font-bold' : 'text-gray-500' %>">
+                      <%= plan_labels[order.plan] || "—" %>
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-center font-mono font-bold text-gray-900 dark:text-gray-100">
+                    <%= order.quantity %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-right font-mono text-sm text-gray-700 dark:text-gray-300">
+                    ¥ <%= order.amount_yuan %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-center">
+                    <% status_class = case order.status
+                       when "paid" then "bg-green-100 text-green-700"
+                       when "pending" then "bg-yellow-100 text-yellow-700"
+                       when "failed" then "bg-red-100 text-red-700"
+                       else "bg-gray-100 text-gray-500"
+                       end %>
+                    <span class="px-2 py-0.5 rounded text-xs font-medium <%= status_class %>">
+                      <%= { "paid" => "已付款", "pending" => "待付款", "failed" => "失败", "closed" => "关闭" }[order.status] %>
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                    <%= order.created_at.strftime("%m-%d %H:%M") %>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-center">
+                    <%= link_to "编辑", edit_admin_wechat_order_path(order), class: "btn-sm btn-outline" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <div class="text-center py-12 text-gray-400">暂无订单</div>
+      <% end %>
+    </div>
+  </div>
+</div>

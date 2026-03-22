@@ -1,0 +1,53 @@
+<% content_for :title, "编辑订单" %>
+
+<div class="container-xl max-w-2xl">
+  <div class="mb-6">
+    <%= link_to "← 返回订单列表", admin_wechat_orders_path, class: "text-sm text-gray-500 hover:text-gray-700" %>
+  </div>
+  <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-2">编辑订单</h1>
+  <p class="text-sm font-mono text-gray-400 mb-8"><%= @order.out_trade_no %></p>
+
+  <div class="card bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+    <div class="card-body">
+      <!-- 用户信息（只读展示） -->
+      <div class="mb-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm">
+        <div class="font-medium text-gray-700 dark:text-gray-300 mb-1">用户：<%= @order.user&.name.presence || @order.user&.email || "未知" %></div>
+        <div class="text-gray-400">注册邮箱：<%= @order.user&.email %></div>
+      </div>
+
+      <%= form_with model: [:admin, @order], class: "space-y-5" do |f| %>
+        <div>
+          <%= f.label :plan, "购买方案", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+          <%= f.select :plan,
+              [["未设置", ""], ["方案一（纯工具）", "plan1"], ["方案二（线上课）", "plan2"], ["方案三（线下课）", "plan3"], ["方案四（团队内训）", "plan4"]],
+              { selected: @order.plan },
+              class: "form-input w-full" %>
+        </div>
+
+        <div>
+          <%= f.label :quantity, "人数", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+          <%= f.number_field :quantity, min: 1, max: 20, class: "form-input w-full" %>
+          <p class="text-xs text-gray-400 mt-1">方案三团购时填写实际人数，默认 1</p>
+        </div>
+
+        <div>
+          <%= f.label :status, "支付状态", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+          <%= f.select :status,
+              [["待付款", "pending"], ["已付款", "paid"], ["失败", "failed"], ["关闭", "closed"]],
+              { selected: @order.status },
+              class: "form-input w-full" %>
+        </div>
+
+        <div>
+          <%= f.label :description, "备注", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+          <%= f.text_area :description, rows: 2, class: "form-input w-full" %>
+        </div>
+
+        <div class="flex gap-3 pt-2">
+          <%= f.submit "保存修改", class: "btn-primary" %>
+          <%= link_to "取消", admin_wechat_orders_path, class: "btn-ghost" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
