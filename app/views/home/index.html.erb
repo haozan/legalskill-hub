@@ -304,6 +304,7 @@
               ["适合人群",      "自带技术感<br>能自主探索工具的独立律师",   "想系统掌握龙虾<br>跟着镐赞学满一年",   "想快速上手<br>面对面解决所有疑问 ⭐",   "整个团队一起提效<br>适合律所或区域律师群体",   false],
               ["龙虾数量",  "青狮龙虾 1 只",   "青狮龙虾 1 只",       "青狮龙虾 1 只",       "青狮龙虾 15 只",   false],
               ["参加人数",          "1 人",            "1 人",                "1 人",                "≤ 15 人",         false],
+              ["参加地区",          "__placeholder__", "__placeholder__",     "__placeholder__",     "__placeholder__", false],
               ["龙虾期限",  "1 年",            "1 年",                "1 年",                "1 年",            false],
               ["线上视频",  "免费课",               "✅",                  "✅",                  "✅",               false],
               ["社群答疑",  "✅",               "✅",                  "✅",                  "✅",               false],
@@ -360,6 +361,24 @@
                   </div>
                   <div id="plan4-tip" class="text-xs font-mono text-muted/70 leading-5">最低 15 人<br>起</div>
                 </td>
+              </tr>
+            <% elsif label == "参加地区" %>
+              <tr class="<%= i.even? ? 'bg-surface-elevated/20' : '' %>">
+                <td class="py-3 pr-6 text-sm font-mono font-medium text-primary border-b border-border/30">参加地区</td>
+                <%# 方案一：微信社群 %>
+                <td class="py-3 px-4 text-center text-sm border-b border-border/30 text-secondary">微信社群</td>
+                <%# 方案二：线上课程 %>
+                <td class="py-3 px-4 text-center text-sm border-b border-border/30 text-secondary">线上课程</td>
+                <%# 方案三：动态班次列表 %>
+                <td class="py-2 px-3 text-center text-xs border-b border-border/30 font-semibold leading-relaxed" style="background: hsl(174,100%,44%,0.04);">
+                  <% @offline_classes.each do |oc| %>
+                    <div class="py-0.5" style="color: hsl(174,100%,44%);">
+                      <%= oc.date.strftime("%m%d") %> 龙虾课｜<%= oc.city %>站
+                    </div>
+                  <% end %>
+                </td>
+                <%# 方案四：由团队负责人确定 %>
+                <td class="py-3 px-4 text-center text-sm border-b border-border/30 text-secondary">由团队负责人确定</td>
               </tr>
             <% else %>
               <tr class="<%= i.even? ? 'bg-surface-elevated/20' : '' %>">
