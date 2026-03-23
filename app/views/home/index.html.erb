@@ -110,6 +110,56 @@
   }
 </script>
 <% end %>
+<!-- SECTION: 3 Reasons -->
+<section id="reasons" class="py-20 bg-surface-elevated border-t border-border">
+  <div class="container-xl mx-auto px-4 sm:px-6">
+    <!-- Section Header -->
+    <div class="mb-10 sm:mb-12">
+      <h2 class="section-title !mb-0">3 点使用<span style="color: hsl(174, 100%, 44%)">青狮龙虾</span>的理由</h2>
+      <p class="section-subtitle mt-2">效果好、更安全、还便宜——专为律师而生</p>
+    </div>
+
+    <!-- Reasons Grid -->
+    <% skill_count = @delivered_skills.count %>
+    <div class="grid sm:grid-cols-3 gap-6 px-4 sm:px-0" style="grid-template-rows: auto;">
+
+      <!-- 理由一 -->
+      <div class="px-6 py-6 sm:px-8 sm:py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
+        <div class="font-mono font-bold leading-none pb-6 sm:pb-10" style="font-size: clamp(4rem, 15vw, 7rem); color: hsl(174, 100%, 44%)">
+          <%= skill_count %>
+        </div>
+        <h3 class="font-mono text-base sm:text-lg font-bold text-primary pb-3 sm:pb-5 tracking-tight">效果好｜<%= skill_count %> 个律师工作场景，量身定制 Skill</h3>
+        <p class="text-secondary text-sm leading-loose">
+          每一个 Skill 均由律师参与设计，深度覆盖办案、阅卷、咨询、合同审核、庭审笔录、日志记录等全执业场景。不是通用 AI 套壳，是真正懂律师业务的专属助手。
+        </p>
+      </div>
+
+      <!-- 理由二 -->
+      <div class="px-6 py-6 sm:px-8 sm:py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
+        <div class="font-mono font-bold leading-none pb-6 sm:pb-10" style="font-size: clamp(4rem, 15vw, 7rem); color: hsl(174, 100%, 44%)">
+          100%
+        </div>
+        <h3 class="font-mono text-base sm:text-lg font-bold text-primary pb-3 sm:pb-5 tracking-tight">更安全｜核心代码 100% 自研、可控</h3>
+        <p class="text-secondary text-sm leading-loose">
+          全套核心代码独立研发，不依赖任何第三方框架。您的每一份案件资料、每一次对话记录，均在自主可控的系统内流转，零第三方数据中转。
+        </p>
+      </div>
+
+      <!-- 理由三 -->
+      <div class="px-6 py-6 sm:px-8 sm:py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
+        <div class="font-mono font-bold leading-none pb-6 sm:pb-10" style="font-size: clamp(4rem, 15vw, 7rem); color: hsl(174, 100%, 44%)">
+          40%
+        </div>
+        <h3 class="font-mono text-base sm:text-lg font-bold text-primary pb-3 sm:pb-5 tracking-tight">还便宜｜独有技术，直降 40% Token 成本</h3>
+        <p class="text-secondary text-sm leading-loose">
+          独有上下文记忆压缩技术，在保证对话记忆连贯性的前提下，平均节约约 40% 的 Token 使用成本。用得越多，省得越多。
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
 <!-- SECTION: Pricing Table -->
 <section id="pricing" class="py-20 bg-surface border-t border-border">
@@ -537,166 +587,6 @@
   </div>
 </section>
 <% end %>
-
-<!-- SECTION: 交付技能 -->
-<section id="delivered-skills" class="py-20 bg-surface border-t border-border">
-  <div class="container-xl mx-auto px-6">
-
-    <!-- Section Header -->
-    <div class="mb-10">
-      <h2 class="font-mono text-3xl md:text-4xl font-bold text-primary tracking-tight mb-3">交付技能</h2>
-      <p class="text-secondary text-base max-w-xl">每一个 Skill 均由律师参与设计，覆盖真实执业场景——交付即可上手，开箱即用</p>
-    </div>
-
-    <% if @delivered_skills.any? %>
-
-      <!-- 手机端：卡片列表 -->
-      <div class="md:hidden flex flex-col gap-3">
-        <% @delivered_skills.each_with_index do |skill, idx| %>
-          <div class="rounded-xl border border-border bg-surface-elevated/30 px-4 py-4">
-            <!-- 顶部：序号 + 名称 + 演示按钮 -->
-            <div class="flex items-center justify-between gap-2 mb-3">
-              <div class="flex items-center gap-2.5 min-w-0">
-                <span class="font-mono text-xs font-bold text-muted/50 shrink-0"><%= "%02d" % (idx + 1) %></span>
-                <span class="text-sm font-semibold text-primary truncate"><%= skill.name %></span>
-              </div>
-              <% if skill.demo_video_url.present? %>
-                <button onclick="openSkillVideo('<%= j skill.demo_video_url %>', '<%= j skill.name %>')"
-                    class="inline-flex items-center gap-1 text-xs font-mono text-primary hover:text-primary-light transition-colors shrink-0">
-                  <%= lucide_icon "play-circle", class: "w-4 h-4" %>
-                  <span>演示</span>
-                </button>
-              <% end %>
-            </div>
-            <!-- 使用场景 -->
-            <% if skill.scenario.present? %>
-              <p class="text-xs text-secondary mb-3 leading-relaxed"><%= skill.scenario %></p>
-            <% end %>
-            <!-- AI 完成度 -->
-            <% if skill.ai_completion.present? %>
-              <div class="flex items-center gap-2">
-                <span class="text-xs font-mono text-muted/60 shrink-0">AI 完成度</span>
-                <div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background:rgba(128,128,128,0.2)">
-                  <div class="h-1.5 rounded-full" style="background:hsl(174,100%,44%); width:<%= skill.ai_completion %>%"></div>
-                </div>
-                <span class="text-xs font-mono shrink-0" style="color:hsl(174,100%,44%)"><%= skill.ai_completion %>%</span>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-
-      <!-- 桌面端：表格 -->
-      <div class="hidden md:block overflow-x-auto rounded-xl border border-border">
-        <table class="min-w-full divide-y divide-border">
-          <thead>
-            <tr class="bg-surface-elevated">
-              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest w-16 whitespace-nowrap">序号</th>
-              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">技能名称</th>
-              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">使用场景</th>
-              <th class="px-5 py-3 text-left text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">AI 完成度</th>
-              <th class="px-5 py-3 text-center text-xs font-mono font-medium text-muted uppercase tracking-widest whitespace-nowrap">演示</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-border">
-            <% @delivered_skills.each_with_index do |skill, idx| %>
-              <tr class="<%= idx.even? ? 'bg-surface' : 'bg-surface-elevated/30' %> hover:bg-primary/5 transition-colors">
-                <td class="px-5 py-4 text-sm font-mono font-bold text-muted/60">
-                  <%= "%02d" % (idx + 1) %>
-                </td>
-                <td class="px-5 py-4 text-sm font-semibold text-primary">
-                  <%= skill.name %>
-                </td>
-                <td class="px-5 py-4 text-sm text-secondary max-w-xs">
-                  <%= skill.scenario.present? ? skill.scenario : "—" %>
-                </td>
-                <td class="px-5 py-4">
-                  <% if skill.ai_completion.present? %>
-                    <div style="display:flex; align-items:center; gap:8px; min-width:120px;">
-                      <div style="flex:1; height:6px; background:rgba(128,128,128,0.2); border-radius:9999px; overflow:hidden;">
-                        <div style="height:6px; border-radius:9999px; background:hsl(174,100%,44%); width:<%= skill.ai_completion %>%;"></div>
-                      </div>
-                      <span style="font-size:12px; font-family:monospace; color:hsl(174,100%,44%); min-width:32px; text-align:right;"><%= skill.ai_completion %>%</span>
-                    </div>
-                  <% else %>
-                    <span class="text-muted/40 text-sm">—</span>
-                  <% end %>
-                </td>
-                <td class="px-5 py-4 text-center">
-                  <% if skill.demo_video_url.present? %>
-                    <button onclick="openSkillVideo('<%= j skill.demo_video_url %>', '<%= j skill.name %>')"
-                        class="inline-flex items-center gap-1 text-xs font-mono text-primary hover:text-primary-light transition-colors">
-                      <%= lucide_icon "play-circle", class: "w-4 h-4" %>
-                      <span>演示</span>
-                    </button>
-                  <% else %>
-                    <span class="text-muted/40 text-xs">—</span>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-
-    <% else %>
-      <p class="text-muted text-sm font-mono">技能整理中，敬请期待…</p>
-    <% end %>
-
-  </div>
-</section>
-
-<!-- SECTION: 3 Reasons -->
-<section id="reasons" class="py-20 bg-surface-elevated border-t border-border">
-  <div class="container-xl mx-auto px-4 sm:px-6">
-    <!-- Section Header -->
-    <div class="mb-10 sm:mb-12">
-      <h2 class="section-title !mb-0">3 点使用<span style="color: hsl(174, 100%, 44%)">青狮龙虾</span>的理由</h2>
-      <p class="section-subtitle mt-2">效果好、更安全、还便宜——专为律师而生</p>
-    </div>
-
-    <!-- Reasons Grid -->
-    <% skill_count = @delivered_skills.count %>
-    <div class="grid sm:grid-cols-3 gap-6 px-4 sm:px-0" style="grid-template-rows: auto;">
-
-      <!-- 理由一 -->
-      <div class="px-6 py-6 sm:px-8 sm:py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
-        <div class="font-mono font-bold leading-none pb-6 sm:pb-10" style="font-size: clamp(4rem, 15vw, 7rem); color: hsl(174, 100%, 44%)">
-          <%= skill_count %>
-        </div>
-        <h3 class="font-mono text-base sm:text-lg font-bold text-primary pb-3 sm:pb-5 tracking-tight">效果好｜<%= skill_count %> 个律师工作场景，量身定制 Skill</h3>
-        <p class="text-secondary text-sm leading-loose">
-          每一个 Skill 均由律师参与设计，深度覆盖办案、阅卷、咨询、合同审核、庭审笔录、日志记录等全执业场景。不是通用 AI 套壳，是真正懂律师业务的专属助手。
-        </p>
-      </div>
-
-      <!-- 理由二 -->
-      <div class="px-6 py-6 sm:px-8 sm:py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
-        <div class="font-mono font-bold leading-none pb-6 sm:pb-10" style="font-size: clamp(4rem, 15vw, 7rem); color: hsl(174, 100%, 44%)">
-          100%
-        </div>
-        <h3 class="font-mono text-base sm:text-lg font-bold text-primary pb-3 sm:pb-5 tracking-tight">更安全｜核心代码 100% 自研、可控</h3>
-        <p class="text-secondary text-sm leading-loose">
-          全套核心代码独立研发，不依赖任何第三方框架。您的每一份案件资料、每一次对话记录，均在自主可控的系统内流转，零第三方数据中转。
-        </p>
-      </div>
-
-      <!-- 理由三 -->
-      <div class="px-6 py-6 sm:px-8 sm:py-8" style="display: grid; grid-template-rows: subgrid; grid-row: span 3;">
-        <div class="font-mono font-bold leading-none pb-6 sm:pb-10" style="font-size: clamp(4rem, 15vw, 7rem); color: hsl(174, 100%, 44%)">
-          40%
-        </div>
-        <h3 class="font-mono text-base sm:text-lg font-bold text-primary pb-3 sm:pb-5 tracking-tight">还便宜｜独有技术，直降 40% Token 成本</h3>
-        <p class="text-secondary text-sm leading-loose">
-          独有上下文记忆压缩技术，在保证对话记忆连贯性的前提下，平均节约约 40% 的 Token 使用成本。用得越多，省得越多。
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
 <!-- SECTION: Video Resources -->
 <section id="video-resources" class="py-20 bg-surface border-t border-border">
   <div class="container-xl mx-auto px-6">
@@ -773,8 +663,6 @@
     <% end %>
   </div>
 </section>
-
-<%# SECTION: Skills Market — 已隐藏，与「交付技能」板块重叠 %>
 
 <!-- SECTION: Community -->
 <section id="community" class="py-16 sm:py-20 bg-surface border-t border-border">
