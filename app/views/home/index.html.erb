@@ -610,7 +610,10 @@
       </div>
       <p class="text-secondary text-base max-w-xl mx-auto">面对面系统学习青狮龙虾实战技能，每期限 10 人，小班精讲</p>
       <% unless user_signed_in? %>
-        <p class="text-sm font-semibold text-primary mt-3">购买方案三后即可报名相应班次</p>
+        <%= link_to "#pricing", class: "inline-flex items-center gap-1.5 mt-3 px-4 py-1.5 rounded-full border border-primary/40 text-sm font-semibold text-primary hover:bg-primary/10 transition-colors" do %>
+          购买后 方可报名
+          <%= lucide_icon "arrow-right", class: "w-3.5 h-3.5" %>
+        <% end %>
       <% end %>
       <% if user_signed_in? && @plan3_order.nil? %>
         <p class="text-xs mt-2" style="color: hsl(174,100%,44%); opacity: 0.8;">· 你尚未购买方案三，无法报名线下班次</p>
