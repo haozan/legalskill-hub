@@ -513,7 +513,7 @@
                 <div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background:rgba(128,128,128,0.2)">
                   <div class="h-1.5 rounded-full" style="background:hsl(174,100%,44%); width:<%= skill.ai_completion %>%"></div>
                 </div>
-                <span class="text-xs font-mono shrink-0" style="color:hsl(174,100%,44%)"><%= skill.ai_completion %>%</span>
+                <span class="text-xs font-mono shrink-0" style="color:hsl(174,100%,44%)">节约 <%= skill.ai_completion %>% 的时间</span>
               </div>
             <% end %>
           </div>
@@ -550,7 +550,7 @@
                       <div style="flex:1; height:6px; background:rgba(128,128,128,0.2); border-radius:9999px; overflow:hidden;">
                         <div style="height:6px; border-radius:9999px; background:hsl(174,100%,44%); width:<%= skill.ai_completion %>%;"></div>
                       </div>
-                      <span style="font-size:12px; font-family:monospace; color:hsl(174,100%,44%); min-width:32px; text-align:right;"><%= skill.ai_completion %>%</span>
+                      <span style="font-size:12px; font-family:monospace; color:hsl(174,100%,44%); min-width:32px; text-align:right;">节约 <%= skill.ai_completion %>% 的时间</span>
                     </div>
                   <% else %>
                     <span class="text-muted/40 text-sm">—</span>
