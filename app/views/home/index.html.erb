@@ -114,7 +114,7 @@
 <section id="reasons" class="py-20 bg-surface-elevated border-t border-border">
   <div class="container-xl mx-auto px-4 sm:px-6">
     <!-- Section Header -->
-    <div class="mb-10 sm:mb-12">
+    <div class="mb-10 sm:mb-12 text-center">
       <h2 class="section-title !mb-0">3 点使用<span style="color: hsl(174, 100%, 44%)">青狮龙虾</span>的理由</h2>
       <p class="section-subtitle mt-2">效果好、更安全、还便宜——专为律师而生</p>
     </div>
@@ -494,9 +494,9 @@
   <div class="container-xl mx-auto px-6">
 
     <!-- Section Header -->
-    <div class="mb-10">
+    <div class="mb-10 text-center">
       <h2 class="font-mono text-3xl md:text-4xl font-bold text-primary tracking-tight mb-3">交付技能</h2>
-      <p class="text-secondary text-base max-w-xl">每一个 Skill 均由律师参与设计，覆盖真实执业场景——交付即可上手，开箱即用</p>
+      <p class="text-secondary text-base max-w-xl mx-auto">每一个 Skill 均由律师参与设计，覆盖真实执业场景——交付即可上手，开箱即用</p>
     </div>
 
     <% if @delivered_skills.any? %>
@@ -603,12 +603,12 @@
   <div class="container-xl mx-auto px-6">
 
     <!-- 标题 -->
-    <div class="mb-10">
-      <div class="flex items-center gap-3 mb-3">
+    <div class="mb-10 text-center">
+      <div class="flex items-center justify-center gap-3 mb-3">
         <h2 class="font-mono text-3xl md:text-4xl font-bold text-primary tracking-tight">线下课程</h2>
         <span class="px-2 py-0.5 text-xs font-mono rounded border border-border text-secondary tracking-widest">OFFLINE</span>
       </div>
-      <p class="text-secondary text-base max-w-xl">面对面系统学习青狮龙虾实战技能，每期限 10 人，小班精讲</p>
+      <p class="text-secondary text-base max-w-xl mx-auto">面对面系统学习青狮龙虾实战技能，每期限 10 人，小班精讲</p>
       <% unless user_signed_in? %>
         <p class="text-xs text-muted mt-2">· 购买方案三后即可报名相应班次</p>
       <% end %>
@@ -699,12 +699,10 @@
 <section id="video-resources" class="py-20 bg-surface border-t border-border">
   <div class="container-xl mx-auto px-6">
     <!-- Section Header -->
-    <div class="flex items-end justify-between mb-12">
-      <div>
-        <h2 class="section-title !mb-0">线上课程</h2>
-        <p class="section-subtitle mt-2">实战性的龙虾技能使用视频，掌握核心技能</p>
-      </div>
-      <%= link_to video_resources_path, class: "hidden md:flex items-center gap-2 text-xs font-mono text-primary hover:text-primary-light tracking-wider" do %>
+    <div class="relative mb-12 text-center">
+      <h2 class="section-title !mb-0">线上课程</h2>
+      <p class="section-subtitle mt-2">实战性的龙虾技能使用视频，掌握核心技能</p>
+      <%= link_to video_resources_path, class: "hidden md:flex items-center gap-2 text-xs font-mono text-primary hover:text-primary-light tracking-wider absolute right-0 bottom-0" do %>
         <span>查看全部</span>
         <%= lucide_icon "arrow-right", class: "w-3 h-3" %>
       <% end %>
@@ -777,7 +775,7 @@
   <div class="container-xl mx-auto px-4 sm:px-6">
 
     <!-- Section Header -->
-    <div class="mb-10 sm:mb-14">
+    <div class="mb-10 sm:mb-14 text-center">
       <h2 class="section-title !mb-0">龙虾社群</h2>
       <p class="section-subtitle mt-2">按大区组建，为了让你们真的能见面</p>
     </div>
