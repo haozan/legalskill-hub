@@ -104,8 +104,44 @@
   }
   // ESC 键关闭
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeHeroVideo();
+    if (e.key === 'Escape') { closeHeroVideo(); closeSkillVideo(); }
   });
+</script>
+
+<!-- 技能演示弹窗 -->
+<div id="skill-video-modal"
+     class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
+     style="background: rgba(0,0,0,0.85);"
+     onclick="if(event.target===this){closeSkillVideo()}">
+  <div class="relative w-full max-w-4xl">
+    <div class="flex items-center justify-between mb-3">
+      <span id="skill-video-title" class="font-mono text-sm tracking-widest" style="color: hsl(174,100%,44%)"></span>
+      <button onclick="closeSkillVideo()" class="text-muted hover:text-primary">
+        <%= lucide_icon "x", class: "w-5 h-5" %>
+      </button>
+    </div>
+    <div class="relative w-full" style="aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden;">
+      <video id="skill-video-player" src="" controls class="w-full h-full object-contain" style="display: block;"></video>
+    </div>
+  </div>
+</div>
+<script>
+  function openSkillVideo(url, title) {
+    var modal = document.getElementById('skill-video-modal');
+    var player = document.getElementById('skill-video-player');
+    document.getElementById('skill-video-title').textContent = title;
+    player.src = url;
+    modal.classList.remove('hidden');
+    player.play();
+  }
+  function closeSkillVideo() {
+    var modal = document.getElementById('skill-video-modal');
+    var player = document.getElementById('skill-video-player');
+    modal.classList.add('hidden');
+    player.pause();
+    player.currentTime = 0;
+    player.src = '';
+  }
 </script>
 <% end %>
 
@@ -584,11 +620,11 @@
                 </td>
                 <td class="px-5 py-4 text-center">
                   <% if skill.demo_video_url.present? %>
-                    <%= link_to skill.demo_video_url, target: "_blank", rel: "noopener noreferrer",
-                        class: "inline-flex items-center gap-1 text-xs font-mono text-primary hover:text-primary-light transition-colors" do %>
+                    <button onclick="openSkillVideo('<%= j skill.demo_video_url %>', '<%= j skill.name %>')"
+                        class="inline-flex items-center gap-1 text-xs font-mono text-primary hover:text-primary-light transition-colors">
                       <%= lucide_icon "play-circle", class: "w-4 h-4" %>
                       <span>演示</span>
-                    <% end %>
+                    </button>
                   <% else %>
                     <span class="text-muted/40 text-xs">—</span>
                   <% end %>
