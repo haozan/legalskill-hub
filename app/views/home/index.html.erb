@@ -372,9 +372,9 @@
                 <%# 方案三：动态班次列表 %>
                 <td class="py-2 px-3 text-center text-xs border-b border-border/30 font-semibold leading-relaxed" style="background: hsl(174,100%,44%,0.04);">
                   <% @offline_classes.each do |oc| %>
-                    <div class="py-0.5" style="color: hsl(174,100%,44%);">
+                    <a href="#offline-class-<%= oc.id %>" class="block py-0.5 hover:underline underline-offset-2 transition-opacity hover:opacity-80" style="color: hsl(174,100%,44%);">
                       <%= oc.date.strftime("%m%d") %> 龙虾课｜<%= oc.city %>站
-                    </div>
+                    </a>
                   <% end %>
                 </td>
                 <%# 方案四：由团队负责人确定 %>
