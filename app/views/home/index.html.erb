@@ -30,13 +30,12 @@
         <span>立即领养龙虾</span>
       <% end %>
       <% if @hero_video_url.present? %>
-        <button
-          onclick="document.getElementById('hero-video-modal').classList.remove('hidden');document.getElementById('hero-video-player').play()"
+        <a href="#video-resources"
           class="btn-md font-mono text-sm tracking-widest inline-flex items-center justify-center gap-2 w-full sm:w-auto"
           style="background: hsl(174,100%,44%); color: #0a0f0d; font-weight: 700;">
           <%= lucide_icon "play-circle", class: "w-4 h-4" %>
           <span>观看演示</span>
-        </button>
+        </a>
       <% end %>
     </div>
 
@@ -68,43 +67,10 @@
 </section>
 
 <% if @hero_video_url.present? %>
-<!-- 首页引导视频 Modal -->
-<div id="hero-video-modal"
-     class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
-     style="background: rgba(0,0,0,0.85);"
-     onclick="if(event.target===this){closeHeroVideo()}">
-  <div class="relative w-full max-w-4xl">
-    <!-- 标题 + 关闭按钮 -->
-    <div class="flex items-center justify-between mb-3">
-      <span class="font-mono text-sm tracking-widest" style="color: hsl(174,100%,44%)"><%= @hero_video_title %></span>
-      <button onclick="closeHeroVideo()" class="text-muted hover:text-primary">
-        <%= lucide_icon "x", class: "w-5 h-5" %>
-      </button>
-    </div>
-    <!-- 视频播放器 -->
-    <div class="relative w-full" style="aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden;">
-      <video
-        id="hero-video-player"
-        src="<%= @hero_video_url %>"
-        controls
-        class="w-full h-full object-contain"
-        style="display: block;">
-      </video>
-    </div>
-  </div>
-</div>
-
 <script>
-  function closeHeroVideo() {
-    var modal = document.getElementById('hero-video-modal');
-    var player = document.getElementById('hero-video-player');
-    modal.classList.add('hidden');
-    player.pause();
-    player.currentTime = 0;
-  }
-  // ESC 键关闭
+  // ESC 键关闭技能演示弹窗
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') { closeHeroVideo(); closeSkillVideo(); }
+    if (e.key === 'Escape') { closeSkillVideo(); }
   });
 </script>
 
